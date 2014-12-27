@@ -36,6 +36,29 @@ trait OptionsTrait
     }
 
     /**
+     * Set options by calling options methods.
+     *
+     * If a set<OptionName> method does not exists it ignores the option.
+     * The setter method should handle the converting from native value to expected value.
+     *
+     * @param array $options Options being added.
+     *
+     * @return $this
+     */
+    public function setOptions(array $options)
+    {
+        foreach ($options as $name => $value) {
+            $method = 'set' . ucfirst($name);
+
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * Set an option.
      *
      * @param string $name  Name of the option.
