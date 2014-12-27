@@ -14,7 +14,8 @@
     "prefer-stable": true,
     "require": {
         "symfony/event-dispatcher": "~2.4",
-        "netzmacht/php-javascript-builder": "~1.0"
+        "netzmacht/php-javascript-builder": "~1.0",
+        "beberlei/assert": "~2.0"
     },
     "require-dev": {
         "netzmacht/contao-build-tools": "~1.0"
