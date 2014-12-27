@@ -11,7 +11,9 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Type;
 
+use Netzmacht\LeafletPHP\Assert\Assertion;
 use Netzmacht\Javascript\Type\Value\ConvertsToJson;
+use Netzmacht\LeafletPHP\Assert\InvalidArgumentException;
 use Netzmacht\LeafletPHP\Encoder;
 
 /**
@@ -53,7 +55,31 @@ class LatLng implements ConvertsToJson
     {
         $this->latitude  = (float) $latitude;
         $this->longitude = (float) $longitude;
-        $this->altitude  = $altitude;
+
+        if ($altitude !== null) {
+            $this->altitude = (float) $altitude;
+        }
+    }
+
+    /**
+     * Create LatLng from a native representation.
+     *
+     * Supported values are array and string. Look at fromString and fromArray method for more details.
+     *
+     * @param mixed $latLng Native latLng representation.
+     *
+     * @return LatLng
+     * @throws InvalidArgumentException If LatLng could not be created.
+     */
+    public static function fromNative($latLng)
+    {
+        if (is_string($latLng)) {
+            return static::fromString($latLng);
+        } elseif (is_array($latLng) || $latLng instanceof \ArrayObject) {
+            return static::fromArray($latLng);
+        }
+
+        throw new InvalidArgumentException('Could not create LatLng from native value', 0, $latLng);
     }
 
     /**
@@ -66,7 +92,6 @@ class LatLng implements ConvertsToJson
      *                       - Long names "latitude", "longitude", "altitude".
      *
      * @return LatLng
-     *
      * @throws \InvalidArgumentException If format is not supported.
      */
     public static function fromArray($native)
@@ -88,6 +113,25 @@ class LatLng implements ConvertsToJson
         }
 
         throw new \InvalidArgumentException('LatLng format not supported');
+    }
+
+    /**
+     * Create latlng from a string reprensentation.
+     *
+     * @param string $latLng Comma separated list of latlng values.
+     *
+     * @return LatLng
+     * @throws InvalidArgumentException If LatLng could not be created.
+     */
+    public static function fromString($latLng)
+    {
+        list($latitude, $longitude, $altitude) = explode(',', $latLng);
+
+        Assertion::numeric($latitude);
+        Assertion::numeric($longitude);
+        Assertion::nullOrNumeric($altitude);
+
+        return new static($latitude, $longitude, $altitude);
     }
 
     /**
