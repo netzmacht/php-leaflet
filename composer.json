@@ -24,5 +24,10 @@
         "psr-0": {
             "Netzmacht\\LeafletPHP": "src/"
         }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
     }
 }
