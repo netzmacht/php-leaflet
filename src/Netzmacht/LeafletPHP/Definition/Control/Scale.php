@@ -11,11 +11,17 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Control;
 
-
+/**
+ * Scale control.
+ *
+ * @package Netzmacht\LeafletPHP\Definition\Control
+ */
 class Scale extends AbstractControl
 {
     /**
-     * {@inheritdoc}
+     * Default position.
+     *
+     * @var string
      */
     protected $defaultPosition = self::POSITION_BOTTOM_LEFT;
 
@@ -27,15 +33,13 @@ class Scale extends AbstractControl
         return 'Control.Scale';
     }
 
-
     /**
      * Set the max width.
-     *
-     * @see http://leafletjs.com/reference.html#control-scale-maxwidth
      *
      * @param int $width Max width of the control in pixels.
      *
      * @return $this
+     * @see    http://leafletjs.com/reference.html#control-scale-maxwidth
      */
     public function setMaxWidth($width)
     {
@@ -45,9 +49,8 @@ class Scale extends AbstractControl
     /**
      * Get the max width.
      *
-     * @see http://leafletjs.com/reference.html#control-scale-maxwidth
-     *
      * @return int
+     * @see    http://leafletjs.com/reference.html#control-scale-maxwidth
      */
     public function getMaxWidth()
     {
@@ -57,11 +60,10 @@ class Scale extends AbstractControl
     /**
      * Enable or disable the metric scale.
      *
-     * @see http://leafletjs.com/reference.html#control-scale-metric
-     *
      * @param bool $scale Enable or disable the scale.
      *
      * @return $this
+     * @see    http://leafletjs.com/reference.html#control-scale-metric
      */
     public function setMetric($scale)
     {
@@ -71,9 +73,8 @@ class Scale extends AbstractControl
     /**
      * Check if metric scale is enabled.
      *
-     * @see http://leafletjs.com/reference.html#control-scale-metric
-     *
      * @return bool
+     * @see    http://leafletjs.com/reference.html#control-scale-metric
      */
     public function isMetric()
     {
@@ -83,11 +84,10 @@ class Scale extends AbstractControl
     /**
      * Enable or disable the imperial scale.
      *
-     * @see http://leafletjs.com/reference.html#control-scale-imperial
-     *
      * @param bool $scale Enable or disable the scale.
      *
      * @return $this
+     * @see    http://leafletjs.com/reference.html#control-scale-imperial
      */
     public function setImperial($scale)
     {
@@ -97,9 +97,8 @@ class Scale extends AbstractControl
     /**
      * Check if imperial scale is enabled.
      *
-     * @see http://leafletjs.com/reference.html#control-scale-imperial
-     *
      * @return bool
+     * @see    http://leafletjs.com/reference.html#control-scale-imperial
      */
     public function isImperial()
     {
@@ -109,11 +108,10 @@ class Scale extends AbstractControl
     /**
      * Set update when idle.
      *
-     * @see http://leafletjs.com/reference.html#control-scale-updatewhenidle
-     *
      * @param bool $update If true the control is updated on moveend.
      *
      * @return $this
+     * @see    http://leafletjs.com/reference.html#control-scale-updatewhenidle
      */
     public function setUpdateWhenIdle($update)
     {
@@ -123,9 +121,8 @@ class Scale extends AbstractControl
     /**
      * Check if update when idle is enabled.
      *
-     * @see http://leafletjs.com/reference.html#control-scale-updatewhenidle
-     *
      * @return bool
+     * @see    http://leafletjs.com/reference.html#control-scale-updatewhenidle
      */
     public function isUpdateWhenIdle()
     {

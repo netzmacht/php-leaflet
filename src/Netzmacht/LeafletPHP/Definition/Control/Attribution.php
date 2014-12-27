@@ -11,7 +11,11 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Control;
 
-
+/**
+ * Attribution control.
+ *
+ * @package Netzmacht\LeafletPHP\Definition\Control
+ */
 class Attribution extends AbstractControl
 {
     /**
@@ -32,11 +36,10 @@ class Attribution extends AbstractControl
     /**
      * Set the prefix.
      *
-     * @see http://leafletjs.com/reference.html#control-attribution-prefix
-     *
      * @param string $prefix The attribution prefix.
      *
      * @return $this
+     * @see    http://leafletjs.com/reference.html#control-attribution-prefix
      */
     public function setPrefix($prefix)
     {
@@ -46,9 +49,8 @@ class Attribution extends AbstractControl
     /**
      * Get the prefix.
      *
-     * @see http://leafletjs.com/reference.html#control-attribution-prefix
-     *
      * @return string
+     * @see    http://leafletjs.com/reference.html#control-attribution-prefix
      */
     public function getPrefix()
     {
@@ -58,15 +60,34 @@ class Attribution extends AbstractControl
     /**
      * Add a attribution.
      *
-     * @see http://leafletjs.com/reference.html#control-attribution-addattribution
-     *
      * @param string $attribution Attribution text. Can contain html.
      *
      * @return $this
+     * @see    http://leafletjs.com/reference.html#control-attribution-addattribution
      */
     public function addAttribution($attribution)
     {
         $this->attributions[] = $attribution;
+
+        return $this;
+    }
+
+    /**
+     * Remove attribution.
+     *
+     * @param string $attribution The attribution.
+     *
+     * @return $this
+     */
+    public function removeAttribution($attribution)
+    {
+        $key = array_search($attribution, $this->attributions);
+
+        if ($key !== false) {
+            unset($this->attributions[$key]);
+        } else {
+            $this->addMethod('removeAttribution', array($attribution));
+        }
 
         return $this;
     }

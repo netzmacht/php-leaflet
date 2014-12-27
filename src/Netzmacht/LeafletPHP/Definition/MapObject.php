@@ -11,13 +11,19 @@
 
 namespace Netzmacht\LeafletPHP\Definition;
 
-use Netzmacht\LeafletPHP\Definition;
-
 /**
- * Interface Layer describes map layers.
+ * Interface MapObject describes elements which can be added to a map.
  *
  * @package Netzmacht\LeafletPHP\Definition
  */
-interface Layer extends Definition, HasLabel
+interface MapObject
 {
+    /**
+     * Add object to the map.
+     *
+     * @param Map $map The map.
+     *
+     * @return $this
+     */
+    public function addTo(Map $map);
 }

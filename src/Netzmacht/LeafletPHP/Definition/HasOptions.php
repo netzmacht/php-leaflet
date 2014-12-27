@@ -11,13 +11,17 @@
 
 namespace Netzmacht\LeafletPHP\Definition;
 
-use Netzmacht\LeafletPHP\Definition;
-
 /**
- * Interface Layer describes map layers.
+ * Interface HasOptions describes elements which have options.
  *
  * @package Netzmacht\LeafletPHP\Definition
  */
-interface Layer extends Definition, HasLabel
+interface HasOptions
 {
+    /**
+     * Get all defined options. It does not contain default values which were not set.
+     *
+     * @return array
+     */
+    public function getOptions();
 }

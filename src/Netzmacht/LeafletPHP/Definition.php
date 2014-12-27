@@ -11,26 +11,40 @@
 
 namespace Netzmacht\LeafletPHP;
 
+use Netzmacht\Javascript\Type\Call\MethodCall;
 
+/**
+ * Interface Definition is the base interface for leaflet map definitions.
+ *
+ * @package Netzmacht\LeafletPHP
+ */
 interface Definition
 {
     /**
      * Get the type of the definition.
      *
-     * @return mixed
+     * @return string
      */
     public static function getType();
 
-    public static function getCompileAfter();
-
-    public static function getCompileBefore();
-
+    /**
+     * Get all required javascript libraries.
+     *
+     * @return array
+     */
     public static function getRequiredLibraries();
 
     /**
-     * Get the name.
+     * Get the identifier.
      *
      * @return string
      */
-    public function getName();
+    public function getId();
+
+    /**
+     * Get all method calls.
+     *
+     * @return MethodCall[]
+     */
+    public function getMethodCalls();
 }

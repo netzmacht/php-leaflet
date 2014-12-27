@@ -1,0 +1,27 @@
+{
+    "name": "netzmacht/php-leaflet",
+    "description": "PHP leaflet definition and javascript generator",
+    "keywords": ["leaflet", "maps", "javascript", "library"],
+    "type": "library",
+    "license": "LGPL-3.0",
+    "authors": [
+        {
+            "name": "David Molineus",
+            "email": "david.molineus@netzmacht.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "symfony/event-dispatcher": "~2.4",
+        "netzmacht/php-javascript-builder": "~1.0"
+    },
+    "require-dev": {
+        "netzmacht/contao-build-tools": "~1.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Netzmacht\\LeafletPHP": "src/"
+        }
+    }
+}

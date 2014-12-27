@@ -11,19 +11,38 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Control;
 
+use Netzmacht\LeafletPHP\Definition\EventsTrait;
 use Netzmacht\LeafletPHP\Definition\Layer;
 
+/**
+ * Layers control.
+ *
+ * @package Netzmacht\LeafletPHP\Definition\Control
+ */
 class Layers extends AbstractControl
 {
+    use EventsTrait;
+
+    const EVENT_BASE_LAYER_CHANGE = 'baselayerchange';
+    const EVENT_OVERLAY_ADD       = 'overlayadd';
+    const EVENT_OVERLAY_REMOVE    = 'overlayremove';
+
     /**
+     * Base layers.
+     *
      * @var Layer[]
      */
     private $baseLayers = array();
 
     /**
-     * Get the type of the definition.
+     * Overlay layers.
      *
-     * @return mixed
+     * @var Layer[]
+     */
+    private $overflays = array();
+
+    /**
+     * {@inheritdoc}
      */
     public static function getType()
     {
@@ -33,11 +52,10 @@ class Layers extends AbstractControl
     /**
      * Set initial collapsed state.
      *
-     * @see http://leafletjs.com/reference.html#control-layers-collapsed
-     *
      * @param bool $state The collapsed state.
      *
      * @return $this
+     * @see    http://leafletjs.com/reference.html#control-layers-collapsed
      */
     public function setCollapsed($state)
     {
@@ -47,9 +65,8 @@ class Layers extends AbstractControl
     /**
      * Get initial collapsed state.
      *
-     * @see http://leafletjs.com/reference.html#control-layers-collapsed
-     *
      * @return bool
+     * @see    http://leafletjs.com/reference.html#control-layers-collapsed
      */
     public function isCollapsed()
     {
@@ -59,11 +76,10 @@ class Layers extends AbstractControl
     /**
      * Set initial collapsed state.
      *
-     * @see http://leafletjs.com/reference.html#control-layers-autozindex
-     *
      * @param bool $state The collapsed state.
      *
      * @return $this
+     * @see    http://leafletjs.com/reference.html#control-layers-autozindex
      */
     public function setAutoZIndex($state)
     {
@@ -73,9 +89,8 @@ class Layers extends AbstractControl
     /**
      * Get initial collapsed state.
      *
-     * @see http://leafletjs.com/reference.html#control-layers-autozindex
-     *
      * @return bool
+     * @see    http://leafletjs.com/reference.html#control-layers-autozindex
      */
     public function isAutoZIndex()
     {
@@ -85,11 +100,10 @@ class Layers extends AbstractControl
     /**
      * Add a base layer.
      *
-     * @see http://leafletjs.com/reference.html#control-layers-addbaselayer
-     *
      * @param Layer $layer A Layer.
      *
      * @return $this
+     * @see    http://leafletjs.com/reference.html#control-layers-addbaselayer
      */
     public function addBaseLayer(Layer $layer)
     {
@@ -101,9 +115,8 @@ class Layers extends AbstractControl
     /**
      * Get all base layers.
      *
-     * @see http://leafletjs.com/reference.html#control-layers-addbaselayer
-     *
      * @return Layer[]
+     * @see    http://leafletjs.com/reference.html#control-layers-addbaselayer
      */
     public function getBaseLayers()
     {
@@ -113,15 +126,14 @@ class Layers extends AbstractControl
     /**
      * Add an overlay layer.
      *
-     * @see http://leafletjs.com/reference.html#control-layers-addoverlay
-     *
      * @param Layer $layer A Layer.
      *
      * @return $this
+     * @see    http://leafletjs.com/reference.html#control-layers-addoverlay
      */
     public function addOverlay(Layer $layer)
     {
-        $this->baseLayers[] = $layer;
+        $this->overflays[] = $layer;
 
         return $this;
     }
@@ -129,12 +141,33 @@ class Layers extends AbstractControl
     /**
      * Get all overlay layers.
      *
-     * @see http://leafletjs.com/reference.html#control-layers-addoverlay
-     *
      * @return Layer[]
+     * @see    http://leafletjs.com/reference.html#control-layers-addoverlay
      */
     public function getOverlays()
     {
-        return $this->baseLayers;
+        return $this->overflays;
+    }
+
+    /**
+     * Remove a layer.
+     *
+     * @param Layer $layer Layer to be removed.
+     *
+     * @return $this
+     */
+    public function removeLayer(Layer $layer)
+    {
+        $key = array_search($layer, $this->baseLayers);
+        if ($key !== false) {
+            unset($this->baseLayers[$key]);
+        }
+
+        $key = array_search($layer, $this->overflays);
+        if ($key !== false) {
+            unset($this->overflays[$key]);
+        }
+
+        return $this;
     }
 }

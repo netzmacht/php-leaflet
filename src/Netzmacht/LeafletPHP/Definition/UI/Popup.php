@@ -9,10 +9,14 @@
  *
  */
 
-namespace Netzmacht\LeafletPHP\Compiler\Event;
+namespace Netzmacht\LeafletPHP\Definition\UI;
 
-
-class PostCompileEvent
+/**
+ * Popup object.
+ *
+ * @package Netzmacht\LeafletPHP\Definition\UI
+ */
+class Popup
 {
 
 }

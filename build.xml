@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="netzmacht/php-leaflet" default="build">
+    <!-- import the main build system -->
+    <import file="vendor/netzmacht/contao-build-tools/netzmacht.main.xml" />
+</project>

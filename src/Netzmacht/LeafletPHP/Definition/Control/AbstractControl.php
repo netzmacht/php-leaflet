@@ -11,59 +11,27 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Control;
 
+use Netzmacht\LeafletPHP\Definition\AbstractDefinition;
 use Netzmacht\LeafletPHP\Definition\Control;
+use Netzmacht\LeafletPHP\Definition\HasOptions;
+use Netzmacht\LeafletPHP\Definition\MapObject;
+use Netzmacht\LeafletPHP\Definition\MapObjectTrait;
+use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 
 /**
  * Basic control class.
  *
  * @package Netzmacht\LeafletPHP\Control
  */
-abstract class AbstractControl implements Control
+abstract class AbstractControl extends AbstractDefinition implements Control, MapObject, HasOptions
 {
+    use OptionsTrait;
+    use MapObjectTrait;
+
     const POSITION_TOP_LEFT     = 'topleft';
     const POSITION_TOP_RIGHT    = 'topright';
     const POSITION_BOTTOM_LEFT  = 'bottomleft';
     const POSITION_BOTTOM_RIGHT = 'bottomright';
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getCompileAfter()
-    {
-        return array();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getCompileBefore()
-    {
-        return array();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getRequiredLibraries()
-    {
-        return array('leaflet');
-    }
-
-    /**
-     * Control name.
-     *
-     * The control name is used as identifier and javascript variable suffix.
-     *
-     * @var string
-     */
-    private $name;
-
-    /**
-     * Options of the control.
-     *
-     * @var array
-     */
-    private $options = array();
 
     /**
      * Default position.
@@ -71,26 +39,6 @@ abstract class AbstractControl implements Control
      * @var string
      */
     protected $defaultPosition = self::POSITION_TOP_RIGHT;
-
-    /**
-     * Construct.
-     *
-     * @param string $name The name.
-     */
-    public function __construct($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * Get the name.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
 
     /**
      * Set position.
@@ -112,61 +60,5 @@ abstract class AbstractControl implements Control
     public function getPosition()
     {
         return $this->getOption('position', $this->defaultPosition);
-    }
-
-    /**
-     * Get all defined options. It does not contain default values which were not set.
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        return $this->getOptions();
-    }
-
-    /**
-     * Set an option.
-     *
-     * @param string $name  Name of the option.
-     * @param mixed  $value Value of the option.
-     *
-     * @return $this
-     */
-    protected function setOption($name, $value)
-    {
-        $this->setOption($name, $value);
-
-        return $this;
-    }
-
-    /**
-     * Get an option.
-     *
-     * @param string $name    Name of the option.
-     * @param mixed  $default Default value if no option is set.
-     *
-     * @return null
-     */
-    protected function getOption($name, $default = null)
-    {
-        if (isset($this->options[$name])) {
-            return $this->options[$name];
-        }
-
-        return $default;
-    }
-
-    /**
-     * Remove an option.
-     *
-     * @param string $name Name of the option.
-     *
-     * @return $this
-     */
-    protected function removeOption($name)
-    {
-        unset($this->options[$name]);
-
-        return $this;
     }
 }

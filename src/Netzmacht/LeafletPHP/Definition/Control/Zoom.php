@@ -11,7 +11,11 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Control;
 
-
+/**
+ * Zoom control.
+ * 
+ * @package Netzmacht\LeafletPHP\Definition\Control
+ */
 class Zoom extends AbstractControl
 {
     /**
@@ -25,11 +29,10 @@ class Zoom extends AbstractControl
     /**
      * Set text on the zoom in button.
      *
-     * @see http://leafletjs.com/reference.html#control-zoom-zoomintext
-     *      
      * @param string $value The text.
      *
      * @return $this
+     * @see    http://leafletjs.com/reference.html#control-zoom-zoomintext
      */
     public function setZoomInText($value)
     {
@@ -38,10 +41,9 @@ class Zoom extends AbstractControl
 
     /**
      * Get the text on the zoom in button.
-     * 
-     * @see http://leafletjs.com/reference.html#control-zoom-zoomintext
-     *      
+     *
      * @return string
+     * @see    http://leafletjs.com/reference.html#control-zoom-zoomintext
      */
     public function getZoomInText()
     {
@@ -51,11 +53,10 @@ class Zoom extends AbstractControl
     /**
      * Set text on the zoom out button.
      *
-     * @see http://leafletjs.com/reference.html#control-zoom-zoomouttext
-     *
      * @param string $value The text.
      *
      * @return $this
+     * @see    http://leafletjs.com/reference.html#control-zoom-zoomouttext
      */
     public function setZoomOutText($value)
     {
@@ -65,11 +66,10 @@ class Zoom extends AbstractControl
     /**
      * Set title on the zoom in button.
      *
-     * @see http://leafletjs.com/reference.html#control-zoom-zoomintitle
-     *
      * @param string $value The title.
      *
      * @return $this
+     * @see    http://leafletjs.com/reference.html#control-zoom-zoomintitle
      */
     public function setZoomInTitle($value)
     {
@@ -79,9 +79,8 @@ class Zoom extends AbstractControl
     /**
      * Get the text on the zoom out button.
      *
-     * @see http://leafletjs.com/reference.html#control-zoom-zoomouttext
-     *
      * @return string
+     * @see    http://leafletjs.com/reference.html#control-zoom-zoomouttext
      */
     public function getZoomOutText()
     {
@@ -91,9 +90,8 @@ class Zoom extends AbstractControl
     /**
      * Get the title on the zoom in button.
      *
-     * @see http://leafletjs.com/reference.html#control-zoom-zoomintitle
-     *
      * @return string
+     * @see    http://leafletjs.com/reference.html#control-zoom-zoomintitle
      */
     public function getZoomInTitle()
     {
@@ -104,11 +102,10 @@ class Zoom extends AbstractControl
     /**
      * Set title on the zoom out button.
      *
-     * @see http://leafletjs.com/reference.html#control-zoom-zoomouttitle
-     *
      * @param string $value The title.
      *
      * @return $this
+     * @see    http://leafletjs.com/reference.html#control-zoom-zoomouttitle
      */
     public function setZoomOutTitle($value)
     {
@@ -118,9 +115,8 @@ class Zoom extends AbstractControl
     /**
      * Get the title on the zoom out button.
      *
-     * @see http://leafletjs.com/reference.html#control-zoom-zoomouttitle
-     *
      * @return string
+     * @see    http://leafletjs.com/reference.html#control-zoom-zoomouttitle
      */
     public function getZoomOutTitle()
     {
