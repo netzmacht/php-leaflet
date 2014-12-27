@@ -97,10 +97,13 @@ class Leaflet
             return $this->builder->build($map);
         }
 
-        $collector = new LibrariesCollector();
-        $this->builder->getDispatcher()->addSubscriber($collector);
+        $dispatcher = $this->builder->getDispatcher();
+        $collector  = new LibrariesCollector();
+        $dispatcher->addSubscriber($collector);
 
         $buffer = $this->builder->build($map);
+        
+        $dispatcher->removeSubscriber($collector);
 
         return $this->combineLibraries($collector->getLibraries()) . "\n" . $buffer;
     }
