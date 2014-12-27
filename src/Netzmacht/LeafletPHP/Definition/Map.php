@@ -11,6 +11,8 @@
 
 namespace Netzmacht\LeafletPHP\Definition;
 
+use Netzmacht\LeafletPHP\Assert\Assertion;
+use Netzmacht\LeafletPHP\Assert\InvalidArgumentException;
 use Netzmacht\LeafletPHP\Definition\Type\LatLng;
 use Netzmacht\LeafletPHP\Definition\Type\LatLngBounds;
 
@@ -331,13 +333,19 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions
     /**
      * Set the center.
      *
-     * @param LatLng $center The map center.
+     * @param LatLng|array $center The map center.
      *
      * @return $this
      * @see    http://leafletjs.com/reference.html#map-center
      */
-    public function setCenter(LatLng $center)
+    public function setCenter($center)
     {
+        if (is_array($center)) {
+            $center = LatLng::fromArray($center);
+        }
+
+        Assertion::isInstanceOf($center, 'Netzmacht/LeafletPHP/Type/LatLng');
+
         return $this->setOption('center', $center);
     }
 
@@ -469,13 +477,21 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions
     /**
      * Set max bounds option.
      *
-     * @param LatLngBounds $bounds Max bounds.
+     * @param LatLngBounds|array $bounds Max bounds.
      *
      * @return $this
      * @see    http://leafletjs.com/reference.html#map-maxbounds
+     *
+     * @throws InvalidArgumentException If invalid bounds given.
      */
-    public function setMaxBounds(LatLngBounds $bounds)
+    public function setMaxBounds($bounds)
     {
+        if (is_array($bounds)) {
+            $bounds = LatLngBounds::fromArray($bounds);
+        }
+
+        Assertion::isInstanceOf($bounds, 'Netzmacht/LeafletPHP/Type/LatLngBounds');
+
         return $this->setOption('maxBounds', $bounds);
     }
 

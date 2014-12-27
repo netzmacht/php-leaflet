@@ -11,6 +11,10 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Vector;
 
+use Netzmacht\LeafletPHP\Assert\Assertion;
+use Netzmacht\LeafletPHP\Assert\InvalidArgumentException;
+use Netzmacht\LeafletPHP\Definition\Type\LatLng;
+
 /**
  * Class Polyline represents a map polyline.
  *
@@ -93,14 +97,20 @@ class Polyline extends Path
     /**
      * Add a latitude longitude position.
      *
-     * @param float $latitude  The latitude.
-     * @param float $longitude The longitude.
+     * @param LatLng|array|string $latLng LatLng coordinate.
      *
      * @return $this
+     * @throws InvalidArgumentException If LatLng could not be created.
      */
-    public function addLatLng($latitude, $longitude)
+    public function addLatLng($latLng)
     {
-        $this->latLngs[] = array($latitude, $longitude);
+        if (is_scalar($latLng)) {
+            $latLng = LatLng::fromNative($latLng);
+        }
+
+        Assertion::isInstanceOf($latLng, 'Netzmacht\LeafletPHP\Definition\Vector\Polyline');
+
+        $this->latLngs[] = $latLng;
 
         return $this;
     }
@@ -111,11 +121,12 @@ class Polyline extends Path
      * @param array $values Position list.
      *
      * @return $this
+     * @throws InvalidArgumentException If LatLng could not be created.
      */
     public function addLatLngs($values)
     {
         foreach ($values as $position) {
-            $this->addLatLng($position[0], $position[1]);
+            $this->addLatLng($position);
         }
 
         return $this;

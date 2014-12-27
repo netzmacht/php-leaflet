@@ -102,7 +102,7 @@ class Leaflet
         $dispatcher->addSubscriber($collector);
 
         $buffer = $this->builder->build($map);
-        
+
         $dispatcher->removeSubscriber($collector);
 
         return $this->combineLibraries($collector->getLibraries()) . "\n" . $buffer;
