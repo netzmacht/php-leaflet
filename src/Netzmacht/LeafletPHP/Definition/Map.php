@@ -264,7 +264,7 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions
      *
      * @var Control[]
      */
-    private $controls;
+    private $controls = array();
 
     /**
      * Get the type of the definition.
@@ -340,11 +340,11 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions
      */
     public function setCenter($center)
     {
-        if (is_array($center)) {
-            $center = LatLng::fromArray($center);
+        if (!$center instanceof LatLng) {
+            $center = LatLng::fromNative($center);
         }
 
-        Assertion::isInstanceOf($center, 'Netzmacht/LeafletPHP/Type/LatLng');
+        Assertion::isInstanceOf($center, 'Netzmacht\LeafletPHP\Definition\Type\LatLng');
 
         return $this->setOption('center', $center);
     }

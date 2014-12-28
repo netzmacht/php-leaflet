@@ -12,6 +12,7 @@
 namespace Netzmacht\LeafletPHP;
 
 use Netzmacht\Javascript\Builder;
+use Netzmacht\LeafletPHP\Assets\Collector;
 use Netzmacht\LeafletPHP\Definition\Map;
 
 /**
@@ -29,11 +30,18 @@ class Leaflet
     private $builder;
 
     /**
-     * Javascript libraries.
+     * Libraries stylesheets.
      *
      * @var array
      */
-    private $libraries = array();
+    private $stylesheets = array();
+
+    /**
+     * Libraries javascripts.
+     *
+     * @var array
+     */
+    private $javascripts = array();
 
     /**
      * Construct.
@@ -44,20 +52,38 @@ class Leaflet
     public function __construct(Builder $builder, array $libraries = array())
     {
         $this->builder   = $builder;
-        $this->libraries = $libraries;
+        $this->stylesheets = $libraries;
     }
 
     /**
-     * Register a library.
+     * Register a stylesheet for the library.
      *
-     * @param string $name Library name.
-     * @param string $path Library path.
+     * @param string $name   Library name.
+     * @param string $source Library path.
+     * @param string $type   Resource type.
      *
      * @return $this
      */
-    public function register($name, $path)
+    public function registerStylesheet($name, $source, $type = Assets::TYPE_FILE)
     {
-        $this->libraries[$name] = $path;
+        $this->stylesheets[$name][] = array($source, $type);
+
+        return $this;
+    }
+
+    /**
+     * Register a javascript for the library.
+     *
+     * @param string $name   Library name.
+     * @param string $source Library path.
+     * @param string $type   Resource type.
+     *
+     * @return $this
+     */
+    public function registerJavascript($name, $source, $type = Assets::TYPE_SOURCE)
+    {
+        $this->javascripts[$name][] = array($source, $type);
+
         return $this;
     }
 
@@ -66,9 +92,9 @@ class Leaflet
      *
      * @return array
      */
-    public function getLibraries()
+    public function getStylesheets()
     {
-        return $this->libraries;
+        return $this->stylesheets;
     }
 
     /**
@@ -84,59 +110,31 @@ class Leaflet
     /**
      * Build map as a javascript resource.
      *
-     * @param Map  $map       The map being created.
-     * @param bool $libraries Also include libraries.
+     * It always return the generated map no matter if an assets object is given or not. If you want to get the
+     * combined generated assets, just use $assets->getHtml().
+     *
+     * @param Map    $map        The map being created.
+     * @param Assets $assets     Optional pass an assets instance which collects all required assets.
+     * @param bool   $includeMap If true the map is also added to the assets instance.
      *
      * @return string
-     *
-     * @throws \RuntimeException If library is not registered or file not found.
      */
-    public function build(Map $map, $libraries = false)
+    public function build(Map $map, Assets $assets = false, $includeMap = false)
     {
-        if (!$libraries) {
+        if (!$assets) {
             return $this->builder->build($map);
         }
 
         $dispatcher = $this->builder->getDispatcher();
-        $collector  = new LibrariesCollector();
+        $collector  = new Collector($assets, $this->javascripts, $this->stylesheets);
         $dispatcher->addSubscriber($collector);
 
         $buffer = $this->builder->build($map);
 
         $dispatcher->removeSubscriber($collector);
 
-        return $this->combineLibraries($collector->getLibraries()) . "\n" . $buffer;
-    }
-
-    /**
-     * Combine all libraries.
-     *
-     * @param array $libraries Collected library names.
-     *
-     * @return string
-     *
-     * @throws \RuntimeException If library is not registered or file not found.
-     */
-    private function combineLibraries(array $libraries)
-    {
-        $buffer = '';
-
-        foreach ($libraries as $library) {
-            if (!isset($this->libraries[$library])) {
-                throw new \RuntimeException(sprintf('Library "%s" not found.', $library));
-            }
-
-            if (!file_exists($this->libraries[$library])) {
-                throw new \RuntimeException(
-                    sprintf(
-                        'Library "%s" file location "%s" not exists.',
-                        $library,
-                        $this->libraries[$library]
-                    )
-                );
-            }
-
-            $buffer .= file_get_contents($this->libraries[$library]);
+        if ($includeMap) {
+            $assets->addJavascript($buffer);
         }
 
         return $buffer;
