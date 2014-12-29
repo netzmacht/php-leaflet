@@ -59,7 +59,7 @@ class Leaflet
      * Register a stylesheet for the library.
      *
      * @param string $name   Library name.
-     * @param string $source Library path.
+     * @param string $source The stylesheet source.
      * @param string $type   Resource type.
      *
      * @return $this
@@ -75,7 +75,7 @@ class Leaflet
      * Register a javascript for the library.
      *
      * @param string $name   Library name.
-     * @param string $source Library path.
+     * @param string $source The javascript source.
      * @param string $type   Resource type.
      *
      * @return $this
@@ -113,13 +113,12 @@ class Leaflet
      * It always return the generated map no matter if an assets object is given or not. If you want to get the
      * combined generated assets, just use $assets->getHtml().
      *
-     * @param Map    $map        The map being created.
-     * @param Assets $assets     Optional pass an assets instance which collects all required assets.
-     * @param bool   $includeMap If true the map is also added to the assets instance.
+     * @param Map    $map    The map being created.
+     * @param Assets $assets Optional pass an assets instance which collects all required assets.
      *
      * @return string
      */
-    public function build(Map $map, Assets $assets = false, $includeMap = false)
+    public function build(Map $map, Assets $assets = null)
     {
         if (!$assets) {
             return $this->builder->build($map);
@@ -129,14 +128,10 @@ class Leaflet
         $collector  = new Collector($assets, $this->javascripts, $this->stylesheets);
         $dispatcher->addSubscriber($collector);
 
-        $buffer = $this->builder->build($map);
+        $assets->setMap($this->builder->build($map));
 
         $dispatcher->removeSubscriber($collector);
 
-        if ($includeMap) {
-            $assets->addJavascript($buffer);
-        }
-
-        return $buffer;
+        return $assets->getMap();
     }
 }

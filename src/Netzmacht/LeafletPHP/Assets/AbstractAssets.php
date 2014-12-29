@@ -14,11 +14,12 @@ namespace Netzmacht\LeafletPHP\Assets;
 use Netzmacht\LeafletPHP\Assets;
 
 /**
- * Class AbstractAssets extends
+ * Class AbstractAssets is a base implementation of the assets interface. It also implements the GeneratesHtml
+ * interface.
  *
  * @package Netzmacht\LeafletPHP\Assets
  */
-abstract class AbstractAssets implements Assets
+abstract class AbstractAssets implements Assets, GeneratesHtml
 {
     /**
      * The stylesheets.
@@ -40,6 +41,13 @@ abstract class AbstractAssets implements Assets
      * @var string
      */
     private $separator = "\n";
+
+    /**
+     * Map javascript.
+     *
+     * @var string
+     */
+    private $map;
 
     /**
      * Get the separator.
@@ -68,6 +76,32 @@ abstract class AbstractAssets implements Assets
     /**
      * {@inheritdoc}
      */
+    public function setMap($map)
+    {
+        $this->map = $map;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMap()
+    {
+        return $this->map;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMapHtml()
+    {
+        return sprintf('<script>%s</script>', $this->getMap());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getScriptsHtml()
     {
         return $this->javaScripts;
@@ -84,9 +118,12 @@ abstract class AbstractAssets implements Assets
     /**
      * {@inheritdoc}
      */
-    public function getHtml()
+    public function getHtml($includeMap = true)
     {
-        return $this->getStylesHtml() . "\n" . $this->getScriptsHtml();
+        return $this->getStylesHtml()
+            . $this->separator
+            . $this->getScriptsHtml()
+            . ($includeMap ? ($this->separator . $this->getMapHtml()) : '');
     }
 
     /**

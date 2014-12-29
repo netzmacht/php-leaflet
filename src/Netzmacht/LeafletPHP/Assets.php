@@ -43,23 +43,18 @@ interface Assets
     public function addStylesheet($stylesheet, $type = self::TYPE_FILE);
 
     /**
-     * Get scripts html.
+     * Set the map javascript.
      *
-     * @return string
+     * @param string $map The map javscript.
+     *
+     * @return $this
      */
-    public function getScriptsHtml();
+    public function setMap($map);
 
     /**
-     * Get styles html.
+     * Get the map javascript.
      *
      * @return string
      */
-    public function getStylesHtml();
-
-    /**
-     * Get html.
-     *
-     * @return string
-     */
-    public function getHtml();
+    public function getMap();
 }
