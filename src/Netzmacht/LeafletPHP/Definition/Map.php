@@ -730,9 +730,9 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions
      * @return $this
      * @see    http://leafletjs.com/reference.html#map-closepopuponclick
      */
-    public function setClosePopupOnClick($value)
+    public function setCloseOnClick($value)
     {
-        return $this->setOption('popupOnClick', (bool) $value);
+        return $this->setOption('closeOnClick', (bool) $value);
     }
 
     /**
@@ -741,9 +741,9 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions
      * @return bool
      * @see    http://leafletjs.com/reference.html#map-closepopuponclick
      */
-    public function isClosePopupOnClick()
+    public function isCloseOnClick()
     {
-        return $this->getOption('popupOnClick', true);
+        return $this->getOption('closeOnClick', true);
     }
 
     /**
