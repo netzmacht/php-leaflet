@@ -108,7 +108,7 @@ class ControlEncoder extends AbstractEncoder
     public function setReference(Definition $definition, GetReferenceEvent $event)
     {
         if ($definition instanceof Control) {
-            $event->setReference('controls.' . $definition->getId());
+            $event->setReference('map.controls.' . $definition->getId());
         }
     }
 

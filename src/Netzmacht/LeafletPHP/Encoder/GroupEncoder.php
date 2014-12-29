@@ -33,7 +33,7 @@ class GroupEncoder extends AbstractEncoder
     public function setReference(Definition $definition, GetReferenceEvent $event)
     {
         if ($definition instanceof LayerGroup) {
-            $event->setReference('layers.' . $definition->getId());
+            $event->setReference('map.layers.' . $definition->getId());
         }
     }
 

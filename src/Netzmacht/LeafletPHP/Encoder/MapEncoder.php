@@ -59,7 +59,7 @@ class MapEncoder extends AbstractEncoder
         parent::handleBuild($event);
 
         $event->getOutput()
-            ->addLine('var layers = {}; var controls = {}; var map = null;');
+            ->addLine('var map = { layers: {}, controls: {}, map: null };');
     }
 
     /**
@@ -103,7 +103,7 @@ class MapEncoder extends AbstractEncoder
     public function setReference(Definition $definition, GetReferenceEvent $event)
     {
         if ($definition instanceof Map) {
-            $event->setReference('map');
+            $event->setReference('map.map');
         }
     }
 }
