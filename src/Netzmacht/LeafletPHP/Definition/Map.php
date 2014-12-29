@@ -557,20 +557,24 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions
     /**
      * Enable or disable scroll whee zoom.
      *
-     * @param bool $value Enable scroll wheel zoom.
+     * @param bool|string $value Enable scroll wheel zoom.
      *
      * @return $this
      * @see    http://leafletjs.com/reference.html#map-scrollwheelzoom
      */
     public function setScrollWheelZoom($value)
     {
-        return $this->setOption('scrollWheelZoom', (bool) $value);
+        if ($value !== 'center') {
+            $value = (bool) $value;
+        }
+
+        return $this->setOption('scrollWheelZoom', $value);
     }
 
     /**
      * Check if scroll wheel zoom is enabled.
      *
-     * @return bool
+     * @return bool|string
      * @see    http://leafletjs.com/reference.html#map-scrollwheelzoom
      */
     public function isScrollWheelZoom()
@@ -588,7 +592,11 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions
      */
     public function setDoubleClickZoom($value)
     {
-        return $this->setOption('doubleClickZoom', (bool) $value);
+        if ($value !== 'center') {
+            $value = (bool) $value;
+        }
+
+        return $this->setOption('doubleClickZoom', $value);
     }
 
     /**
