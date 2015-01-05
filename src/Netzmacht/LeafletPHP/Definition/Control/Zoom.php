@@ -19,6 +19,13 @@ namespace Netzmacht\LeafletPHP\Definition\Control;
 class Zoom extends AbstractControl
 {
     /**
+     * Default position.
+     *
+     * @var string
+     */
+    protected $defaultPosition = self::POSITION_TOP_LEFT;
+
+    /**
      * {@inheritdoc}
      */
     public static function getType()
