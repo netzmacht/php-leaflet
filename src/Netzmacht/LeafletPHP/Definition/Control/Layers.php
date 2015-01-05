@@ -39,7 +39,27 @@ class Layers extends AbstractControl
      *
      * @var Layer[]
      */
-    private $overflays = array();
+    private $overlays = array();
+
+    /**
+     * Construct.
+     *
+     * @param string  $identifier The identifier.
+     * @param Layer[] $baseLayers Base layers.
+     * @param Layer[] $overlays   Overlay layers.
+     */
+    public function __construct($identifier, $baseLayers = array(), $overlays = array())
+    {
+        parent::__construct($identifier);
+
+        foreach ($baseLayers as $layer) {
+            $this->addBaseLayer($layer);
+        }
+
+        foreach ($overlays as $layer) {
+            $this->addOverlay($layer);
+        }
+    }
 
     /**
      * {@inheritdoc}
@@ -133,7 +153,7 @@ class Layers extends AbstractControl
      */
     public function addOverlay(Layer $layer)
     {
-        $this->overflays[] = $layer;
+        $this->overlays[] = $layer;
 
         return $this;
     }
@@ -146,7 +166,7 @@ class Layers extends AbstractControl
      */
     public function getOverlays()
     {
-        return $this->overflays;
+        return $this->overlays;
     }
 
     /**
@@ -163,9 +183,9 @@ class Layers extends AbstractControl
             unset($this->baseLayers[$key]);
         }
 
-        $key = array_search($layer, $this->overflays);
+        $key = array_search($layer, $this->overlays);
         if ($key !== false) {
-            unset($this->overflays[$key]);
+            unset($this->overlays[$key]);
         }
 
         return $this;

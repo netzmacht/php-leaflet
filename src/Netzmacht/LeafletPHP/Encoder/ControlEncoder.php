@@ -89,15 +89,11 @@ class ControlEncoder extends AbstractEncoder
     {
         return array(
             sprintf(
-                '%s = L.control.layers(%s);',
+                '%s = L.control.layers(%s, %s, %s);',
                 $encoder->encodeReference($layers),
-                $encoder->encodeArguments(
-                    array(
-                        $this->getLayersInformation($layers->getBaseLayers()),
-                        $this->getLayersInformation($layers->getOverlays()),
-                        $layers->getOptions()
-                    )
-                )
+                $this->encodeLayersInformation($layers->getBaseLayers(), $encoder),
+                $this->encodeLayersInformation($layers->getOverlays(), $encoder),
+                $encoder->encodeValue($layers->getOptions())
             )
         );
     }
@@ -136,18 +132,27 @@ class ControlEncoder extends AbstractEncoder
     /**
      * Get layer information, so that label is used.
      *
-     * @param Layer[] $layers The layers.
+     * @param Layer[] $layers  The layers.
+     * @param Encoder $encoder The encoder.
      *
      * @return array
      */
-    private function getLayersInformation($layers)
+    private function encodeLayersInformation($layers, Encoder $encoder)
     {
-        $prepared = array();
+        $prepared = '';
 
         foreach ($layers as $layer) {
-            $prepared[$layer->getLabel()] = $layer;
+            if ($prepared) {
+                $prepared .= ', ';
+            }
+
+            $prepared .= sprintf(
+                '%s: %s',
+                $encoder->encodeValue($layer->getLabel()),
+                $encoder->encodeReference($layer)
+            );
         }
 
-        return $prepared;
+        return '{' . $prepared . '}';
     }
 }
