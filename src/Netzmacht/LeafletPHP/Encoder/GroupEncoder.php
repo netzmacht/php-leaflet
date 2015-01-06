@@ -74,9 +74,10 @@ class GroupEncoder extends AbstractEncoder
     {
         return array(
             sprintf(
-                '%s = new L.geoJson(%s);',
+                '%s = new L.geoJson(%s, %s);',
                 $encoder->encodeReference($geoJson),
-                $encoder->encodeValue($geoJson->toGeoJson())
+                $encoder->encodeValue($geoJson->toGeoJson()),
+                $encoder->encodeValue($geoJson->getOptions())
             )
         );
     }
@@ -86,20 +87,20 @@ class GroupEncoder extends AbstractEncoder
      *
      * @param string     $type    The group type.
      * @param LayerGroup $group   The group instance.
-     * @param Encoder    $builder The builder.
+     * @param Encoder    $encoder The encoder.
      *
      * @return array
      *
      * @throws GetReferenceFailed If reference could not created.
      */
-    private function doGroupEncode($type, LayerGroup $group, Encoder $builder)
+    private function doGroupEncode($type, LayerGroup $group, Encoder $encoder)
     {
         return array(
             sprintf(
                 '%s = L.%s(%s);',
-                $builder->encodeReference($group),
+                $encoder->encodeReference($group),
                 $type,
-                $builder->encodeArguments(array($group->getLayers()))
+                $encoder->encodeArguments(array($group->getLayers()))
             )
         );
     }

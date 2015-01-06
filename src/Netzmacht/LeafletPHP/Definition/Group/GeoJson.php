@@ -11,6 +11,8 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Group;
 
+use Netzmacht\LeafletPHP\Definition\HasOptions;
+use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 use Netzmacht\LeafletPHP\Definition\Vector\PathOptionsTrait;
 
 /**
@@ -18,9 +20,10 @@ use Netzmacht\LeafletPHP\Definition\Vector\PathOptionsTrait;
  *
  * @package Netzmacht\LeafletPHP\Definition\Group
  */
-class GeoJson extends FeatureGroup
+class GeoJson extends FeatureGroup implements HasOptions
 {
     use PathOptionsTrait;
+    use OptionsTrait;
 
     /**
      * {@inheritdoc}
@@ -28,5 +31,10 @@ class GeoJson extends FeatureGroup
     public static function getType()
     {
         return 'GeoJSON';
+    }
+
+    public function setPointToLayer($function)
+    {
+        return $this->setOption('pointToLayer', $function);
     }
 }

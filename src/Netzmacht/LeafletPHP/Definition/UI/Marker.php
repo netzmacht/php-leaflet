@@ -343,7 +343,7 @@ class Marker extends AbstractDefinition implements Layer, HasOptions, MapObject,
      */
     public function setPopupContent($content)
     {
-        return $this->addMethod('setPopupContent', $content);
+        return $this->addMethod('setPopupContent', array($content));
     }
 
     /**
@@ -355,7 +355,7 @@ class Marker extends AbstractDefinition implements Layer, HasOptions, MapObject,
      */
     public function bindPopup($popup)
     {
-        return $this->addMethod('bindPopup', $popup);
+        return $this->addMethod('bindPopup', array($popup));
     }
 
     /**
@@ -391,7 +391,18 @@ class Marker extends AbstractDefinition implements Layer, HasOptions, MapObject,
             $this->getId()
         );
 
-        $feature->setProperties($this->getOptions());
+        $methods = array();
+
+        foreach ($this->getMethodCalls() as $call) {
+            $methods[] = array($call->getName(), $call->getArguments());
+        }
+
+        $feature->setProperties(
+            array(
+                'options' => $this->getOptions(),
+                'methods' => $methods
+            )
+        );
 
         return $feature;
     }
