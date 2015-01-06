@@ -16,6 +16,7 @@ use Netzmacht\Javascript\Event\GetReferenceEvent;
 use Netzmacht\Javascript\Exception\GetReferenceFailed;
 use Netzmacht\LeafletPHP\Definition;
 use Netzmacht\LeafletPHP\Definition\Group\FeatureGroup;
+use Netzmacht\LeafletPHP\Definition\Group\GeoJson;
 use Netzmacht\LeafletPHP\Definition\Group\LayerGroup;
 
 /**
@@ -52,13 +53,32 @@ class GroupEncoder extends AbstractEncoder
      * Encode a feature group.
      *
      * @param FeatureGroup $featureGroup The layer group.
-     * @param Encoder      $builder      The builder.
+     * @param Encoder      $encoder      The builder.
      *
      * @return bool
      */
-    public function encodeFeatureGroup(FeatureGroup $featureGroup, Encoder $builder)
+    public function encodeFeatureGroup(FeatureGroup $featureGroup, Encoder $encoder)
     {
-        return $this->doGroupEncode('featureGroup', $featureGroup, $builder);
+        return $this->doGroupEncode('featureGroup', $featureGroup, $encoder);
+    }
+
+    /**
+     * Encode a feature group.
+     *
+     * @param GeoJson $geoJson The layer group.
+     * @param Encoder $encoder The builder.
+     *
+     * @return bool
+     */
+    public function encodeGeoJson(GeoJson $geoJson, Encoder $encoder)
+    {
+        return array(
+            sprintf(
+                '%s = new L.geoJson(%s);',
+                $encoder->encodeReference($geoJson),
+                $encoder->encodeValue($geoJson->getFeatureCollection())
+            )
+        );
     }
 
     /**
