@@ -13,11 +13,7 @@ namespace Netzmacht\LeafletPHP\Plugins\Ajax;
 
 use Netzmacht\Javascript\Encoder;
 use Netzmacht\Javascript\Type\ConvertsToJavascript;
-use Netzmacht\LeafletPHP\Definition\AbstractDefinition;
-use Netzmacht\LeafletPHP\Definition\EventsTrait;
-use Netzmacht\LeafletPHP\Definition\HasEvents;
-use Netzmacht\LeafletPHP\Definition\LabelTrait;
-use Netzmacht\LeafletPHP\Definition\Layer;
+use Netzmacht\LeafletPHP\Definition\Group\GeoJson;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 
 /**
@@ -25,10 +21,8 @@ use Netzmacht\LeafletPHP\Definition\OptionsTrait;
  *
  * @package Netzmacht\LeafletPHP\Plugins\Ajax
  */
-class GeoJsonAjax extends AbstractDefinition implements Layer, HasEvents, ConvertsToJavascript
+class GeoJsonAjax extends GeoJson implements ConvertsToJavascript
 {
-    use LabelTrait;
-    use EventsTrait;
     use OptionsTrait;
 
     const EVENT_DATA_LOADING = 'data:loading';
@@ -43,6 +37,17 @@ class GeoJsonAjax extends AbstractDefinition implements Layer, HasEvents, Conver
     public static function getType()
     {
         return 'Ajax';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getRequiredLibraries()
+    {
+        $libs   = parent::getRequiredLibraries();
+        $libs[] = 'leaflet-ajax';
+
+        return $libs;
     }
 
     /**
