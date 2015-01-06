@@ -113,18 +113,18 @@ class ControlEncoder extends AbstractEncoder
      *
      * @param string  $type    The control type.
      * @param Control $control The control definition.
-     * @param Encoder $builder The builder.
+     * @param Encoder $encoder The builder.
      *
      * @return bool
      */
-    private function doControlEncode($type, Control $control, Encoder $builder)
+    private function doControlEncode($type, Control $control, Encoder $encoder)
     {
         return array(
             sprintf(
                 '%s = L.control.%s(%s);',
-                $builder->encodeReference($control),
+                $encoder->encodeReference($control),
                 $type,
-                $builder->encodeArguments(array($control->getOptions()))
+                $encoder->encodeArguments(array($control->getOptions()))
             )
         );
     }

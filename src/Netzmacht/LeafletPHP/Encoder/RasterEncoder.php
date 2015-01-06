@@ -42,7 +42,6 @@ class RasterEncoder extends AbstractEncoder
      *
      * @return bool
      *
-     * @internal param Encoder $Encoder
      */
     public function encodeTileLayer(TileLayer $layer, Encoder $builder)
     {
