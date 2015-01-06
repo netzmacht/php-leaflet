@@ -17,7 +17,7 @@ namespace Netzmacht\LeafletPHP\Definition\GeoJson;
  * @see     http://geojson.org/geojson-spec.html#feature-collection-objects
  * @package Netzmacht\LeafletPHP\Definition\GeoJson
  */
-class FeatureCollection implements \JsonSerializable, \IteratorAggregate
+class FeatureCollection extends AbstractFeature implements \JsonSerializable, \IteratorAggregate
 {
     /**
      * GeoJson features.
@@ -89,6 +89,15 @@ class FeatureCollection implements \JsonSerializable, \IteratorAggregate
      */
     function jsonSerialize()
     {
-        return $this->getFeatures();
+        $data = array(
+            'type'     => 'FeatureCollection',
+            'features' => $this->getFeatures()
+        );
+
+        if ($this->getBoundingBox()) {
+            $data['bbox'] = $this->getBoundingBox()->toGeoJson();
+        }
+
+        return $data;
     }
 }

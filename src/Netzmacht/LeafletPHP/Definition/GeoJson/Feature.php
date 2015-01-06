@@ -17,7 +17,7 @@ namespace Netzmacht\LeafletPHP\Definition\GeoJson;
  * @see     http://geojson.org/geojson-spec.html#feature-objects
  * @package Netzmacht\LeafletPHP\Definition\GeoJson
  */
-class Feature implements \JsonSerializable
+class Feature extends AbstractFeature implements \JsonSerializable
 {
     /**
      * The identifier.
@@ -115,6 +115,7 @@ class Feature implements \JsonSerializable
         return $this;
     }
 
+
     /**
      * {@inheritdoc}
      */
@@ -125,6 +126,10 @@ class Feature implements \JsonSerializable
             'geometry'   => $this->geometry,
             'properties' => $this->properties ?: null
         );
+
+        if ($this->getBoundingBox()) {
+            $data['bbox'] = $this->getBoundingBox()->toGeoJson();
+        }
 
         if ($this->identifier) {
             $data['id'] = $this->identifier;
