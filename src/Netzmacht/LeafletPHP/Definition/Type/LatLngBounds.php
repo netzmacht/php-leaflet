@@ -11,14 +11,12 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Type;
 
-use Netzmacht\Javascript\Type\Value\ConvertsToJson;
-
 /**
  * Class LatLngBounds defines a bounds on the map.
  *
  * @package Netzmacht\LeafletPHP\Definition\Type
  */
-class LatLngBounds implements ConvertsToJson
+class LatLngBounds implements \JsonSerializable
 {
     /**
      * South west boundary.
@@ -179,10 +177,13 @@ class LatLngBounds implements ConvertsToJson
     /**
      * Get value as valid json string.
      *
-     * @return string
+     * @return array
      */
-    public function toJson()
+    public function jsonSerialize()
     {
-        return sprintf('[%s, %s]', $this->getSouthWest()->toJson(), $this->getNorthEast()->toJson());
+        return array(
+            $this->getSouthWest(),
+            $this->getNorthEast()
+        );
     }
 }
