@@ -11,15 +11,17 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Group;
 
-use Netzmacht\LeafletPHP\Definition\Vector\Path;
+use Netzmacht\LeafletPHP\Definition\Vector\PathOptionsTrait;
 
 /**
  * Class GeoJSON representation.
  *
  * @package Netzmacht\LeafletPHP\Definition\Group
  */
-class GeoJSON extends Path
+class GeoJson extends FeatureGroup
 {
+    use PathOptionsTrait;
+
     /**
      * {@inheritdoc}
      */
