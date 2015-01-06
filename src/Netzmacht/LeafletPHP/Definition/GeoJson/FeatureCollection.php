@@ -89,9 +89,6 @@ class FeatureCollection implements \JsonSerializable, \IteratorAggregate
      */
     function jsonSerialize()
     {
-        return array(
-            'type'     => 'FeatureCollection',
-            'features' => $this->getFeatures()
-        );
+        return $this->getFeatures();
     }
 }

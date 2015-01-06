@@ -121,6 +121,7 @@ class Feature implements \JsonSerializable
     function jsonSerialize()
     {
         $data = array(
+            'type'       => 'Feature',
             'geometry'   => $this->geometry,
             'properties' => $this->properties ?: null
         );
