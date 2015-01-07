@@ -38,6 +38,20 @@ class Marker extends AbstractDefinition implements Layer, HasOptions, MapObject,
     use MapObjectTrait;
 
     /**
+     * The bind popup.
+     *
+     * @var Popup|string
+     */
+    private $popup;
+
+    /**
+     * Popup content.
+     *
+     * @var string
+     */
+    private $popupContent;
+
+    /**
      * Get the type of the definition.
      *
      * @return string
@@ -104,7 +118,7 @@ class Marker extends AbstractDefinition implements Layer, HasOptions, MapObject,
      */
     public function setIcon(Icon $icon)
     {
-        return $this->setOption('iocn', $icon);
+        return $this->setOption('icon', $icon);
     }
 
     /**
@@ -343,7 +357,19 @@ class Marker extends AbstractDefinition implements Layer, HasOptions, MapObject,
      */
     public function setPopupContent($content)
     {
+        $this->popupContent = $content;
+
         return $this->addMethod('setPopupContent', array($content));
+    }
+
+    /**
+     * Get the popup content.
+     *
+     * @return string
+     */
+    public function getPopupContent()
+    {
+        return $this->popupContent;
     }
 
     /**
@@ -355,7 +381,19 @@ class Marker extends AbstractDefinition implements Layer, HasOptions, MapObject,
      */
     public function bindPopup($popup)
     {
+        $this->popup = $popup;
+
         return $this->addMethod('bindPopup', array($popup));
+    }
+
+    /**
+     * Get bound popup.
+     *
+     * @return Popup|string
+     */
+    public function getPopup()
+    {
+        return $this->popup;
     }
 
     /**
@@ -365,6 +403,8 @@ class Marker extends AbstractDefinition implements Layer, HasOptions, MapObject,
      */
     public function unbindPopup()
     {
+        $this->popup = null;
+
         return $this->addMethod('unbindPopup');
     }
 
@@ -391,18 +431,22 @@ class Marker extends AbstractDefinition implements Layer, HasOptions, MapObject,
             $this->getId()
         );
 
-        $methods = array();
+        $options = $this->getOptions();
 
-        foreach ($this->getMethodCalls() as $call) {
-            $methods[] = array($call->getName(), $call->getArguments());
+        if ($this->getIcon()) {
+            $feature->setProperty('icon', $this->getIcon()->getId());
+            unset($options['icon']);
         }
 
-        $feature->setProperties(
-            array(
-                'options' => $this->getOptions(),
-                'methods' => $methods
-            )
-        );
+        if ($this->getPopup()) {
+            $feature->setProperty('popup', $this->getPopup());
+        }
+
+        if ($this->getPopupContent()) {
+            $feature->setProperty('popupContent', $this->getPopupContent());
+        }
+
+        $feature->setProperty('options', $options);
 
         return $feature;
     }
