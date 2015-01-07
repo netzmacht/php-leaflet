@@ -22,6 +22,7 @@ use Netzmacht\LeafletPHP\Definition\Layer;
 use Netzmacht\LeafletPHP\Definition\MapObject;
 use Netzmacht\LeafletPHP\Definition\MapObjectTrait;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
+use Netzmacht\LeafletPHP\Definition\PopupTrait;
 use Netzmacht\LeafletPHP\Definition\Type\Icon;
 use Netzmacht\LeafletPHP\Definition\Type\LatLng;
 
@@ -36,20 +37,7 @@ class Marker extends AbstractDefinition implements Layer, HasOptions, MapObject,
     use EventsTrait;
     use LabelTrait;
     use MapObjectTrait;
-
-    /**
-     * The bind popup.
-     *
-     * @var Popup|string
-     */
-    private $popup;
-
-    /**
-     * Popup content.
-     *
-     * @var string
-     */
-    private $popupContent;
+    use PopupTrait;
 
     /**
      * Get the type of the definition.
@@ -346,66 +334,6 @@ class Marker extends AbstractDefinition implements Layer, HasOptions, MapObject,
     public function getRiseOffset()
     {
         return $this->getOption('riseOffset', 250);
-    }
-
-    /**
-     * Set the popup content.
-     *
-     * @param string $content The popup content.
-     *
-     * @return $this
-     */
-    public function setPopupContent($content)
-    {
-        $this->popupContent = $content;
-
-        return $this->addMethod('setPopupContent', array($content));
-    }
-
-    /**
-     * Get the popup content.
-     *
-     * @return string
-     */
-    public function getPopupContent()
-    {
-        return $this->popupContent;
-    }
-
-    /**
-     * Bind marker to a popup.
-     *
-     * @param Popup|string $popup The popup.
-     *
-     * @return $this
-     */
-    public function bindPopup($popup)
-    {
-        $this->popup = $popup;
-
-        return $this->addMethod('bindPopup', array($popup));
-    }
-
-    /**
-     * Get bound popup.
-     *
-     * @return Popup|string
-     */
-    public function getPopup()
-    {
-        return $this->popup;
-    }
-
-    /**
-     * Unbind a popup.
-     *
-     * @return $this
-     */
-    public function unbindPopup()
-    {
-        $this->popup = null;
-
-        return $this->addMethod('unbindPopup');
     }
 
     /**

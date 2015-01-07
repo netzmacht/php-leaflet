@@ -37,4 +37,9 @@ class GeoJson extends FeatureGroup implements HasOptions
     {
         return $this->setOption('pointToLayer', $function);
     }
+
+    public function setOnEachFeature($function)
+    {
+        return $this->setOption('onEachFeature', $function);
+    }
 }

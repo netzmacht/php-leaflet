@@ -62,6 +62,7 @@ class VectorEncoder extends AbstractEncoder
      */
     public function encodePolygon(Polygon $polygon, Encoder $builder)
     {
+        var_dump($polygon);
         $this->doVectorEncode('polygon', $polygon, $builder);
     }
 

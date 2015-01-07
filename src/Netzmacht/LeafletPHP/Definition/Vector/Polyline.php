@@ -13,6 +13,9 @@ namespace Netzmacht\LeafletPHP\Definition\Vector;
 
 use Netzmacht\LeafletPHP\Assert\Assertion;
 use Netzmacht\LeafletPHP\Assert\InvalidArgumentException;
+use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJson;
+use Netzmacht\LeafletPHP\Definition\GeoJson\Feature;
+use Netzmacht\LeafletPHP\Definition\GeoJson\Geometry;
 use Netzmacht\LeafletPHP\Definition\Type\LatLng;
 
 /**
@@ -20,7 +23,7 @@ use Netzmacht\LeafletPHP\Definition\Type\LatLng;
  *
  * @package Netzmacht\LeafletPHP\Definition\Vector
  */
-class Polyline extends Path
+class Polyline extends Path implements ConvertsToGeoJson, Geometry
 {
     /**
      * List of latitude and longitude values.
@@ -108,7 +111,7 @@ class Polyline extends Path
             $latLng = LatLng::fromNative($latLng);
         }
 
-        Assertion::isInstanceOf($latLng, 'Netzmacht\LeafletPHP\Definition\Vector\Polyline');
+        Assertion::isInstanceOf($latLng, 'Netzmacht\LeafletPHP\Definition\Type\LatLng');
 
         $this->latLngs[] = $latLng;
 
@@ -164,5 +167,40 @@ class Polyline extends Path
     public function isAffectBounds()
     {
         return $this->affectsBounds;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    function jsonSerialize()
+    {
+        return array(
+            'type'        => 'LineString',
+            'coordinates' => array_map(
+                function (LatLng $latLng) {
+                    return $latLng->toGeoJson();
+                },
+                $this->getLatLngs()
+            )
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toGeoJson()
+    {
+        $feature = new Feature($this, $this->getId());
+        $feature->setProperty('options', $this->getOptions());
+
+        if ($this->getPopup()) {
+            $feature->setProperty('popup', $this->getPopup());
+        }
+
+        if ($this->getPopupContent()) {
+            $feature->setProperty('popupContent', $this->getPopupContent());
+        }
+
+        return $feature;
     }
 }

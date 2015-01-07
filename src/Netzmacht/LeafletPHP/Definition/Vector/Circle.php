@@ -11,6 +11,9 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Vector;
 
+use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJson;
+use Netzmacht\LeafletPHP\Definition\GeoJson\Feature;
+use Netzmacht\LeafletPHP\Definition\GeoJson\Geometry;
 use Netzmacht\LeafletPHP\Definition\Type\LatLng;
 
 /**
@@ -18,7 +21,7 @@ use Netzmacht\LeafletPHP\Definition\Type\LatLng;
  *
  * @package Netzmacht\LeafletPHP\Definition\Vector
  */
-class Circle extends Path
+class Circle extends Path implements Geometry, ConvertsToGeoJson
 {
     /**
      * {@inheritdoc}
@@ -85,8 +88,45 @@ class Circle extends Path
      */
     public function setRadius($radius)
     {
-        $this->radius = $radius;
+        $this->radius = (int) $radius;
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    function jsonSerialize()
+    {
+        return array(
+            'type'        => 'Point',
+            'coordinates' => $this->getLatLng()->toGeoJson()
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toGeoJson()
+    {
+        $feature = new Feature(
+            $this,
+            $this->getId()
+        );
+
+        $feature->setProperty('type', lcfirst(static::getType()));
+        $feature->setProperty('options', $this->getOptions());
+        $feature->setProperty('arguments', array($this->getLatLng(), $this->getRadius()));
+
+        if ($this->getPopup()) {
+            $feature->setProperty('popup', $this->getPopup());
+        }
+
+        if ($this->getPopupContent()) {
+            $feature->setProperty('popupContent', $this->getPopupContent());
+        }
+
+        return $feature;
+    }
 }
+

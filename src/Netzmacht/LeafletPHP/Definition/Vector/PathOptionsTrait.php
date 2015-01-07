@@ -87,6 +87,30 @@ trait PathOptionsTrait
     }
 
     /**
+     * Set the opacity.
+     *
+     * @param float $value  opacity.
+     *
+     * @return $this
+     * @see    http://leafletjs.com/reference.html#path-opacity
+     */
+    public function setOpacity($value)
+    {
+        return $this->setOption('opacity', (float) $value);
+    }
+
+    /**
+     * Get opacity.
+     *
+     * @return float
+     * @see    http://leafletjs.com/reference.html#path-opacity
+     */
+    public function getOpacity()
+    {
+        return $this->getOption('opacity', 0.5);
+    }
+
+    /**
      * Fill the path.
      *
      * @param bool|string $value If true a fill is drwan.
@@ -96,7 +120,7 @@ trait PathOptionsTrait
      */
     public function setFill($value)
     {
-        return $this->setOption('fill', $value);
+        return $this->setOption('fill', (bool) $value);
     }
 
     /**
@@ -155,7 +179,7 @@ trait PathOptionsTrait
      */
     public function getFillOpacity()
     {
-        return $this->getOption('fillOpacity', 0.5);
+        return $this->getOption('fillOpacity', 0.2);
     }
 
     /**
