@@ -18,6 +18,7 @@ use Netzmacht\LeafletPHP\Definition;
 use Netzmacht\LeafletPHP\Definition\Group\FeatureGroup;
 use Netzmacht\LeafletPHP\Definition\Group\GeoJson;
 use Netzmacht\LeafletPHP\Definition\Group\LayerGroup;
+use Netzmacht\LeafletPHP\Definition\Layer;
 
 /**
  * Class GroupEncoder encodes group elements.
@@ -100,8 +101,28 @@ class GroupEncoder extends AbstractEncoder
                 '%s = L.%s(%s);',
                 $encoder->encodeReference($group),
                 $type,
-                $encoder->encodeArguments(array($group->getLayers()))
+                $this->encodeLayersInformation($group->getLayers(), $encoder)
             )
         );
+    }
+
+    /**
+     * Get layer information correctly encoded.
+     *
+     * @param Layer[] $layers  The layers.
+     * @param Encoder $encoder The encoder.
+     *
+     * @return array
+     */
+    private function encodeLayersInformation($layers, Encoder $encoder)
+    {
+        $layers = array_map(
+            function($layer) use ($encoder) {
+                return $encoder->encodeReference($layer);
+            },
+            $layers
+        );
+
+        return '[' . implode(', ', $layers) . ']';
     }
 }
