@@ -15,7 +15,7 @@ use Netzmacht\LeafletPHP\Definition\AbstractDefinition;
 use Netzmacht\LeafletPHP\Definition\HasOptions;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 
-abstract class AbstractIcon extends AbstractDefinition implements HasOptions
+abstract class AbstractIcon extends AbstractDefinition implements HasOptions, Icon
 {
     use OptionsTrait;
 

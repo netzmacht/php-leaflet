@@ -16,7 +16,7 @@ use Netzmacht\Javascript\Event\GetReferenceEvent;
 use Netzmacht\LeafletPHP\Definition;
 use Netzmacht\LeafletPHP\Definition\Type\AbstractIcon;
 use Netzmacht\LeafletPHP\Definition\Type\DivIcon;
-use Netzmacht\LeafletPHP\Definition\Type\Icon;
+use Netzmacht\LeafletPHP\Definition\Type\ImageIcon;
 
 /**
  * Class TypeEncoder encodes type definitions.
@@ -43,12 +43,12 @@ class TypeEncoder extends AbstractEncoder
     /**
      * Encode the icon.
      *
-     * @param Icon    $icon    The icon.
+     * @param ImageIcon    $icon    The icon.
      * @param Encoder $encoder The encoder.
      *
      * @return string
      */
-    public function encodeIcon(Icon $icon, Encoder $encoder)
+    public function encodeIcon(ImageIcon $icon, Encoder $encoder)
     {
         return sprintf(
             '%s = L.Icon(%s);',

@@ -11,175 +11,83 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Type;
 
+use Netzmacht\LeafletPHP\Definition;
+
 /**
- * Class Icon describes an leaflet icon.
+ * Interface Icon
  *
  * @package Netzmacht\LeafletPHP\Definition\Type
  */
-class Icon extends AbstractIcon
+interface Icon extends Definition
 {
     /**
-     * {@inheritdoc}
-     */
-    public static function getType()
-    {
-        return 'Icon';
-    }
-
-    /**
-     * Construct.
+     * The icon size as point.
      *
-     * @param string $identifier Icon identifier.
-     * @param string $iconUrl    Icon url.
-     */
-    public function __construct($identifier, $iconUrl)
-    {
-        parent::__construct($identifier);
-
-        $this->setIconUrl($iconUrl);
-    }
-
-    /**
-     * Set the icon url.
-     *
-     * @param string $url The icon url.
+     * @param array $size The icon size as point.
      *
      * @return $this
-     * @see    http://leafletjs.com/reference.html#icon-iconurl
+     * @see    http://leafletjs.com/reference.html#divicon-iconsize
      */
-    public function setIconUrl($url)
-    {
-        return $this->setOption('iconUrl', $url);
-    }
+    public function setIconSize($size);
 
     /**
-     * Get the icon url.
-     *
-     * @return string
-     * @see    http://leafletjs.com/reference.html#icon-iconurl
-     */
-    public function getIconUrl()
-    {
-        return $this->getOption('iconUrl');
-    }
-
-    /**
-     * Set the icon retina url.
-     *
-     * @param string $url The icon url.
-     *
-     * @return $this
-     * @see    http://leafletjs.com/reference.html#icon-iconretinaurl
-     */
-    public function setIconRetinaUrl($url)
-    {
-        return $this->setOption('iconRetinaUrl', $url);
-    }
-
-    /**
-     * Get the icon retina url.
-     *
-     * @return string
-     * @see    http://leafletjs.com/reference.html#icon-iconretinaurl
-     */
-    public function getIconRetinaUrl()
-    {
-        return $this->getOption('iconRetinaUrl');
-    }
-    
-    /**
-     * Set the shadow url.
-     *
-     * @param string $url The shadow url.
-     *
-     * @return $this
-     * @see    http://leafletjs.com/reference.html#shadow-shadowurl
-     */
-    public function setShadowUrl($url)
-    {
-        return $this->setOption('shadowUrl', $url);
-    }
-
-    /**
-     * Get the shadow url.
-     *
-     * @return string
-     * @see    http://leafletjs.com/reference.html#shadow-shadowurl
-     */
-    public function getShadowUrl()
-    {
-        return $this->getOption('shadowUrl');
-    }
-
-    /**
-     * Set the shadow retina url.
-     *
-     * @param string $url The shadow url.
-     *
-     * @return $this
-     * @see    http://leafletjs.com/reference.html#shadow-shadowretinaurl
-     */
-    public function setShadowRetinaUrl($url)
-    {
-        return $this->setOption('shadowRetinaUrl', $url);
-    }
-
-    /**
-     * Get the shadow retina url.
-     *
-     * @return string
-     * @see    http://leafletjs.com/reference.html#shadow-shadowretinaurl
-     */
-    public function getShadowRetinaUrl()
-    {
-        return $this->getOption('shadowRetinaUrl');
-    }
-
-    /**
-     * The shadow size as point.
-     *
-     * @param array $size The shadow size as point.
-     *
-     * @return $this
-     * @see    http://leafletjs.com/reference.html#divshadow-shadowsize
-     */
-    public function setShadowSize($size)
-    {
-        return $this->setOption('shadowSize', $size);
-    }
-
-    /**
-     * Get the shadow size.
+     * Get the icon size.
      *
      * @return array|null
-     * @see    http://leafletjs.com/reference.html#divshadow-shadowsize
+     * @see    http://leafletjs.com/reference.html#divicon-iconsize
      */
-    public function getShadowSize()
-    {
-        return $this->getOption('shadowSize');
-    }
+    public function getIconSize();
 
     /**
-     * The coordinates of the "tip" of the shadow (relative to its top left corner).
+     * The coordinates of the "tip" of the icon (relative to its top left corner).
      *
      * @param array $point The coordinates as point
      *
      * @return $this
-     * @see    http://leafletjs.com/reference.html#divshadow-shadowanchor
+     * @see    http://leafletjs.com/reference.html#divicon-iconanchor
      */
-    public function setShadowAnchor($point)
-    {
-        return $this->setOption('shadowAnchor', $point);
-    }
+    public function setIconAnchor($point);
 
     /**
-     * Get the shadow anchor.
+     * Get the icon anchor.
      *
      * @return array|null
-     * @see    http://leafletjs.com/reference.html#divshadow-shadowanchor
+     * @see    http://leafletjs.com/reference.html#divicon-iconanchor
      */
-    public function getShadowAnchor()
-    {
-        return $this->getOption('shadowAnchor');
-    }
+    public function getIconAnchor();
+
+    /**
+     * The coordinates of the point from which popups will "open", relative to the icon anchor.
+     *
+     * @param array $point The coordinates as point
+     *
+     * @return $this
+     * @see    http://leafletjs.com/reference.html#divicon-popupanchor
+     */
+    public function setPopupAnchor($point);
+
+    /**
+     * Get the icon anchor.
+     *
+     * @return array|null
+     * @see    http://leafletjs.com/reference.html#divicon-popupanchor
+     */
+    public function getPopupAnchor();
+
+    /**
+     * Set a custom class name to assign to the icon.
+     *
+     * @param string $className The custom class name.
+     *
+     * @return $this
+     * @see    http://leafletjs.com/reference.html#divicon-classname
+     */
+    public function setClassName($className);
+
+    /**
+     * Get the clas name.
+     *
+     * @return string
+     */
+    public function getClassName();
 }
