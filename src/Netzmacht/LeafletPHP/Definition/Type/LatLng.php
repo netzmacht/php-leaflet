@@ -177,17 +177,22 @@ class LatLng implements \JsonSerializable, ConvertsToJson
     /**
      * Compare 2 coordinates. It ignores the altitude.
      *
-     * @param LatLng $other Another coordinate.
+     * @param LatLng $other          Another coordinate.
+     * @param bool   $ignoreAltitude If true only longitude and latitude are compared.
      *
      * @return bool
      */
-    public function equals(LatLng $other)
+    public function equals(LatLng $other, $ignoreAltitude = true)
     {
         if ($this->getLatitude() !== $other->getLatitude()) {
             return false;
         }
 
         if ($this->getLongitude() !== $other->getLongitude()) {
+            return false;
+        }
+
+        if (!$ignoreAltitude && $this->getAltitude() !== $other->getAltitude()) {
             return false;
         }
 
@@ -201,10 +206,16 @@ class LatLng implements \JsonSerializable, ConvertsToJson
      */
     public function toGeoJson()
     {
-        return array(
+        $raw = array (
             $this->getLongitude(),
             $this->getLatitude()
         );
+
+        if ($this->hasAltitude()) {
+            $raw[] = $this->getAltitude();
+        }
+
+        return $raw;
     }
 
     /**
