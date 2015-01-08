@@ -51,7 +51,7 @@ class Leaflet
      */
     public function __construct(Builder $builder, array $libraries = array())
     {
-        $this->builder   = $builder;
+        $this->builder     = $builder;
         $this->stylesheets = $libraries;
     }
 

@@ -27,7 +27,7 @@ use Netzmacht\LeafletPHP\Definition\Type\Icon;
 use Netzmacht\LeafletPHP\Definition\Type\LatLng;
 
 /**
- * Class Marker
+ * Class Marker is the Marker definition for the Leaflet marker.
  * 
  * @package Netzmacht\LeafletPHP\Definition\UI
  */
@@ -57,9 +57,10 @@ class Marker extends AbstractDefinition implements Layer, HasOptions, MapObject,
     private $latLng;
 
     /**
-     * Construct
-     * @param string $identifier
-     * @param LatLng|string|array $latLng LatLng
+     * Construct.
+     *
+     * @param string              $identifier The identifier.
+     * @param LatLng|string|array $latLng     LatLng.
      */
     public function __construct($identifier, $latLng)
     {
@@ -339,7 +340,7 @@ class Marker extends AbstractDefinition implements Layer, HasOptions, MapObject,
     /**
      * {@inheritdoc}
      */
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         return array(
             'type'        => 'Point',

@@ -14,7 +14,6 @@ namespace Netzmacht\LeafletPHP\Definition\Vector;
 use Netzmacht\LeafletPHP\Assert\Assertion;
 use Netzmacht\LeafletPHP\Assert\InvalidArgumentException;
 use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJson;
-use Netzmacht\LeafletPHP\Definition\GeoJson\Feature;
 use Netzmacht\LeafletPHP\Definition\GeoJson\Geometry;
 use Netzmacht\LeafletPHP\Definition\Type\LatLng;
 
@@ -172,7 +171,7 @@ class Polyline extends Path implements ConvertsToGeoJson, Geometry
     /**
      * {@inheritdoc}
      */
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         return array(
             'type'        => 'LineString',
@@ -183,24 +182,5 @@ class Polyline extends Path implements ConvertsToGeoJson, Geometry
                 $this->getLatLngs()
             )
         );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toGeoJson()
-    {
-        $feature = new Feature($this, $this->getId());
-        $feature->setProperty('options', $this->getOptions());
-
-        if ($this->getPopup()) {
-            $feature->setProperty('popup', $this->getPopup());
-        }
-
-        if ($this->getPopupContent()) {
-            $feature->setProperty('popupContent', $this->getPopupContent());
-        }
-
-        return $feature;
     }
 }

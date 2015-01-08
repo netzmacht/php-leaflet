@@ -14,7 +14,7 @@ namespace Netzmacht\LeafletPHP\Definition\Type;
 use Netzmacht\LeafletPHP\Definition;
 
 /**
- * Interface Icon
+ * Interface describes Icon objects for Leaflet.
  *
  * @package Netzmacht\LeafletPHP\Definition\Type
  */
@@ -41,7 +41,7 @@ interface Icon extends Definition
     /**
      * The coordinates of the "tip" of the icon (relative to its top left corner).
      *
-     * @param array $point The coordinates as point
+     * @param array $point The coordinates as point.
      *
      * @return $this
      * @see    http://leafletjs.com/reference.html#divicon-iconanchor
@@ -59,7 +59,7 @@ interface Icon extends Definition
     /**
      * The coordinates of the point from which popups will "open", relative to the icon anchor.
      *
-     * @param array $point The coordinates as point
+     * @param array $point The coordinates as point.
      *
      * @return $this
      * @see    http://leafletjs.com/reference.html#divicon-popupanchor

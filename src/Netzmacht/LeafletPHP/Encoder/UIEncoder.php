@@ -18,19 +18,14 @@ use Netzmacht\LeafletPHP\Definition;
 use Netzmacht\LeafletPHP\Definition\UI\Marker;
 
 /**
- * Class UIEncoder
+ * Class UIEncoder encodes ui elements.
  *
  * @package Netzmacht\LeafletPHP\Encoder
  */
 class UIEncoder extends AbstractEncoder
 {
     /**
-     * Set the reference reference.
-     *
-     * @param Definition        $definition The current definition.
-     * @param GetReferenceEvent $event      The get reference event.
-     *
-     * @return string
+     *  {@inheritdoc}
      */
     public function setReference(Definition $definition, GetReferenceEvent $event)
     {
@@ -46,7 +41,6 @@ class UIEncoder extends AbstractEncoder
      * @param Encoder $encoder The encoder.
      *
      * @return bool
-     *
      */
     public function encodeMarker(Marker $marker, Encoder $encoder)
     {

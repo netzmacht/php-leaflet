@@ -31,7 +31,7 @@ class Polygon extends Polyline
     /**
      * {@inheritdoc}
      */
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         return array(
             'type'        => 'Polygon',

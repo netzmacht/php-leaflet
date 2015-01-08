@@ -162,7 +162,7 @@ class ImageIcon extends AbstractIcon
     /**
      * The coordinates of the "tip" of the shadow (relative to its top left corner).
      *
-     * @param array $point The coordinates as point
+     * @param array $point The coordinates as point.
      *
      * @return $this
      * @see    http://leafletjs.com/reference.html#divshadow-shadowanchor

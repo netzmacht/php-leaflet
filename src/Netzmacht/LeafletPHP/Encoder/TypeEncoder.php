@@ -26,12 +26,7 @@ use Netzmacht\LeafletPHP\Definition\Type\ImageIcon;
 class TypeEncoder extends AbstractEncoder
 {
     /**
-     * Set the reference reference.
-     *
-     * @param Definition        $definition The current definition.
-     * @param GetReferenceEvent $event      The get reference event.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function setReference(Definition $definition, GetReferenceEvent $event)
     {
@@ -43,8 +38,8 @@ class TypeEncoder extends AbstractEncoder
     /**
      * Encode the icon.
      *
-     * @param ImageIcon    $icon    The icon.
-     * @param Encoder $encoder The encoder.
+     * @param ImageIcon $icon    The icon.
+     * @param Encoder   $encoder The encoder.
      *
      * @return string
      */

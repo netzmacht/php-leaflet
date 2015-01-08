@@ -62,7 +62,7 @@ abstract class AbstractAssets implements Assets, GeneratesHtml
     /**
      * Set the separator.
      *
-     * @param string $separator
+     * @param string $separator The line separator.
      *
      * @return $this
      */

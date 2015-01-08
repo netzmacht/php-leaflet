@@ -119,7 +119,7 @@ class Feature extends AbstractFeature implements \JsonSerializable
     /**
      * {@inheritdoc}
      */
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         $data = array(
             'type'       => 'Feature',

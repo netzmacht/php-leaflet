@@ -21,32 +21,63 @@ use Netzmacht\Javascript\Encoder;
 class MapBoxProvider extends Provider
 {
     /**
-     * Application key.
+     * Mapbox user.
      *
      * @var string
      */
-    private $key;
+    private $user;
+
+    /**
+     * Mapbox map name.
+     *
+     * @var string
+     */
+    private $mapName;
 
     /**
      * Get the key.
      *
      * @return string
      */
-    public function getKey()
+    public function getUser()
     {
-        return $this->key;
+        return $this->user;
     }
 
     /**
-     * Set the key.
+     * Set the mapbox user..
      *
-     * @param string $key
+     * @param string $user Mapbox username.
      *
      * @return $this
      */
-    public function setKey($key)
+    public function setUser($user)
     {
-        $this->key = $key;
+        $this->user = $user;
+
+        return $this;
+    }
+    
+    /**
+     * Get the map name.
+     *
+     * @return string
+     */
+    public function getMapName()
+    {
+        return $this->mapName;
+    }
+
+    /**
+     * Set the map name.
+     *
+     * @param string $mapName Mapbox map name.
+     *
+     * @return $this
+     */
+    public function setMapName($mapName)
+    {
+        $this->mapName = $mapName;
 
         return $this;
     }
@@ -62,7 +93,8 @@ class MapBoxProvider extends Provider
             $name .= '.' . $this->getVariant();
         }
 
-        $name .= '.' . $this->getKey();
+        $name .= '.' . $this->getUser();
+        $name .= '.' . $this->getMapName();
 
         return sprintf(
             '%s = L.tileLayer.provider(\'' . $name . '\')' . ($finish ? ';' : ''),

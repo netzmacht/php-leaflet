@@ -11,24 +11,26 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Vector;
 
+use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureTrait;
 use Netzmacht\LeafletPHP\Definition\HasEvents;
 use Netzmacht\LeafletPHP\Definition\EventsTrait;
+use Netzmacht\LeafletPHP\Definition\HasPopup;
 use Netzmacht\LeafletPHP\Definition\MapObject;
 use Netzmacht\LeafletPHP\Definition\MapObjectTrait;
 use Netzmacht\LeafletPHP\Definition\PopupTrait;
-use Netzmacht\LeafletPHP\Definition\UI\Popup;
 
 /**
  * Abstract class Path for path based elements.
  *
  * @package Netzmacht\LeafletPHP\Definition\Vector
  */
-abstract class Path extends AbstractLayer implements HasEvents, MapObject
+abstract class Path extends AbstractLayer implements HasEvents, MapObject, HasPopup
 {
     use EventsTrait;
     use MapObjectTrait;
     use PathOptionsTrait;
     use PopupTrait;
+    use FeatureTrait;
 
     /**
      * The click event.
@@ -109,38 +111,6 @@ abstract class Path extends AbstractLayer implements HasEvents, MapObject
     {
         return 'Path';
     }
-
-//    /**
-//     * Bind a popup.
-//     *
-//     * @param Popup  $popup   The popup object.
-//     * @param array  $options Popup options.
-//     * @param string $html    Optional html content of the html.
-//     *
-//     * @return $this
-//     * @see    http://leafletjs.com/reference.html#path-bindpopup
-//     */
-//    public function bindPopup(Popup $popup, $options, $html = null)
-//    {
-//        if ($html !== null) {
-//            $this->addMethod('bindPopup', array($html, $popup, $options));
-//        } else {
-//            $this->addMethod('bindPopup', array($popup, $options));
-//        }
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Unbind path from a popup.
-//     *
-//     * @return $this
-//     * @see    http://leafletjs.com/reference.html#path-unbindpopup
-//     */
-//    public function unbindPopup()
-//    {
-//        return $this->addMethod('unbindPopup');
-//    }
 
     /**
      * Bring path to the front.

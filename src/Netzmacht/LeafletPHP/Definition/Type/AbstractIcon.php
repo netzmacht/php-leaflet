@@ -15,6 +15,11 @@ use Netzmacht\LeafletPHP\Definition\AbstractDefinition;
 use Netzmacht\LeafletPHP\Definition\HasOptions;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 
+/**
+ * Class AbstractIcon is the base icon implementation.
+ *
+ * @package Netzmacht\LeafletPHP\Definition\Type
+ */
 abstract class AbstractIcon extends AbstractDefinition implements HasOptions, Icon
 {
     use OptionsTrait;
@@ -27,12 +32,7 @@ abstract class AbstractIcon extends AbstractDefinition implements HasOptions, Ic
     protected static $defaultClassName = '';
 
     /**
-     * The icon size as point.
-     *
-     * @param array $size The icon size as point.
-     *
-     * @return $this
-     * @see    http://leafletjs.com/reference.html#divicon-iconsize
+     * {@inheritdoc}
      */
     public function setIconSize($size)
     {
@@ -40,10 +40,7 @@ abstract class AbstractIcon extends AbstractDefinition implements HasOptions, Ic
     }
 
     /**
-     * Get the icon size.
-     *
-     * @return array|null
-     * @see    http://leafletjs.com/reference.html#divicon-iconsize
+     * {@inheritdoc}
      */
     public function getIconSize()
     {
@@ -51,12 +48,7 @@ abstract class AbstractIcon extends AbstractDefinition implements HasOptions, Ic
     }
 
     /**
-     * The coordinates of the "tip" of the icon (relative to its top left corner).
-     *
-     * @param array $point The coordinates as point
-     *
-     * @return $this
-     * @see    http://leafletjs.com/reference.html#divicon-iconanchor
+     * {@inheritdoc}
      */
     public function setIconAnchor($point)
     {
@@ -64,10 +56,7 @@ abstract class AbstractIcon extends AbstractDefinition implements HasOptions, Ic
     }
 
     /**
-     * Get the icon anchor.
-     *
-     * @return array|null
-     * @see    http://leafletjs.com/reference.html#divicon-iconanchor
+     * {@inheritdoc}
      */
     public function getIconAnchor()
     {
@@ -75,12 +64,7 @@ abstract class AbstractIcon extends AbstractDefinition implements HasOptions, Ic
     }
 
     /**
-     * The coordinates of the point from which popups will "open", relative to the icon anchor.
-     *
-     * @param array $point The coordinates as point
-     *
-     * @return $this
-     * @see    http://leafletjs.com/reference.html#divicon-popupanchor
+     * {@inheritdoc}
      */
     public function setPopupAnchor($point)
     {
@@ -88,10 +72,7 @@ abstract class AbstractIcon extends AbstractDefinition implements HasOptions, Ic
     }
 
     /**
-     * Get the icon anchor.
-     *
-     * @return array|null
-     * @see    http://leafletjs.com/reference.html#divicon-popupanchor
+     * {@inheritdoc}
      */
     public function getPopupAnchor()
     {
@@ -99,12 +80,7 @@ abstract class AbstractIcon extends AbstractDefinition implements HasOptions, Ic
     }
 
     /**
-     * Set a custom class name to assign to the icon.
-     *
-     * @param string $className The custom class name.
-     *
-     * @return $this
-     * @see    http://leafletjs.com/reference.html#divicon-classname
+     * {@inheritdoc}
      */
     public function setClassName($className)
     {
@@ -112,9 +88,7 @@ abstract class AbstractIcon extends AbstractDefinition implements HasOptions, Ic
     }
 
     /**
-     * Get the clas name.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getClassName()
     {

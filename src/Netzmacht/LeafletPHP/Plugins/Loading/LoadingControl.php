@@ -18,8 +18,10 @@ use Netzmacht\LeafletPHP\Definition\Control\AbstractControl;
 use Netzmacht\LeafletPHP\Definition\Control\Zoom;
 
 /**
- * Class LoadingControl
+ * Class LoadingControl represents the Leaflet.loading control plugin.
+ *
  * @package Netzmacht\LeafletPHP\Plugins\Loading
+ * @see     https://github.com/ebrelsford/Leaflet.loading
  */
 class LoadingControl extends AbstractControl implements ConvertsToJavascript
 {

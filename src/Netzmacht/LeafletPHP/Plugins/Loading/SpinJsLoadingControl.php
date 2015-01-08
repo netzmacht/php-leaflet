@@ -11,7 +11,14 @@
 
 namespace Netzmacht\LeafletPHP\Plugins\Loading;
 
-
+/**
+ * SpinJsLoadingControl is for the spin.js loading indicator.
+ *
+ * Instead of setting an option to the LoadingControl you have to use a separate class. Autoloading of spin.js library
+ * causes this.
+ *
+ * @package Netzmacht\LeafletPHP\Plugins\Loading
+ */
 class SpinJsLoadingControl extends LoadingControl
 {
     /**

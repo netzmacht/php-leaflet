@@ -11,7 +11,11 @@
 
 namespace Netzmacht\LeafletPHP\Assets;
 
-
+/**
+ * Interface GeneratesHtml describes an Assets object which generates the assets output.
+ *
+ * @package Netzmacht\LeafletPHP\Assets
+ */
 interface GeneratesHtml
 {
     /**

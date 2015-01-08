@@ -87,7 +87,7 @@ class FeatureCollection extends AbstractFeature implements \JsonSerializable, \I
     /**
      * {@inheritdoc}
      */
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         $data = array(
             'type'     => 'FeatureCollection',

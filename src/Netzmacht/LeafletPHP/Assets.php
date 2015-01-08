@@ -28,7 +28,7 @@ interface Assets
      * @param string $script Javascript source.
      * @param string $type   The resource type.
      *
-     * @return void
+     * @return $this
      */
     public function addJavascript($script, $type = self::TYPE_SOURCE);
 
@@ -38,7 +38,7 @@ interface Assets
      * @param string $stylesheet The stylesheet.
      * @param string $type       The resource type.
      *
-     * @return
+     * @return $this
      */
     public function addStylesheet($stylesheet, $type = self::TYPE_FILE);
 

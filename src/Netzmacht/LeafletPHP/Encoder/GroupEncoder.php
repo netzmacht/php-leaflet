@@ -117,7 +117,7 @@ class GroupEncoder extends AbstractEncoder
     private function encodeLayersInformation($layers, Encoder $encoder)
     {
         $layers = array_map(
-            function($layer) use ($encoder) {
+            function ($layer) use ($encoder) {
                 return $encoder->encodeReference($layer);
             },
             $layers

@@ -11,6 +11,8 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Group;
 
+use Netzmacht\Javascript\Type\Call\AnonymousFunction;
+use Netzmacht\Javascript\Type\Value\Expression;
 use Netzmacht\LeafletPHP\Definition\HasOptions;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 use Netzmacht\LeafletPHP\Definition\Vector\PathOptionsTrait;
@@ -33,11 +35,25 @@ class GeoJson extends FeatureGroup implements HasOptions
         return 'GeoJSON';
     }
 
+    /**
+     * Set point to layer function.
+     *
+     * @param Expression|AnonymousFunction $function The function callback.
+     *
+     * @return $this
+     */
     public function setPointToLayer($function)
     {
         return $this->setOption('pointToLayer', $function);
     }
 
+    /**
+     * Set on each feature function.
+     *
+     * @param Expression|AnonymousFunction $function The function callback.
+     *
+     * @return $this
+     */
     public function setOnEachFeature($function)
     {
         return $this->setOption('onEachFeature', $function);

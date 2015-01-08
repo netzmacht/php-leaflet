@@ -11,74 +11,35 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Vector;
 
-
 use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJson;
 use Netzmacht\LeafletPHP\Definition\GeoJson\Feature;
+use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureTrait;
 use Netzmacht\LeafletPHP\Definition\GeoJson\Geometry;
 use Netzmacht\LeafletPHP\Definition\Group\FeatureGroup;
+use Netzmacht\LeafletPHP\Definition\HasPopup;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 use Netzmacht\LeafletPHP\Definition\PopupTrait;
 use Netzmacht\LeafletPHP\Definition\Type\LatLng;
 
-class MultiPolygon extends FeatureGroup implements Geometry, ConvertsToGeoJson
+/**
+ * Class MultiPolygon is the definition for Leaflet multi polygon object.
+ *
+ * @package Netzmacht\LeafletPHP\Definition\Vector
+ */
+class MultiPolygon extends MultiPolyline
 {
-    use OptionsTrait;
-    use PathOptionsTrait;
-    use PopupTrait;
-
-    private $latLngs = array();
-
-
-    public function setLatLngs($latLngs)
+    /**
+     * {@inheritdoc}
+     */
+    public static function getType()
     {
-        $this->latLngs = $latLngs;
-
-        return $this;
+        return 'MultiPolygon';
     }
 
     /**
-     * @return array
+     * Name of the geo json representation.
+     *
+     * @var string
      */
-    public function getLatLngs()
-    {
-        return $this->latLngs;
-    }
-
-    public function jsonSerialize()
-    {
-        return array(
-            'type'        => 'MultiPolygon',
-            'coordinates' => array_map(
-                function($latLngs) {
-                    return array(
-                        array_map(
-                            function(LatLng $latLng) {
-                                return $latLng->toGeoJson();
-                            },
-                            $latLngs
-                        )
-                    );
-                },
-                $this->getLatLngs()
-            )
-        );
-    }
-
-    public function toGeoJson()
-    {
-        $feature = new Feature(
-            $this,
-            $this->getId()
-        );
-
-        if ($this->getPopup()) {
-            $feature->setProperty('popup', $this->getPopup());
-        }
-
-        if ($this->getPopupContent()) {
-            $feature->setProperty('popupContent', $this->getPopupContent());
-        }
-
-        return $feature;
-    }
+    protected $geoJsonType = 'MultiPolygon';
 }

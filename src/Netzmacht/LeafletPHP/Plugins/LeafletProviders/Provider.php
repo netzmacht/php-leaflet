@@ -67,9 +67,9 @@ class Provider extends AbstractDefinition implements Layer, MapObject, ConvertsT
     /**
      * Construct.
      *
-     * @param string $identifier
-     * @param string $provider
-     * @param string $variant
+     * @param string $identifier Element identifier.
+     * @param string $provider   Provider name.
+     * @param string $variant    Map variant.
      */
     public function __construct($identifier, $provider, $variant = null)
     {
@@ -80,6 +80,8 @@ class Provider extends AbstractDefinition implements Layer, MapObject, ConvertsT
     }
 
     /**
+     * Get the provider.
+     *
      * @return string
      */
     public function getProvider()
@@ -88,6 +90,8 @@ class Provider extends AbstractDefinition implements Layer, MapObject, ConvertsT
     }
 
     /**
+     * Get the variant.
+     *
      * @return string
      */
     public function getVariant()

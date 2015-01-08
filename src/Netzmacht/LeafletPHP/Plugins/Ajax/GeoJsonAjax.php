@@ -17,9 +17,10 @@ use Netzmacht\LeafletPHP\Definition\Group\GeoJson;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 
 /**
- * Class GeoJsonAjax
+ * Class GeoJsonAjax represents the Leaflet ajax pluging for geojson data.
  *
  * @package Netzmacht\LeafletPHP\Plugins\Ajax
+ * @see     https://github.com/calvinmetcalf/leaflet-ajax
  */
 class GeoJsonAjax extends GeoJson implements ConvertsToJavascript
 {

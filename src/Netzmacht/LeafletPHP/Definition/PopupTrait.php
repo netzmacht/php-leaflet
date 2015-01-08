@@ -13,6 +13,11 @@ namespace Netzmacht\LeafletPHP\Definition;
 
 use Netzmacht\LeafletPHP\Definition\UI\Popup;
 
+/**
+ * Class PopupTrait is an implementation of the HasPopup interface an can be used as trait.
+ *
+ * @package Netzmacht\LeafletPHP\Definition
+ */
 trait PopupTrait
 {
     /**
@@ -56,13 +61,18 @@ trait PopupTrait
     /**
      * Bind marker to a popup.
      *
-     * @param Popup|string $popup The popup.
+     * @param Popup|string $popup   The popup.
+     * @param array|null   $options Optional popup options.
      *
      * @return $this
      */
-    public function bindPopup($popup)
+    public function bindPopup($popup, $options = null)
     {
         $this->popup = $popup;
+
+        if (!empty($options)) {
+            return $this->addMethod('binPopup', array($popup, $options));
+        }
 
         return $this->addMethod('bindPopup', array($popup));
     }

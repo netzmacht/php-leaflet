@@ -109,7 +109,7 @@ class LayerGroup extends AbstractDefinition implements Layer, MapObject, Convert
 
     /**
      * Get definition as feature collection.
-     **
+     *
      * @return FeatureCollection
      */
     public function toGeoJson()

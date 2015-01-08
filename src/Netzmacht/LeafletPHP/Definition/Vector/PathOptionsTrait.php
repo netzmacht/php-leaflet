@@ -89,7 +89,7 @@ trait PathOptionsTrait
     /**
      * Set the opacity.
      *
-     * @param float $value  opacity.
+     * @param float $value Path opacity.
      *
      * @return $this
      * @see    http://leafletjs.com/reference.html#path-opacity
