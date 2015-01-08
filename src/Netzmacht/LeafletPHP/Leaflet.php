@@ -80,7 +80,7 @@ class Leaflet
      *
      * @return $this
      */
-    public function registerJavascript($name, $source, $type = Assets::TYPE_SOURCE)
+    public function registerJavascript($name, $source, $type = Assets::TYPE_FILE)
     {
         $this->javascripts[$name][] = array($source, $type);
 
