@@ -201,4 +201,16 @@ class LatLngBounds implements ConvertsToJson
             $this->getNorthEast()->toGeoJson()
         );
     }
+
+    /**
+     * Check if given object in in the bounds.
+     *
+     * @param $object
+     *
+     * @return bool
+     */
+    public function contains($object)
+    {
+        // TODO: Implement
+    }
 }
