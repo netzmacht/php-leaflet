@@ -13,7 +13,6 @@ namespace Netzmacht\LeafletPHP\Encoder;
 
 use Netzmacht\Javascript\Encoder;
 use Netzmacht\Javascript\Event\BuildEvent;
-use Netzmacht\Javascript\Event\EncodeValueEvent;
 use Netzmacht\Javascript\Event\GetReferenceEvent;
 use Netzmacht\Javascript\Exception\GetReferenceFailed;
 use Netzmacht\LeafletPHP\Definition;
