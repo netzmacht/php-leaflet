@@ -58,8 +58,7 @@ class MapEncoder extends AbstractEncoder
     {
         parent::handleBuild($event);
 
-        $event->getOutput()
-            ->addLine('var map = { layers: {}, controls: {}, map: null };');
+        $event->getOutput()->addLine('var map = { layers: {}, controls: {}, icons: {}, map: null };');
     }
 
     /**
