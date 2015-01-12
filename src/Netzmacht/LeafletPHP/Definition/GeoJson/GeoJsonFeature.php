@@ -11,7 +11,11 @@
 
 namespace Netzmacht\LeafletPHP\Definition\GeoJson;
 
-
+/**
+ * Interface GeoJsonFeature describes an object which represents a GeoJSON feature.
+ *
+ * @package Netzmacht\LeafletPHP\Definition\GeoJson
+ */
 interface GeoJsonFeature extends GeoJsonObject
 {
 

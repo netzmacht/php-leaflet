@@ -45,6 +45,71 @@ class GeoJsonAjax extends FeatureGroup implements ConvertsToJavascript
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public static function getRequiredLibraries()
+    {
+        $libs   = parent::getRequiredLibraries();
+        $libs[] = 'leaflet-ajax';
+
+        return $libs;
+    }
+
+    /**
+     * Url to load.
+     *
+     * @var string
+     */
+    private $url;
+
+    /**
+     * Urls to load.
+     *
+     * @var array
+     */
+    private $urls = array();
+
+    /**
+     * Get the ajax url.
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * Set ajax url which is used for the constructor.
+     *
+     * @param string $url Ajax url.
+     *
+     * @return $this
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Add url via call addUrl method.
+     *
+     * @param string $url Url being added.
+     *
+     * @return $this
+     */
+    public function addUrl($url)
+    {
+        $this->urls[] = $url;
+
+        $this->addMethod('addUrl', $url);
+
+        return $this;
+    }
+
+    /**
      * Set point to layer function.
      *
      * @param Expression|AnonymousFunction $function The function callback.
@@ -66,48 +131,6 @@ class GeoJsonAjax extends FeatureGroup implements ConvertsToJavascript
     public function setOnEachFeature($function)
     {
         return $this->setOption('onEachFeature', $function);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getRequiredLibraries()
-    {
-        $libs   = parent::getRequiredLibraries();
-        $libs[] = 'leaflet-ajax';
-
-        return $libs;
-    }
-
-    /**
-     * Url to load.
-     *
-     * @var string
-     */
-    private $url;
-
-    /**
-     * Get the ajax url.
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * Set ajax url.
-     *
-     * @param string $url Ajax url.
-     *
-     * @return $this
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-
-        return $this;
     }
 
     /**
@@ -137,7 +160,7 @@ class GeoJsonAjax extends FeatureGroup implements ConvertsToJavascript
      */
     public function encode(Encoder $encoder, $finish = true)
     {
-        return sprintf(
+        $buffer = sprintf(
             '%s = L.geoJson.ajax(%s)%s',
             $encoder->encodeReference($this),
             $encoder->encodeArguments(
@@ -148,5 +171,24 @@ class GeoJsonAjax extends FeatureGroup implements ConvertsToJavascript
             ),
             $finish ? ';' : ''
         );
+
+        foreach ($this->getLayers() as $layer) {
+            $buffer .= "\n";
+            $buffer .= sprintf(
+                '%s.addLayer(%s);',
+                $encoder->encodeReference($this),
+                $encoder->encodeReference($layer)
+            );
+        }
+
+        return $buffer;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function convertsFullyToGeoJson()
+    {
+        return false;
     }
 }

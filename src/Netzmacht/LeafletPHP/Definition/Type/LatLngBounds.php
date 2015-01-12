@@ -202,6 +202,7 @@ class LatLngBounds implements ConvertsToJson
         );
     }
 
+    // @codingStandardsIgnoreStart
     /**
      * Check if given object in in the bounds.
      *
@@ -209,8 +210,9 @@ class LatLngBounds implements ConvertsToJson
      *
      * @return bool
      */
-    public function contains($object)
+    public function contains()
     {
         // TODO: Implement
     }
+    // @codingStandardsIgnoreEnd
 }
