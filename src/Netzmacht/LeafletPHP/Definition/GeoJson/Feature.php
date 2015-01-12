@@ -17,7 +17,7 @@ namespace Netzmacht\LeafletPHP\Definition\GeoJson;
  * @see     http://geojson.org/geojson-spec.html#feature-objects
  * @package Netzmacht\LeafletPHP\Definition\GeoJson
  */
-class Feature extends AbstractFeature implements \JsonSerializable
+class Feature extends AbstractFeature
 {
     /**
      * The identifier.

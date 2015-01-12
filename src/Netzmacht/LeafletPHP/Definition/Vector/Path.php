@@ -11,6 +11,7 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Vector;
 
+use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
 use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureTrait;
 use Netzmacht\LeafletPHP\Definition\HasEvents;
 use Netzmacht\LeafletPHP\Definition\EventsTrait;
@@ -24,7 +25,7 @@ use Netzmacht\LeafletPHP\Definition\PopupTrait;
  *
  * @package Netzmacht\LeafletPHP\Definition\Vector
  */
-abstract class Path extends AbstractLayer implements HasEvents, MapObject, HasPopup
+abstract class Path extends AbstractLayer implements HasEvents, MapObject, HasPopup, ConvertsToGeoJsonFeature
 {
     use EventsTrait;
     use MapObjectTrait;
@@ -143,5 +144,13 @@ abstract class Path extends AbstractLayer implements HasEvents, MapObject, HasPo
     public function redraw()
     {
         return $this->addMethod('redraw');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function convertsFullyToGeoJson()
+    {
+        return true;
     }
 }

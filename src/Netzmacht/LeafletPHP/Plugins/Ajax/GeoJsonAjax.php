@@ -12,9 +12,12 @@
 namespace Netzmacht\LeafletPHP\Plugins\Ajax;
 
 use Netzmacht\Javascript\Encoder;
+use Netzmacht\Javascript\Type\Call\AnonymousFunction;
 use Netzmacht\Javascript\Type\ConvertsToJavascript;
-use Netzmacht\LeafletPHP\Definition\Group\GeoJson;
+use Netzmacht\Javascript\Type\Value\Expression;
+use Netzmacht\LeafletPHP\Definition\Group\FeatureGroup;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
+use Netzmacht\LeafletPHP\Definition\Vector\PathOptionsTrait;
 
 /**
  * Class GeoJsonAjax represents the Leaflet ajax pluging for geojson data.
@@ -22,9 +25,10 @@ use Netzmacht\LeafletPHP\Definition\OptionsTrait;
  * @package Netzmacht\LeafletPHP\Plugins\Ajax
  * @see     https://github.com/calvinmetcalf/leaflet-ajax
  */
-class GeoJsonAjax extends GeoJson implements ConvertsToJavascript
+class GeoJsonAjax extends FeatureGroup implements ConvertsToJavascript
 {
     use OptionsTrait;
+    use PathOptionsTrait;
 
     const EVENT_DATA_LOADING = 'data:loading';
 
@@ -38,6 +42,30 @@ class GeoJsonAjax extends GeoJson implements ConvertsToJavascript
     public static function getType()
     {
         return 'Ajax';
+    }
+
+    /**
+     * Set point to layer function.
+     *
+     * @param Expression|AnonymousFunction $function The function callback.
+     *
+     * @return $this
+     */
+    public function setPointToLayer($function)
+    {
+        return $this->setOption('pointToLayer', $function);
+    }
+
+    /**
+     * Set on each feature function.
+     *
+     * @param Expression|AnonymousFunction $function The function callback.
+     *
+     * @return $this
+     */
+    public function setOnEachFeature($function)
+    {
+        return $this->setOption('onEachFeature', $function);
     }
 
     /**

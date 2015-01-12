@@ -11,14 +11,18 @@
 
 namespace Netzmacht\LeafletPHP\Encoder;
 
+use Netzmacht\Contao\Leaflet\MetaModels\Dca\Feature;
 use Netzmacht\Javascript\Encoder;
 use Netzmacht\Javascript\Event\GetReferenceEvent;
 use Netzmacht\Javascript\Exception\GetReferenceFailed;
 use Netzmacht\LeafletPHP\Definition;
+use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
+use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureCollection;
 use Netzmacht\LeafletPHP\Definition\Group\FeatureGroup;
 use Netzmacht\LeafletPHP\Definition\Group\GeoJson;
 use Netzmacht\LeafletPHP\Definition\Group\LayerGroup;
 use Netzmacht\LeafletPHP\Definition\Layer;
+use Netzmacht\LeafletPHP\Plugins\Ajax\GeoJsonAjax;
 
 /**
  * Class GroupEncoder encodes group elements.
@@ -73,14 +77,28 @@ class GroupEncoder extends AbstractEncoder
      */
     public function encodeGeoJson(GeoJson $geoJson, Encoder $encoder)
     {
-        return array(
+        $buffer = array(
             sprintf(
                 '%s = new L.geoJson(%s, %s);',
                 $encoder->encodeReference($geoJson),
-                $encoder->encodeValue($geoJson->toGeoJson()),
+                $encoder->encodeValue($geoJson->toGeoJsonFeature()),
                 $encoder->encodeValue($geoJson->getOptions())
             )
         );
+
+        foreach ($geoJson->getLayers() as $layer) {
+            if ($layer instanceof ConvertsToGeoJsonFeature && $layer->convertsFullyToGeoJson()) {
+                continue;
+            }
+
+            $buffer[] = sprintf(
+                '%s.addLayer(%s);',
+                $encoder->encodeReference($geoJson),
+                $encoder->encodeReference($layer)
+            );
+        }
+
+        return $buffer;
     }
 
     /**

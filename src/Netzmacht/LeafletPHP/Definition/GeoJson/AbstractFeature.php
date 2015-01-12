@@ -18,7 +18,7 @@ use Netzmacht\LeafletPHP\Definition\Type\LatLngBounds;
  *
  * @package Netzmacht\LeafletPHP\Definition\GeoJson
  */
-class AbstractFeature
+abstract class AbstractFeature implements GeoJsonFeature
 {
     /**
      * Bounding box of the feature.

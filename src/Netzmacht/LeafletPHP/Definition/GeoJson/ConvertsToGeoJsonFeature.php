@@ -16,12 +16,19 @@ namespace Netzmacht\LeafletPHP\Definition\GeoJson;
  *
  * @package Netzmacht\LeafletPHP\Definition\GeoJson
  */
-interface ConvertsToGeoJson
+interface ConvertsToGeoJsonFeature
 {
     /**
      * Get definition as feature collection.
      *
-     * @return Feature|FeatureCollection
+     * @return GeoJsonFeature
      */
-    public function toGeoJson();
+    public function toGeoJsonFeature();
+
+    /**
+     * Check if this object converts fully to geo json or other content is in it as well.
+     *
+     * @return bool
+     */
+    public function convertsFullyToGeoJson();
 }

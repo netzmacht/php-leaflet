@@ -16,7 +16,8 @@ use Netzmacht\Javascript\Type\Call\MethodCall;
 use Netzmacht\LeafletPHP\Definition\AbstractDefinition;
 use Netzmacht\LeafletPHP\Definition\GeoJson\Feature;
 use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureCollection;
-use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJson;
+use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
+use Netzmacht\LeafletPHP\Definition\GeoJson\GeoJsonFeature;
 use Netzmacht\LeafletPHP\Definition\LabelTrait;
 use Netzmacht\LeafletPHP\Definition\Layer;
 use Netzmacht\LeafletPHP\Definition\MapObject;
@@ -27,7 +28,7 @@ use Netzmacht\LeafletPHP\Definition\MapObjectTrait;
  *
  * @package Netzmacht\LeafletPHP\Definition\Group
  */
-class LayerGroup extends AbstractDefinition implements Layer, MapObject, ConvertsToGeoJson
+class LayerGroup extends AbstractDefinition implements Layer, MapObject, ConvertsToGeoJsonFeature
 {
     use LabelTrait;
     use MapObjectTrait;
@@ -108,28 +109,46 @@ class LayerGroup extends AbstractDefinition implements Layer, MapObject, Convert
     }
 
     /**
-     * Get definition as feature collection.
-     *
-     * @return FeatureCollection
+     * {@inheritdoc}
      */
-    public function toGeoJson()
+    public function toGeoJsonFeature()
     {
         $collection = new FeatureCollection();
 
         foreach ($this->getLayers() as $layer) {
-            if ($layer instanceof ConvertsToGeoJson) {
-                $geoJson = $layer->toGeoJson();
-
-                if ($geoJson instanceof FeatureCollection) {
-                    foreach ($geoJson as $feature) {
-                        $collection->addFeature($feature);
-                    }
-                } elseif ($geoJson instanceof Feature) {
-                    $collection->addFeature($geoJson);
-                }
+            if ($layer instanceof GeoJsonFeature) {
+                $collection->addFeature($layer);
+            } elseif ($layer instanceof ConvertsToGeoJsonFeature) {
+                $collection->addFeature($layer->toGeoJsonFeature());
             }
         }
 
         return $collection;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function convertsFullyToGeoJson()
+    {
+        foreach ($this->getLayers() as $layer) {
+            if ($layer instanceof GeoJsonFeature) {
+                // Layer is a geo json feature, it is fully a geo json object
+                continue;
+
+            } elseif ($layer instanceof ConvertsToGeoJsonFeature) {
+                // check children of the layer.
+
+                if (!$layer->convertsFullyToGeoJson()) {
+                    return false;
+                }
+            } else {
+                // Unknown layer, return false.
+
+                return false;
+            }
+        }
+
+        return true;
     }
 }

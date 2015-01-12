@@ -13,6 +13,11 @@ namespace Netzmacht\LeafletPHP\Definition\Group;
 
 use Netzmacht\Javascript\Type\Call\AnonymousFunction;
 use Netzmacht\Javascript\Type\Value\Expression;
+use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
+use Netzmacht\LeafletPHP\Definition\GeoJson\Feature;
+use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureCollection;
+use Netzmacht\LeafletPHP\Definition\GeoJson\GeoJsonFeature;
+use Netzmacht\LeafletPHP\Definition\GeoJson\GeoJsonObject;
 use Netzmacht\LeafletPHP\Definition\HasOptions;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 use Netzmacht\LeafletPHP\Definition\Vector\PathOptionsTrait;
@@ -22,7 +27,7 @@ use Netzmacht\LeafletPHP\Definition\Vector\PathOptionsTrait;
  *
  * @package Netzmacht\LeafletPHP\Definition\Group
  */
-class GeoJson extends FeatureGroup implements HasOptions
+class GeoJson extends FeatureGroup implements HasOptions, ConvertsToGeoJsonFeature
 {
     use PathOptionsTrait;
     use OptionsTrait;

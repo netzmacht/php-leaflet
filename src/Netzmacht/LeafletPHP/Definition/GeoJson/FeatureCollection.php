@@ -17,19 +17,19 @@ namespace Netzmacht\LeafletPHP\Definition\GeoJson;
  * @see     http://geojson.org/geojson-spec.html#feature-collection-objects
  * @package Netzmacht\LeafletPHP\Definition\GeoJson
  */
-class FeatureCollection extends AbstractFeature implements \JsonSerializable, \IteratorAggregate
+class FeatureCollection extends AbstractFeature implements \IteratorAggregate
 {
     /**
      * GeoJson features.
      *
-     * @var Feature[]
+     * @var GeoJsonFeature[]
      */
     private $features = array();
 
     /**
      * Construct.
      *
-     * @param array $features GeoJson features.
+     * @param GeoJsonFeature[] $features GeoJson features.
      */
     public function __construct($features = array())
     {
@@ -39,11 +39,11 @@ class FeatureCollection extends AbstractFeature implements \JsonSerializable, \I
     /**
      * Add a geo json feature.
      *
-     * @param Feature $feature Feature being added.
+     * @param GeoJsonFeature $feature Feature being added.
      *
      * @return $this
      */
-    public function addFeature(Feature $feature)
+    public function addFeature(GeoJsonFeature $feature)
     {
         $this->features[] = $feature;
 
@@ -53,7 +53,7 @@ class FeatureCollection extends AbstractFeature implements \JsonSerializable, \I
     /**
      * Add multiple features.
      *
-     * @param Feature[] $features GeoJson features.
+     * @param GeoJsonFeature[] $features GeoJson features.
      *
      * @return $this
      */

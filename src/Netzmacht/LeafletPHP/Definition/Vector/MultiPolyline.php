@@ -11,7 +11,7 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Vector;
 
-use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJson;
+use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
 use Netzmacht\LeafletPHP\Definition\GeoJson\Feature;
 use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureTrait;
 use Netzmacht\LeafletPHP\Definition\GeoJson\Geometry;
@@ -26,7 +26,7 @@ use Netzmacht\LeafletPHP\Definition\Type\LatLng;
  *
  * @package Netzmacht\LeafletPHP\Definition\Vector
  */
-class MultiPolyline extends FeatureGroup implements Geometry, ConvertsToGeoJson, HasPopup
+class MultiPolyline extends FeatureGroup implements Geometry, HasPopup
 {
     use OptionsTrait;
     use PathOptionsTrait;

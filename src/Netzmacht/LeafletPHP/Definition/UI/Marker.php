@@ -13,7 +13,7 @@ namespace Netzmacht\LeafletPHP\Definition\UI;
 
 use Netzmacht\LeafletPHP\Definition\AbstractDefinition;
 use Netzmacht\LeafletPHP\Definition\EventsTrait;
-use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJson;
+use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
 use Netzmacht\LeafletPHP\Definition\GeoJson\Feature;
 use Netzmacht\LeafletPHP\Definition\GeoJson\Geometry;
 use Netzmacht\LeafletPHP\Definition\HasOptions;
@@ -31,7 +31,7 @@ use Netzmacht\LeafletPHP\Definition\Type\LatLng;
  * 
  * @package Netzmacht\LeafletPHP\Definition\UI
  */
-class Marker extends AbstractDefinition implements Layer, HasOptions, MapObject, Geometry, ConvertsToGeoJson
+class Marker extends AbstractDefinition implements Layer, HasOptions, MapObject, Geometry, ConvertsToGeoJsonFeature
 {
     use OptionsTrait;
     use EventsTrait;
@@ -353,7 +353,7 @@ class Marker extends AbstractDefinition implements Layer, HasOptions, MapObject,
      *
      * @return Feature
      */
-    public function toGeoJson()
+    public function toGeoJsonFeature()
     {
         $feature = new Feature(
             $this,
@@ -378,5 +378,13 @@ class Marker extends AbstractDefinition implements Layer, HasOptions, MapObject,
         $feature->setProperty('options', $options);
 
         return $feature;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function convertsFullyToGeoJson()
+    {
+        return true;
     }
 }

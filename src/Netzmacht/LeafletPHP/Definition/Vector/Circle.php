@@ -11,8 +11,6 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Vector;
 
-use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJson;
-use Netzmacht\LeafletPHP\Definition\GeoJson\Feature;
 use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureTrait;
 use Netzmacht\LeafletPHP\Definition\GeoJson\Geometry;
 use Netzmacht\LeafletPHP\Definition\Type\LatLng;
@@ -22,7 +20,7 @@ use Netzmacht\LeafletPHP\Definition\Type\LatLng;
  *
  * @package Netzmacht\LeafletPHP\Definition\Vector
  */
-class Circle extends Path implements Geometry, ConvertsToGeoJson
+class Circle extends Path implements Geometry
 {
     use FeatureTrait;
 
@@ -110,7 +108,7 @@ class Circle extends Path implements Geometry, ConvertsToGeoJson
     /**
      * {@inheritdoc}
      */
-    public function toGeoJson()
+    public function toGeoJsonFeature()
     {
         $feature = $this->createFeature();
         $feature->setProperty('arguments', array($this->getLatLng(), $this->getRadius()));

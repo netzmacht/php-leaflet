@@ -29,7 +29,7 @@ class CircleMarker extends Circle
     /**
      * {@inheritdoc}
      */
-    public function toGeoJson()
+    public function toGeoJsonFeature()
     {
         $feature = $this->createFeature();
         $feature->setProperty('radius', $this->getRadius());

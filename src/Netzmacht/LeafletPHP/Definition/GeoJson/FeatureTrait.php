@@ -49,7 +49,7 @@ trait FeatureTrait
     /**
      * {@inheritdoc}
      */
-    public function toGeoJson()
+    public function toGeoJsonFeature()
     {
         return $this->createFeature();
     }

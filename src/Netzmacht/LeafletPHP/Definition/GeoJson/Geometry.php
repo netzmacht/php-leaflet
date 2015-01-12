@@ -17,6 +17,6 @@ namespace Netzmacht\LeafletPHP\Definition\GeoJson;
  * @package Netzmacht\LeafletPHP\Definition\GeoJson
  * @see     http://geojson.org/geojson-spec.html#geometry-objects
  */
-interface Geometry extends \JsonSerializable
+interface Geometry extends GeoJsonObject
 {
 }

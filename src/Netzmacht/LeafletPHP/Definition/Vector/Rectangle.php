@@ -11,7 +11,6 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Vector;
 
-use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJson;
 use Netzmacht\LeafletPHP\Definition\GeoJson\Feature;
 use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureCollection;
 use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureTrait;
@@ -23,7 +22,7 @@ use Netzmacht\LeafletPHP\Definition\Type\LatLngBounds;
  *
  * @package Netzmacht\LeafletPHP\Definition\Vector
  */
-class Rectangle extends Path implements ConvertsToGeoJson, Geometry
+class Rectangle extends Path implements Geometry
 {
     use FeatureTrait;
 
