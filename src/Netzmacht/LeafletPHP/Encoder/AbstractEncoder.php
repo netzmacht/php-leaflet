@@ -81,6 +81,12 @@ abstract class AbstractEncoder implements EventSubscriberInterface
         }
 
         $type   = $definition->getType();
+        $method = 'define' . $this->convertTypeToMethod($type);
+
+        if (method_exists($this, $method)) {
+            $this->$method($definition, $event->getEncoder());
+        }
+
         $method = 'encode' . $this->convertTypeToMethod($type);
 
         if (method_exists($this, $method)) {

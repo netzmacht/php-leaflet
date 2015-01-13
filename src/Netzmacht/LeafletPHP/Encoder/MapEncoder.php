@@ -31,18 +31,19 @@ class MapEncoder extends AbstractEncoder
      * @param Map     $map     The map.
      * @param Encoder $encoder The builder.
      *
-     * @return string
+     * @return void
      *
      * @throws GetReferenceFailed If a reference could not be created.
      */
-    public function encodeMap(Map $map, Encoder $encoder)
+    public function defineMap(Map $map, Encoder $encoder)
     {
-        return array(
+        $encoder->getOutput()->define(
             sprintf(
-                '%s = L.map(%s);',
-                $encoder->encodeReference($map),
-                $encoder->encodeArguments(array($map->getElementId(), $map->getOptions()))
-            )
+                    '%s = L.map(%s);',
+                    $encoder->encodeReference($map),
+                    $encoder->encodeArguments(array($map->getElementId(), $map->getOptions()))
+            ),
+            $map
         );
     }
 
@@ -76,19 +77,19 @@ class MapEncoder extends AbstractEncoder
     {
         $result = array();
 
-        foreach ($map->getLayers() as $layer) {
-            $result[] = sprintf(
-                '%s.addLayer(%s);',
-                $encoder->encodeReference($map),
-                $encoder->encodeReference($layer)
-            );
-        }
-
         foreach ($map->getControls() as $control) {
             $result[] = sprintf(
                 '%s.addControl(%s);',
                 $encoder->encodeReference($map),
                 $encoder->encodeReference($control)
+            );
+        }
+
+        foreach ($map->getLayers() as $layer) {
+            $result[] = sprintf(
+                '%s.addLayer(%s);',
+                $encoder->encodeReference($map),
+                $encoder->encodeReference($layer)
             );
         }
 
