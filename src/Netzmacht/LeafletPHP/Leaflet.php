@@ -121,14 +121,14 @@ class Leaflet
     public function build(Map $map, Assets $assets = null)
     {
         if (!$assets) {
-            return $this->builder->build($map);
+            return $this->builder->build($map, true);
         }
 
         $dispatcher = $this->builder->getDispatcher();
         $collector  = new Collector($assets, $this->javascripts, $this->stylesheets);
         $dispatcher->addSubscriber($collector);
 
-        $assets->setMap($this->builder->build($map));
+        $assets->setMap($this->builder->build($map, true));
 
         $dispatcher->removeSubscriber($collector);
 
