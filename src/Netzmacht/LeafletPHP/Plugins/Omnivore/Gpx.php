@@ -16,7 +16,7 @@ namespace Netzmacht\LeafletPHP\Plugins\Omnivore;
  *
  * @package Netzmacht\LeafletPHP\Plugins\Omnivore
  */
-class Gpx extends OptionsLayer
+class Gpx extends OmnivoreLayer
 {
     /**
      * {@inheritdoc}

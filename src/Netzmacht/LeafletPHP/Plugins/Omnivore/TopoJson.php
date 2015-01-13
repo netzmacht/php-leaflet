@@ -16,7 +16,7 @@ namespace Netzmacht\LeafletPHP\Plugins\Omnivore;
  *
  * @package Netzmacht\LeafletPHP\Plugins\Omnivore
  */
-class TopoJson extends OptionsLayer
+class TopoJson extends OmnivoreLayer
 {
     /**
      * {@inheritdoc}

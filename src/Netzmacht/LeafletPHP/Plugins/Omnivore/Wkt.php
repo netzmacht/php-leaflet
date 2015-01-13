@@ -16,7 +16,7 @@ namespace Netzmacht\LeafletPHP\Plugins\Omnivore;
  *
  * @package Netzmacht\LeafletPHP\Plugins\Omnivore
  */
-class Wkt extends OptionsLayer
+class Wkt extends OmnivoreLayer
 {
     /**
      * {@inheritdoc}

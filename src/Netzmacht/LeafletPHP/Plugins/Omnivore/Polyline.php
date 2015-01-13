@@ -16,7 +16,7 @@ namespace Netzmacht\LeafletPHP\Plugins\Omnivore;
  *
  * @package Netzmacht\LeafletPHP\Plugins\Omnivore
  */
-class Polyline extends OptionsLayer
+class Polyline extends OmnivoreLayer
 {
     /**
      * {@inheritdoc}

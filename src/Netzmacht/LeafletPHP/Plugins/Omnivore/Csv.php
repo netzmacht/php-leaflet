@@ -16,7 +16,7 @@ namespace Netzmacht\LeafletPHP\Plugins\Omnivore;
  *
  * @package Netzmacht\LeafletPHP\Plugins\Omnivore
  */
-class Csv extends OptionsLayer
+class Csv extends OmnivoreLayer
 {
     /**
      * {@inheritdoc}
