@@ -18,7 +18,7 @@ use Netzmacht\LeafletPHP\Definition;
  *
  * @package Netzmacht\LeafletPHP\Definition
  */
-interface Control extends Definition
+interface Control extends Definition, MapObject
 {
     /**
      * Get options of the control.

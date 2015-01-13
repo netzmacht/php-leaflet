@@ -23,7 +23,7 @@ use Netzmacht\LeafletPHP\Definition\OptionsTrait;
  *
  * @package Netzmacht\LeafletPHP\Control
  */
-abstract class AbstractControl extends AbstractDefinition implements Control, MapObject, HasOptions
+abstract class AbstractControl extends AbstractDefinition implements Control, HasOptions
 {
     use OptionsTrait;
     use MapObjectTrait;
