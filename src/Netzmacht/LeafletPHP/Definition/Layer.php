@@ -18,6 +18,6 @@ use Netzmacht\LeafletPHP\Definition;
  *
  * @package Netzmacht\LeafletPHP\Definition
  */
-interface Layer extends Definition, HasLabel
+interface Layer extends Definition, HasLabel, MapObject
 {
 }

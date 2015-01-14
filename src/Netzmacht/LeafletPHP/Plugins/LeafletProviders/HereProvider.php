@@ -12,6 +12,7 @@
 namespace Netzmacht\LeafletPHP\Plugins\LeafletProviders;
 
 use Netzmacht\Javascript\Encoder;
+use Netzmacht\Javascript\Output;
 use Netzmacht\LeafletPHP\Definition\HasOptions;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 
@@ -71,7 +72,7 @@ class HereProvider extends Provider implements HasOptions
     /**
      * {@inheritdoc}
      */
-    public function encode(Encoder $encoder, $finish = true)
+    public function encode(Encoder $encoder, Output $output, $finish = true)
     {
         $name = $this->getProvider();
 

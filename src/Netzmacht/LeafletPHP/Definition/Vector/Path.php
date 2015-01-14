@@ -11,13 +11,14 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Vector;
 
+use Netzmacht\LeafletPHP\Definition\AbstractLayer;
 use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
 use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureTrait;
 use Netzmacht\LeafletPHP\Definition\HasEvents;
 use Netzmacht\LeafletPHP\Definition\EventsTrait;
+use Netzmacht\LeafletPHP\Definition\HasOptions;
 use Netzmacht\LeafletPHP\Definition\HasPopup;
-use Netzmacht\LeafletPHP\Definition\MapObject;
-use Netzmacht\LeafletPHP\Definition\MapObjectTrait;
+use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 use Netzmacht\LeafletPHP\Definition\PopupTrait;
 
 /**
@@ -25,10 +26,10 @@ use Netzmacht\LeafletPHP\Definition\PopupTrait;
  *
  * @package Netzmacht\LeafletPHP\Definition\Vector
  */
-abstract class Path extends AbstractLayer implements HasEvents, MapObject, HasPopup, ConvertsToGeoJsonFeature
+abstract class Path extends AbstractLayer implements HasEvents, HasOptions, HasPopup, ConvertsToGeoJsonFeature
 {
+    use OptionsTrait;
     use EventsTrait;
-    use MapObjectTrait;
     use PathOptionsTrait;
     use PopupTrait;
     use FeatureTrait;

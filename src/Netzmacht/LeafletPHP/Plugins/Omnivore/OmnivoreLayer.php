@@ -12,24 +12,23 @@
 namespace Netzmacht\LeafletPHP\Plugins\Omnivore;
 
 use Netzmacht\Javascript\Encoder;
-use Netzmacht\Javascript\Type\ConvertsToJavascript;
+use Netzmacht\Javascript\Output;
+use Netzmacht\Javascript\Type\Value\ConvertsToJavascript;
+use Netzmacht\LeafletPHP\Definition\AbstractLayer;
 use Netzmacht\LeafletPHP\Definition\EventsTrait;
 use Netzmacht\LeafletPHP\Definition\HasEvents;
 use Netzmacht\LeafletPHP\Definition\HasOptions;
-use Netzmacht\LeafletPHP\Definition\LabelTrait;
 use Netzmacht\LeafletPHP\Definition\Layer;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
-use Netzmacht\LeafletPHP\Definition\Vector\AbstractLayer;
 
 /**
  * Class OmnivoreLayer is the base omnivore layer providing support for a custom layer and options.
  *
  * @package Netzmacht\LeafletPHP\Plugins\Omnivore
  */
-abstract class OmnivoreLayer extends AbstractLayer implements Layer, ConvertsToJavascript, HasEvents, HasOptions
+abstract class OmnivoreLayer extends AbstractLayer implements ConvertsToJavascript, HasEvents, HasOptions
 {
     use OptionsTrait;
-    use LabelTrait;
     use EventsTrait;
 
     /**
@@ -126,7 +125,7 @@ abstract class OmnivoreLayer extends AbstractLayer implements Layer, ConvertsToJ
     /**
      * {@inheritdoc}
      */
-    public function encode(Encoder $encoder, $finish = true)
+    public function encode(Encoder $encoder, Output $output, $finish = true)
     {
         $buffer = sprintf(
             '%s = %s(%s)%s',
@@ -138,7 +137,8 @@ abstract class OmnivoreLayer extends AbstractLayer implements Layer, ConvertsToJ
                     $this->getOptions(),
                     $this->getCustomLayer()
                 )
-            )
+            ),
+            $finish ? ';' : ''
         );
 
         foreach ($this->getMethodCalls() as $call) {

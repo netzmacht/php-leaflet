@@ -14,8 +14,7 @@ namespace Netzmacht\LeafletPHP\Definition\Control;
 use Netzmacht\LeafletPHP\Definition\AbstractDefinition;
 use Netzmacht\LeafletPHP\Definition\Control;
 use Netzmacht\LeafletPHP\Definition\HasOptions;
-use Netzmacht\LeafletPHP\Definition\MapObject;
-use Netzmacht\LeafletPHP\Definition\MapObjectTrait;
+use Netzmacht\LeafletPHP\Definition\Map;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 
 /**
@@ -26,7 +25,6 @@ use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 abstract class AbstractControl extends AbstractDefinition implements Control, HasOptions
 {
     use OptionsTrait;
-    use MapObjectTrait;
 
     const POSITION_TOP_LEFT     = 'topleft';
     const POSITION_TOP_RIGHT    = 'topright';
@@ -60,5 +58,22 @@ abstract class AbstractControl extends AbstractDefinition implements Control, Ha
     public function getPosition()
     {
         return $this->getOption('position', $this->defaultPosition);
+    }
+
+    /**
+     * Add control to the map.
+     *
+     * Instead create an addTo method, it's assigned to the map.
+     * This is required so that the encoder knows the relation between the map and the control.
+     *
+     * @param Map $map The leaflet map.
+     *
+     * @return $this
+     */
+    public function addTo(Map $map)
+    {
+        $map->addControl($this);
+
+        return $this;
     }
 }

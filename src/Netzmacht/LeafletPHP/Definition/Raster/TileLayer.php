@@ -11,12 +11,11 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Raster;
 
-use Netzmacht\LeafletPHP\Definition\AbstractDefinition;
+use Netzmacht\LeafletPHP\Definition\AbstractLayer;
 use Netzmacht\LeafletPHP\Definition\EventsTrait;
 use Netzmacht\LeafletPHP\Definition\HasEvents;
 use Netzmacht\LeafletPHP\Definition\HasOptions;
 use Netzmacht\LeafletPHP\Definition\LabelTrait;
-use Netzmacht\LeafletPHP\Definition\Layer;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 
 /**
@@ -26,7 +25,7 @@ use Netzmacht\LeafletPHP\Definition\OptionsTrait;
  *
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
-class TileLayer extends AbstractDefinition implements Layer, HasEvents, HasOptions
+class TileLayer extends AbstractLayer implements HasEvents, HasOptions
 {
     use LabelTrait;
     use OptionsTrait;

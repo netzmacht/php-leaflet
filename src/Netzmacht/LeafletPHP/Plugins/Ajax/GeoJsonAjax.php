@@ -13,7 +13,7 @@ namespace Netzmacht\LeafletPHP\Plugins\Ajax;
 
 use Netzmacht\Javascript\Encoder;
 use Netzmacht\Javascript\Type\Call\AnonymousFunction;
-use Netzmacht\Javascript\Type\ConvertsToJavascript;
+use Netzmacht\Javascript\Type\Value\ConvertsToJavascript;
 use Netzmacht\Javascript\Type\Value\Expression;
 use Netzmacht\LeafletPHP\Definition\Group\FeatureGroup;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;

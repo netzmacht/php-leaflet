@@ -13,7 +13,8 @@ namespace Netzmacht\LeafletPHP\Plugins\Loading;
 
 
 use Netzmacht\Javascript\Encoder;
-use Netzmacht\Javascript\Type\ConvertsToJavascript;
+use Netzmacht\Javascript\Output;
+use Netzmacht\Javascript\Type\Value\ConvertsToJavascript;
 use Netzmacht\LeafletPHP\Definition\Control\AbstractControl;
 use Netzmacht\LeafletPHP\Definition\Control\Zoom;
 
@@ -102,7 +103,7 @@ class LoadingControl extends AbstractControl implements ConvertsToJavascript
      *
      * @return string
      */
-    public function encode(Encoder $encoder, $finish = true)
+    public function encode(Encoder $encoder, Output $output, $finish = true)
     {
         return sprintf(
             '%s = L.Control.loading(%s)%s',

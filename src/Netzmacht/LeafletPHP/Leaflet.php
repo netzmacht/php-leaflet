@@ -11,9 +11,11 @@
 
 namespace Netzmacht\LeafletPHP;
 
-use Netzmacht\Javascript\Builder;
+use Netzmacht\Javascript\Encoder;
+use Netzmacht\Javascript\Output;
 use Netzmacht\LeafletPHP\Assets\Collector;
 use Netzmacht\LeafletPHP\Definition\Map;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface as EventDispatcher;
 
 /**
  * Class Leaflet provides a simple interface for building javascript from a map.
@@ -23,11 +25,11 @@ use Netzmacht\LeafletPHP\Definition\Map;
 class Leaflet
 {
     /**
-     * The javascript builder.
+     * The event dispatcher.
      *
-     * @var Builder
+     * @var EventDispatcher
      */
-    private $builder;
+    private $dispatcher;
 
     /**
      * Libraries stylesheets.
@@ -44,15 +46,22 @@ class Leaflet
     private $javascripts = array();
 
     /**
+     * @var null
+     */
+    private $jsonEncodeFlags;
+
+    /**
      * Construct.
      *
-     * @param Builder $builder   The javascript builder.
-     * @param array   $libraries Registered libraries.
+     * @param EventDispatcher $eventDispatcher The javascript encoder.
+     * @param array           $libraries       Registered libraries.
+     * @param null            $jsonEncodeFlags
      */
-    public function __construct(Builder $builder, array $libraries = array())
+    public function __construct(EventDispatcher $eventDispatcher, array $libraries = array(), $jsonEncodeFlags = null)
     {
-        $this->builder     = $builder;
-        $this->stylesheets = $libraries;
+        $this->dispatcher      = $eventDispatcher;
+        $this->stylesheets     = $libraries;
+        $this->jsonEncodeFlags = $jsonEncodeFlags;
     }
 
     /**
@@ -98,13 +107,13 @@ class Leaflet
     }
 
     /**
-     * Get the javascript builder.
+     * Get the javascript encoder.
      *
-     * @return Builder
+     * @return Encoder
      */
-    public function getBuilder()
+    public function getDispatcher()
     {
-        return $this->builder;
+        return $this->dispatcher;
     }
 
     /**
@@ -120,17 +129,19 @@ class Leaflet
      */
     public function build(Map $map, Assets $assets = null)
     {
+        $prefix  = 'var map, layers = {}, controls = {}, icons = {};';
+        $encoder = new Encoder($this->dispatcher, $this->jsonEncodeFlags);
+
         if (!$assets) {
-            return $this->builder->build($map, true);
+            return $prefix . $encoder->encode($map);
         }
 
-        $dispatcher = $this->builder->getDispatcher();
         $collector  = new Collector($assets, $this->javascripts, $this->stylesheets);
-        $dispatcher->addSubscriber($collector);
+        $this->dispatcher->addSubscriber($collector);
 
-        $assets->setMap($this->builder->build($map, true));
+        $assets->setMap($prefix . $encoder->encode($map));
 
-        $dispatcher->removeSubscriber($collector);
+        $this->dispatcher->removeSubscriber($collector);
 
         return $assets->getMap();
     }

@@ -12,6 +12,7 @@
 namespace Netzmacht\LeafletPHP\Plugins\LeafletProviders;
 
 use Netzmacht\Javascript\Encoder;
+use Netzmacht\Javascript\Output;
 
 /**
  * Provider plugin for the MaxBox.
@@ -85,7 +86,7 @@ class MapBoxProvider extends Provider
     /**
      * {@inheritdoc}
      */
-    public function encode(Encoder $encoder, $finish = true)
+    public function encode(Encoder $encoder, Output $output, $finish = true)
     {
         $name = $this->getProvider();
 

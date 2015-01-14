@@ -13,26 +13,20 @@ namespace Netzmacht\LeafletPHP\Definition\Group;
 
 use Netzmacht\Javascript\Type\Call\AnonymousFunction;
 use Netzmacht\Javascript\Type\Call\MethodCall;
-use Netzmacht\LeafletPHP\Definition\AbstractDefinition;
-use Netzmacht\LeafletPHP\Definition\GeoJson\Feature;
+use Netzmacht\LeafletPHP\Definition\AbstractLayer;
 use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureCollection;
 use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
 use Netzmacht\LeafletPHP\Definition\GeoJson\GeoJsonFeature;
-use Netzmacht\LeafletPHP\Definition\LabelTrait;
 use Netzmacht\LeafletPHP\Definition\Layer;
-use Netzmacht\LeafletPHP\Definition\MapObject;
-use Netzmacht\LeafletPHP\Definition\MapObjectTrait;
+use Netzmacht\LeafletPHP\Definition\Map;
 
 /**
  * Basic layer group class.
  *
  * @package Netzmacht\LeafletPHP\Definition\Group
  */
-class LayerGroup extends AbstractDefinition implements Layer, MapObject, ConvertsToGeoJsonFeature
+class LayerGroup extends AbstractLayer implements ConvertsToGeoJsonFeature
 {
-    use LabelTrait;
-    use MapObjectTrait;
-
     /**
      * Get the type of the definition.
      *
@@ -150,5 +144,22 @@ class LayerGroup extends AbstractDefinition implements Layer, MapObject, Convert
         }
 
         return true;
+    }
+
+    /**
+     * Add layer to the map.
+     *
+     * Instead create an addTo method, it's assigned to the map.
+     * This is required so that the encoder knows the relation between the map and the layer.
+     *
+     * @param Map $map The leaflet map.
+     *
+     * @return $this
+     */
+    public function addTo(Map $map)
+    {
+        $map->addLayer($this);
+
+        return $this;
     }
 }

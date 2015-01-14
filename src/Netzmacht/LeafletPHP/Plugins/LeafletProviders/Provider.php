@@ -12,23 +12,18 @@
 namespace Netzmacht\LeafletPHP\Plugins\LeafletProviders;
 
 use Netzmacht\Javascript\Encoder;
-use Netzmacht\Javascript\Type\ConvertsToJavascript;
-use Netzmacht\LeafletPHP\Definition\AbstractDefinition;
-use Netzmacht\LeafletPHP\Definition\LabelTrait;
+use Netzmacht\Javascript\Output;
+use Netzmacht\Javascript\Type\Value\ConvertsToJavascript;
+use Netzmacht\LeafletPHP\Definition\AbstractLayer;
 use Netzmacht\LeafletPHP\Definition\Layer;
-use Netzmacht\LeafletPHP\Definition\MapObject;
-use Netzmacht\LeafletPHP\Definition\MapObjectTrait;
 
 /**
  * Class Provider provides the L.tileLayer.provider plugin.
  *
  * @package Netzmacht\LeafletPHP\Plugins\LeafletProviders
  */
-class Provider extends AbstractDefinition implements Layer, MapObject, ConvertsToJavascript
+class Provider extends AbstractLayer implements Layer, ConvertsToJavascript
 {
-    use LabelTrait;
-    use MapObjectTrait;
-
     /**
      * {@inheritdoc}
      */
@@ -102,7 +97,7 @@ class Provider extends AbstractDefinition implements Layer, MapObject, ConvertsT
     /**
      * {@inheritdoc}
      */
-    public function encode(Encoder $encoder, $finish = true)
+    public function encode(Encoder $encoder, Output $output, $finish = true)
     {
         $name = $this->getProvider();
 
