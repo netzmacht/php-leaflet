@@ -11,7 +11,6 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Type;
 
-use Netzmacht\Javascript\Type\Value\ConvertsToJson;
 use Netzmacht\LeafletPHP\Assert\Assertion;
 use Netzmacht\LeafletPHP\Assert\InvalidArgumentException;
 use Netzmacht\LeafletPHP\Encoder;
@@ -21,7 +20,7 @@ use Netzmacht\LeafletPHP\Encoder;
  *
  * @package Netzmacht\LeafletPHP\Definition\Type
  */
-class LatLng implements \JsonSerializable, ConvertsToJson
+class LatLng implements \JsonSerializable
 {
     /**
      * Latitude value.
