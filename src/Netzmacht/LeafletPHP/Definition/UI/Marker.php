@@ -11,17 +11,12 @@
 
 namespace Netzmacht\LeafletPHP\Definition\UI;
 
-use Netzmacht\LeafletPHP\Definition\AbstractDefinition;
 use Netzmacht\LeafletPHP\Definition\AbstractLayer;
 use Netzmacht\LeafletPHP\Definition\EventsTrait;
 use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
 use Netzmacht\LeafletPHP\Definition\GeoJson\Feature;
 use Netzmacht\LeafletPHP\Definition\GeoJson\Geometry;
 use Netzmacht\LeafletPHP\Definition\HasOptions;
-use Netzmacht\LeafletPHP\Definition\LabelTrait;
-use Netzmacht\LeafletPHP\Definition\Layer;
-use Netzmacht\LeafletPHP\Definition\MapObject;
-use Netzmacht\LeafletPHP\Definition\MapObjectTrait;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 use Netzmacht\LeafletPHP\Definition\PopupTrait;
 use Netzmacht\LeafletPHP\Definition\Type\Icon;
