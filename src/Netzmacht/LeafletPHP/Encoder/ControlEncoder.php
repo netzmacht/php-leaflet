@@ -32,44 +32,44 @@ class ControlEncoder extends AbstractEncoder
      * Compile scale object.
      *
      * @param Scale   $scale   The scale control.
-     * @param Encoder $builder The builder.
+     * @param Encoder $encoder The encoder.
      *
      * @return bool
      */
-    public function encodeControlScale(Scale $scale, Encoder $builder)
+    public function encodeControlScale(Scale $scale, Encoder $encoder)
     {
-        return $this->doControlEncode('scale', $scale, $builder);
+        return $this->doControlEncode('scale', $scale, $encoder);
     }
 
     /**
      * Compile the zoom object.
      *
      * @param Zoom    $zoom    The zoom control.
-     * @param Encoder $builder The builder.
+     * @param Encoder $encoder The encoder.
      *
      * @return bool
      */
-    public function encodeControlZoom(Zoom $zoom, Encoder $builder)
+    public function encodeControlZoom(Zoom $zoom, Encoder $encoder)
     {
-        return $this->doControlEncode('zoom', $zoom, $builder);
+        return $this->doControlEncode('zoom', $zoom, $encoder);
     }
 
     /**
      * Compile attributions.
      *
      * @param Attribution $attribution The attributions.
-     * @param Encoder     $builder     The builder.
+     * @param Encoder     $encoder     The encoder.
      *
      * @return bool
      */
-    public function encodeControlAttribution(Attribution $attribution, Encoder $builder)
+    public function encodeControlAttribution(Attribution $attribution, Encoder $encoder)
     {
-        $result = $this->doControlEncode('attribution', $attribution, $builder);
+        $result = $this->doControlEncode('attribution', $attribution, $encoder);
 
         foreach ($attribution->getAttributions() as $value) {
-            $result[] = sprintf(
-                '%s.addAttribution(\'%s\');',
-                $builder->encodeReference($attribution),
+            $result .= sprintf(
+                '%s.addAttribution(\'%s\');' . "\n",
+                $encoder->encodeReference($attribution),
                 $value
             );
         }
@@ -81,20 +81,18 @@ class ControlEncoder extends AbstractEncoder
      * Compile layer control.
      *
      * @param Layers  $layers  The layers control.
-     * @param Encoder $encoder The builder.
+     * @param Encoder $encoder The encoder.
      *
      * @return bool
      */
     public function encodeControlLayers(Layers $layers, Encoder $encoder)
     {
-        return array(
-            sprintf(
-                '%s = L.control.layers(%s, %s, %s);',
-                $encoder->encodeReference($layers),
-                $this->encodeLayersInformation($layers->getBaseLayers(), $encoder),
-                $this->encodeLayersInformation($layers->getOverlays(), $encoder),
-                $encoder->encodeValue($layers->getOptions())
-            )
+        return sprintf(
+            '%s = L.control.layers(%s, %s, %s);',
+            $encoder->encodeReference($layers),
+            $this->encodeLayersInformation($layers->getBaseLayers(), $encoder),
+            $this->encodeLayersInformation($layers->getOverlays(), $encoder),
+            $encoder->encodeValue($layers->getOptions())
         );
     }
 
@@ -104,7 +102,7 @@ class ControlEncoder extends AbstractEncoder
     public function setReference(Definition $definition, GetReferenceEvent $event)
     {
         if ($definition instanceof Control) {
-            $event->setReference('map.controls.' . $definition->getId());
+            $event->setReference('controls.' . $definition->getId());
         }
     }
 
@@ -113,19 +111,17 @@ class ControlEncoder extends AbstractEncoder
      *
      * @param string  $type    The control type.
      * @param Control $control The control definition.
-     * @param Encoder $encoder The builder.
+     * @param Encoder $encoder The encoder.
      *
-     * @return bool
+     * @return string
      */
     private function doControlEncode($type, Control $control, Encoder $encoder)
     {
-        return array(
-            sprintf(
-                '%s = L.control.%s(%s);',
-                $encoder->encodeReference($control),
-                $type,
-                $encoder->encodeArguments(array($control->getOptions()))
-            )
+        return sprintf(
+            '%s = L.control.%s(%s);',
+            $encoder->encodeReference($control),
+            $type,
+            $encoder->encodeArguments(array($control->getOptions()))
         );
     }
 

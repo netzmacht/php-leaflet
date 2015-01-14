@@ -35,7 +35,7 @@ class VectorEncoder extends AbstractEncoder
     public function setReference(Definition $definition, GetReferenceEvent $event)
     {
         if ($definition instanceof Layer) {
-            $event->setReference('map.layers.' . $definition->getId());
+            $event->setReference('layers.' . $definition->getId());
         }
     }
 
@@ -115,13 +115,11 @@ class VectorEncoder extends AbstractEncoder
      */
     private function doVectorEncode($type, Vector $vector, Encoder $builder)
     {
-        return array(
-            sprintf(
-                '%s = L.%s(%s);',
-                $builder->encodeReference($vector),
-                $type,
-                $builder->encodeArguments(array($vector->getLatLngs(), $vector->getOptions()))
-            )
+        return sprintf(
+            '%s = L.%s(%s);',
+            $builder->encodeReference($vector),
+            $type,
+            $builder->encodeArguments(array($vector->getLatLngs(), $vector->getOptions()))
         );
     }
 
@@ -136,13 +134,11 @@ class VectorEncoder extends AbstractEncoder
      */
     private function doCircleEncode($type, Circle $circle, Encoder $builder)
     {
-        return array(
-            sprintf(
-                '%s = L.%s(%s);',
-                $builder->encodeReference($circle),
-                $type,
-                $builder->encodeArguments(array($circle->getLatLng(), $circle, $circle->getOptions()))
-            ),
+        return sprintf(
+            '%s = L.%s(%s);',
+            $builder->encodeReference($circle),
+            $type,
+            $builder->encodeArguments(array($circle->getLatLng(), $circle, $circle->getOptions()))
         );
     }
 }

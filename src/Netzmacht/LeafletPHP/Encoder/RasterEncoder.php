@@ -30,7 +30,7 @@ class RasterEncoder extends AbstractEncoder
     public function setReference(Definition $definition, GetReferenceEvent $event)
     {
         if ($definition instanceof Layer) {
-            $event->setReference('map.layers.' . $definition->getId());
+            $event->setReference('layers.' . $definition->getId());
         }
     }
 

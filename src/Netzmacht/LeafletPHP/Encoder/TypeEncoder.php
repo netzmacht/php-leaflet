@@ -31,7 +31,7 @@ class TypeEncoder extends AbstractEncoder
     public function setReference(Definition $definition, GetReferenceEvent $event)
     {
         if ($definition instanceof AbstractIcon) {
-            $event->setReference('map.icons.' . $definition->getId());
+            $event->setReference('icons.' . $definition->getId());
         }
     }
 

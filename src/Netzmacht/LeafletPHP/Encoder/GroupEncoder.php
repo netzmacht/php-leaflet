@@ -37,7 +37,7 @@ class GroupEncoder extends AbstractEncoder
     public function setReference(Definition $definition, GetReferenceEvent $event)
     {
         if ($definition instanceof LayerGroup) {
-            $event->setReference('map.layers.' . $definition->getId());
+            $event->setReference('layers.' . $definition->getId());
         }
     }
 
@@ -77,13 +77,11 @@ class GroupEncoder extends AbstractEncoder
      */
     public function encodeGeoJson(GeoJson $geoJson, Encoder $encoder)
     {
-        $buffer = array(
-            sprintf(
-                '%s = new L.geoJson(%s, %s);',
-                $encoder->encodeReference($geoJson),
-                $encoder->encodeValue($geoJson->toGeoJsonFeature()),
-                $encoder->encodeValue($geoJson->getOptions())
-            )
+        $buffer = sprintf(
+            '%s = new L.geoJson(%s, %s);',
+            $encoder->encodeReference($geoJson),
+            $encoder->encodeValue($geoJson->toGeoJsonFeature()),
+            $encoder->encodeValue($geoJson->getOptions())
         );
 
         foreach ($geoJson->getLayers() as $layer) {
@@ -91,7 +89,7 @@ class GroupEncoder extends AbstractEncoder
                 continue;
             }
 
-            $buffer[] = sprintf(
+            $buffer .= sprintf(
                 '%s.addLayer(%s);',
                 $encoder->encodeReference($geoJson),
                 $encoder->encodeReference($layer)
@@ -108,19 +106,17 @@ class GroupEncoder extends AbstractEncoder
      * @param LayerGroup $group   The group instance.
      * @param Encoder    $encoder The encoder.
      *
-     * @return array
+     * @return string
      *
      * @throws GetReferenceFailed If reference could not created.
      */
     private function doGroupEncode($type, LayerGroup $group, Encoder $encoder)
     {
-        return array(
-            sprintf(
-                '%s = L.%s(%s);',
-                $encoder->encodeReference($group),
-                $type,
-                $this->encodeLayersInformation($group->getLayers(), $encoder)
-            )
+        return sprintf(
+            '%s = L.%s(%s);',
+            $encoder->encodeReference($group),
+            $type,
+            $this->encodeLayersInformation($group->getLayers(), $encoder)
         );
     }
 

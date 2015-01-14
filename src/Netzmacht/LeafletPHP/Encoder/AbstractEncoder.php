@@ -12,7 +12,6 @@
 namespace Netzmacht\LeafletPHP\Encoder;
 
 use Netzmacht\Javascript\Encoder;
-use Netzmacht\Javascript\Event\BuildEvent;
 use Netzmacht\Javascript\Event\EncodeValueEvent;
 use Netzmacht\Javascript\Event\GetReferenceEvent;
 use Netzmacht\LeafletPHP\Definition;
@@ -45,25 +44,11 @@ abstract class AbstractEncoder implements EventSubscriberInterface
         return array(
             EncodeValueEvent::NAME  => array(
                 array('handleEncode', 100),
-                array('handlePostEncode'),
             ),
-            GetReferenceEvent::NAME => array('handleGetReference'),
-            BuildEvent::NAME        => array('handleBuild', 100),
+            GetReferenceEvent::NAME => array(
+                'handleGetReference'
+            ),
         );
-    }
-
-    /**
-     * Reset encoded method registry when compile mehtod is called.
-     *
-     * @param BuildEvent $event The build event.
-     *
-     * @return void
-     *
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter) - It's required so that overwrites can use it.
-     */
-    public function handleBuild(BuildEvent $event)
-    {
-        static::$encodedMethods = array();
     }
 
     /**
@@ -76,46 +61,18 @@ abstract class AbstractEncoder implements EventSubscriberInterface
     public function handleEncode(EncodeValueEvent $event)
     {
         $definition = $event->getValue();
-        if (!$definition instanceof Definition || $event->getFlag() > Encoder::BUILD) {
-            return;
-        }
-
-        $type   = $definition->getType();
-        $method = 'define' . $this->convertTypeToMethod($type);
-
-        if (method_exists($this, $method)) {
-            $this->$method($definition, $event->getEncoder());
-        }
-
-        $method = 'encode' . $this->convertTypeToMethod($type);
-
-        if (method_exists($this, $method)) {
-            $event->addLines((array) $this->$method($definition, $event->getEncoder()));
-        }
-    }
-
-    /**
-     * Handle compile event.
-     *
-     * @param EncodeValueEvent $event The subscribed event.
-     *
-     * @return void
-     */
-    public function handlePostEncode(EncodeValueEvent $event)
-    {
-        $definition = $event->getValue();
         if (!$definition instanceof Definition) {
             return;
         }
 
         $type   = $definition->getType();
-        $method = 'postEncode' . $this->convertTypeToMethod($type);
+        $method = 'encode' . $this->convertTypeToMethod($type);
 
         if (method_exists($this, $method)) {
-            $event->addLines((array) $this->$method($definition, $event->getEncoder()));
+            $event->addLine($this->$method($definition, $event->getEncoder()));
+            $this->encodeMethodCalls($definition, $event->getEncoder(), $event);
+            $event->setSuccessful();
         }
-
-        $this->encodeMethodCalls($definition, $event->getEncoder(), $event);
     }
 
     /**

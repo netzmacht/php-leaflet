@@ -30,7 +30,7 @@ class UIEncoder extends AbstractEncoder
     public function setReference(Definition $definition, GetReferenceEvent $event)
     {
         if ($definition instanceof Marker) {
-            $event->setReference('map.layers.' . $definition->getId());
+            $event->setReference('layers.' . $definition->getId());
         }
     }
 
