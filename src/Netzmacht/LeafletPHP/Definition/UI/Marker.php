@@ -12,6 +12,7 @@
 namespace Netzmacht\LeafletPHP\Definition\UI;
 
 use Netzmacht\LeafletPHP\Definition\AbstractDefinition;
+use Netzmacht\LeafletPHP\Definition\AbstractLayer;
 use Netzmacht\LeafletPHP\Definition\EventsTrait;
 use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
 use Netzmacht\LeafletPHP\Definition\GeoJson\Feature;
@@ -31,12 +32,10 @@ use Netzmacht\LeafletPHP\Definition\Type\LatLng;
  * 
  * @package Netzmacht\LeafletPHP\Definition\UI
  */
-class Marker extends AbstractDefinition implements Layer, HasOptions, MapObject, Geometry, ConvertsToGeoJsonFeature
+class Marker extends AbstractLayer implements HasOptions, Geometry, ConvertsToGeoJsonFeature
 {
     use OptionsTrait;
     use EventsTrait;
-    use LabelTrait;
-    use MapObjectTrait;
     use PopupTrait;
 
     /**
