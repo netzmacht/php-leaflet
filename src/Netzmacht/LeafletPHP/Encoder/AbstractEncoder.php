@@ -76,7 +76,7 @@ abstract class AbstractEncoder implements EventSubscriberInterface
     public function handleEncode(EncodeValueEvent $event)
     {
         $definition = $event->getValue();
-        if (!$definition instanceof Definition || $event->getReferenced() > Encoder::VALUE_DEFINE) {
+        if (!$definition instanceof Definition || $event->getFlag() > Encoder::BUILD) {
             return;
         }
 
