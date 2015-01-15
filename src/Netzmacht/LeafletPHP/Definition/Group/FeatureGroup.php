@@ -11,13 +11,18 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Group;
 
+use Netzmacht\LeafletPHP\Definition\EventsTrait;
+use Netzmacht\LeafletPHP\Definition\HasEvents;
+
 /**
  * Class FeatureGroup map object.
  *
  * @package Netzmacht\LeafletPHP\Definition\Group
  */
-class FeatureGroup extends LayerGroup
+class FeatureGroup extends LayerGroup implements HasEvents
 {
+    use EventsTrait;
+
     /**
      * {@inheritdoc}
      */
