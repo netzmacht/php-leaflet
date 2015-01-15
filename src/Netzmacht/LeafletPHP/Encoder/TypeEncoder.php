@@ -48,7 +48,7 @@ class TypeEncoder extends AbstractEncoder
         return sprintf(
             '%s = L.Icon(%s);',
             $encoder->encodeReference($icon),
-            $encoder->encodeArguments($icon->getOptions())
+            $encoder->encodeArguments(array($icon->getOptions()))
         );
     }
 
@@ -65,7 +65,7 @@ class TypeEncoder extends AbstractEncoder
         return sprintf(
             '%s = L.DivIcon(%s);',
             $encoder->encodeReference($icon),
-            $encoder->encodeArguments($icon->getOptions())
+            $encoder->encodeArguments(array($icon->getOptions()))
         );
     }
 }
