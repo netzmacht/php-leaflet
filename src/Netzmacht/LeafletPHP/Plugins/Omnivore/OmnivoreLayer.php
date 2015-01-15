@@ -127,16 +127,12 @@ abstract class OmnivoreLayer extends FeatureGroup implements ConvertsToJavascrip
     {
         $ref    = $encoder->encodeReference($this);
         $buffer = sprintf(
-            '%s = %s(%s)%s',
+            '%s = %s(%s, %s, %s)%s',
             $ref,
             strtolower(static::getType()),
-            $encoder->encodeArguments(
-                array(
-                    $this->getUrl(),
-                    $this->getOptions(),
-                    $this->getCustomLayer()
-                )
-            ),
+            $encoder->encodeValue($this->getUrl()),
+            $encoder->encodeArray($this->getOptions(), JSON_FORCE_OBJECT),
+            $encoder->encodeValue($this->getCustomLayer()),
             $finish ? ';' : ''
         );
 

@@ -119,7 +119,7 @@ class VectorEncoder extends AbstractEncoder
             '%s = L.%s(%s, %s);',
             $builder->encodeReference($vector),
             $type,
-            $vector->getLatLngs(),
+            $builder->encodeArray($vector->getLatLngs()),
             $builder->encodeValue($vector->getOptions())
         );
     }
