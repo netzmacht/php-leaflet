@@ -21,7 +21,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  * Class AbstractEncoder delegates the encoding events to the encoder implementation.
  *
  * Add a encode<Type> method to the encoder to encode the definition.
- * If you want to ensure that the encoding is added last you can define a postEncode<Type> method as well.
  *
  * @package Netzmacht\LeafletPHP\Encoder
  */
@@ -133,7 +132,7 @@ abstract class AbstractEncoder implements EventSubscriberInterface
             static::$encodedMethods[$hash] = true;
 
             foreach ($definition->getMethodCalls() as $method) {
-                $event->addLine($method->encode($encoder));
+                $event->addLine($method->encode($encoder, $encoder->getOutput()));
             }
         }
     }
