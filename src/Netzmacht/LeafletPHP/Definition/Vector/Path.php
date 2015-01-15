@@ -27,7 +27,7 @@ use Netzmacht\LeafletPHP\Definition\Vector;
  *
  * @package Netzmacht\LeafletPHP\Definition\Vector
  */
-abstract class Path extends AbstractLayer implements Vector, HasEvents, HasPopup, ConvertsToGeoJsonFeature
+abstract class Path extends AbstractLayer implements HasEvents, HasPopup, ConvertsToGeoJsonFeature
 {
     use OptionsTrait;
     use EventsTrait;

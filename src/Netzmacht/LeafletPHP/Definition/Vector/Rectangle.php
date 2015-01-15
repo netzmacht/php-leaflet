@@ -22,7 +22,7 @@ use Netzmacht\LeafletPHP\Definition\Type\LatLngBounds;
  *
  * @package Netzmacht\LeafletPHP\Definition\Vector
  */
-class Rectangle extends Path implements Geometry
+class Rectangle extends Polyline implements Geometry
 {
     use FeatureTrait;
 
@@ -52,6 +52,17 @@ class Rectangle extends Path implements Geometry
         parent::__construct($identifier);
 
         $this->bounds = $latLngBounds;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLatLngs()
+    {
+        return array(
+            $this->bounds->getSouthWest(),
+            $this->bounds->getNorthEast()
+        );
     }
 
     /**

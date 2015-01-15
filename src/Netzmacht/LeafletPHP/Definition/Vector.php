@@ -24,11 +24,11 @@ interface Vector extends Layer, HasOptions
      * @return array
      */
     public function getLatLngs();
-
-    /**
-     * Is Bounds affected.
-     *
-     * @return bool
-     */
-    public function isAffectBounds();
+//
+//    /**
+//     * Is Bounds affected.
+//     *
+//     * @return bool
+//     */
+//    public function isAffectBounds();
 }

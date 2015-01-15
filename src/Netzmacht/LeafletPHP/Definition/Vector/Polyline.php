@@ -16,13 +16,14 @@ use Netzmacht\LeafletPHP\Assert\InvalidArgumentException;
 use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
 use Netzmacht\LeafletPHP\Definition\GeoJson\Geometry;
 use Netzmacht\LeafletPHP\Definition\Type\LatLng;
+use Netzmacht\LeafletPHP\Definition\Vector;
 
 /**
  * Class Polyline represents a map polyline.
  *
  * @package Netzmacht\LeafletPHP\Definition\Vector
  */
-class Polyline extends Path implements Geometry
+class Polyline extends Path implements Vector, Geometry
 {
     /**
      * List of latitude and longitude values.
