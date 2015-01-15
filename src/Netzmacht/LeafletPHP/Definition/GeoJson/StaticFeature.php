@@ -11,7 +11,7 @@
 
 namespace Netzmacht\LeafletPHP\Definition\GeoJson;
 
-use Netzmacht\LeafletPHP\Definition\Vector\AbstractLayer;
+use Netzmacht\LeafletPHP\Definition\AbstractLayer;
 
 /**
  * Class StaticFeature is a hybrid of a layer and geojson feature which contains static geojson data.

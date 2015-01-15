@@ -11,18 +11,15 @@
 
 namespace Netzmacht\LeafletPHP\Encoder;
 
-use Netzmacht\Contao\Leaflet\MetaModels\Dca\Feature;
 use Netzmacht\Javascript\Encoder;
 use Netzmacht\Javascript\Event\GetReferenceEvent;
 use Netzmacht\Javascript\Exception\GetReferenceFailed;
 use Netzmacht\LeafletPHP\Definition;
 use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
-use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureCollection;
 use Netzmacht\LeafletPHP\Definition\Group\FeatureGroup;
 use Netzmacht\LeafletPHP\Definition\Group\GeoJson;
 use Netzmacht\LeafletPHP\Definition\Group\LayerGroup;
 use Netzmacht\LeafletPHP\Definition\Layer;
-use Netzmacht\LeafletPHP\Plugins\Ajax\GeoJsonAjax;
 
 /**
  * Class GroupEncoder encodes group elements.
