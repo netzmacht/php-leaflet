@@ -34,8 +34,8 @@ class VectorEncoder extends AbstractEncoder
      */
     public function setReference(Definition $definition, GetReferenceEvent $event)
     {
-        if ($definition instanceof Layer) {
-            $event->setReference('layers.' . $definition->getId());
+        if ($definition instanceof Vector) {
+            $event->setReference('layers.vector_' . $definition->getId());
         }
     }
 
@@ -45,11 +45,11 @@ class VectorEncoder extends AbstractEncoder
      * @param Polyline $polyline The polyline.
      * @param Encoder  $builder  The builder.
      *
-     * @return void
+     * @return string
      */
     public function encodePolyline(Polyline $polyline, Encoder $builder)
     {
-        $this->doVectorEncode('polyline', $polyline, $builder);
+        return $this->doVectorEncode('polyline', $polyline, $builder);
     }
 
     /**
@@ -58,11 +58,11 @@ class VectorEncoder extends AbstractEncoder
      * @param Polygon $polygon The polygon.
      * @param Encoder $builder The builder.
      *
-     * @return void
+     * @return string
      */
     public function encodePolygon(Polygon $polygon, Encoder $builder)
     {
-        $this->doVectorEncode('polygon', $polygon, $builder);
+        return $this->doVectorEncode('polygon', $polygon, $builder);
     }
 
     /**
@@ -71,11 +71,11 @@ class VectorEncoder extends AbstractEncoder
      * @param Rectangle $rectangle The rectangle.
      * @param Encoder   $builder   The builder.
      *
-     * @return void
+     * @return string
      */
     public function encodeRectangle(Rectangle $rectangle, Encoder $builder)
     {
-        $this->doVectorEncode('rectangle', $rectangle, $builder);
+        return $this->doVectorEncode('rectangle', $rectangle, $builder);
     }
 
     /**
@@ -84,11 +84,11 @@ class VectorEncoder extends AbstractEncoder
      * @param Circle  $circle  The circle.
      * @param Encoder $builder The builder.
      *
-     * @return void
+     * @return string
      */
     public function encodeCircle(Circle $circle, Encoder $builder)
     {
-        $this->doCircleEncode('circle', $circle, $builder);
+        return $this->doCircleEncode('circle', $circle, $builder);
     }
 
     /**
@@ -97,11 +97,11 @@ class VectorEncoder extends AbstractEncoder
      * @param CircleMarker $circle  The circle marker.
      * @param Encoder      $builder The builder.
      *
-     * @return void
+     * @return string
      */
     public function encodeCircleMarker(CircleMarker $circle, Encoder $builder)
     {
-        $this->doCircleEncode('circleMarker', $circle, $builder);
+        return $this->doCircleEncode('circleMarker', $circle, $builder);
     }
 
     /**
@@ -111,15 +111,16 @@ class VectorEncoder extends AbstractEncoder
      * @param Vector  $vector  The vector.
      * @param Encoder $builder The builder.
      *
-     * @return array
+     * @return string
      */
     private function doVectorEncode($type, Vector $vector, Encoder $builder)
     {
         return sprintf(
-            '%s = L.%s(%s);',
+            '%s = L.%s(%s, %s);',
             $builder->encodeReference($vector),
             $type,
-            $builder->encodeArguments(array($vector->getLatLngs(), $vector->getOptions()))
+            $vector->getLatLngs(),
+            $builder->encodeValue($vector->getOptions())
         );
     }
 
