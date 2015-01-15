@@ -30,7 +30,7 @@ class MapEncoder extends AbstractEncoder
      * @param Map     $map     The map.
      * @param Encoder $encoder The builder.
      *
-     * @return string
+     * @return void
      *
      * @throws GetReferenceFailed If a reference could not be created.
      */

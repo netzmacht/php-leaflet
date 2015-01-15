@@ -46,6 +46,8 @@ class Leaflet
     private $javascripts = array();
 
     /**
+     * Flags for built in json_encode.
+     *
      * @var null
      */
     private $jsonEncodeFlags;
@@ -55,7 +57,7 @@ class Leaflet
      *
      * @param EventDispatcher $eventDispatcher The javascript encoder.
      * @param array           $libraries       Registered libraries.
-     * @param null            $jsonEncodeFlags
+     * @param null            $jsonEncodeFlags Flags for built in json_encode.
      */
     public function __construct(EventDispatcher $eventDispatcher, array $libraries = array(), $jsonEncodeFlags = null)
     {
@@ -136,7 +138,7 @@ class Leaflet
             return $prefix . $encoder->encode($map);
         }
 
-        $collector  = new Collector($assets, $this->javascripts, $this->stylesheets);
+        $collector = new Collector($assets, $this->javascripts, $this->stylesheets);
         $this->dispatcher->addSubscriber($collector);
 
         $assets->setMap($prefix . $encoder->encode($map));

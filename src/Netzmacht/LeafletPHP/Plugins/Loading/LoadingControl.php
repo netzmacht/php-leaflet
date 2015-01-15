@@ -13,6 +13,7 @@ namespace Netzmacht\LeafletPHP\Plugins\Loading;
 
 
 use Netzmacht\Javascript\Encoder;
+use Netzmacht\Javascript\Exception\EncodeValueFailed;
 use Netzmacht\Javascript\Output;
 use Netzmacht\Javascript\Type\Value\ConvertsToJavascript;
 use Netzmacht\LeafletPHP\Definition\Control\AbstractControl;
@@ -99,9 +100,13 @@ class LoadingControl extends AbstractControl implements ConvertsToJavascript
      * Encode the javascript representation of the object.
      *
      * @param Encoder $encoder The javascript encoder.
+     * @param Output  $output  The encoder output.
      * @param bool    $finish  If true the statement should be finished with an semicolon.
      *
      * @return string
+     * @throws EncodeValueFailed If value encoding failed.
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function encode(Encoder $encoder, Output $output, $finish = true)
     {

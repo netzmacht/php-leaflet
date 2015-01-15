@@ -12,6 +12,7 @@
 namespace Netzmacht\LeafletPHP\Plugins\Ajax;
 
 use Netzmacht\Javascript\Encoder;
+use Netzmacht\Javascript\Output;
 use Netzmacht\Javascript\Type\Call\AnonymousFunction;
 use Netzmacht\Javascript\Type\Value\ConvertsToJavascript;
 use Netzmacht\Javascript\Type\Value\Expression;
@@ -158,7 +159,7 @@ class GeoJsonAjax extends FeatureGroup implements ConvertsToJavascript
     /**
      * {@inheritdoc}
      */
-    public function encode(Encoder $encoder, $finish = true)
+    public function encode(Encoder $encoder, Output $output, $finish = true)
     {
         $buffer = sprintf(
             '%s = L.geoJson.ajax(%s)%s',

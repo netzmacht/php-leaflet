@@ -11,7 +11,11 @@
 
 namespace Netzmacht\LeafletPHP\Definition;
 
-
+/**
+ * Bas class for the layer implementation.
+ *
+ * @package Netzmacht\LeafletPHP\Definition
+ */
 abstract class AbstractLayer extends AbstractDefinition implements Layer
 {
     use LabelTrait;
