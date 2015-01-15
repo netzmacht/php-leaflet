@@ -20,13 +20,14 @@ use Netzmacht\LeafletPHP\Definition\HasOptions;
 use Netzmacht\LeafletPHP\Definition\HasPopup;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 use Netzmacht\LeafletPHP\Definition\PopupTrait;
+use Netzmacht\LeafletPHP\Definition\Vector;
 
 /**
  * Abstract class Path for path based elements.
  *
  * @package Netzmacht\LeafletPHP\Definition\Vector
  */
-abstract class Path extends AbstractLayer implements HasEvents, HasOptions, HasPopup, ConvertsToGeoJsonFeature
+abstract class Path extends AbstractLayer implements Vector, HasEvents, HasPopup, ConvertsToGeoJsonFeature
 {
     use OptionsTrait;
     use EventsTrait;
