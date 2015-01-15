@@ -14,10 +14,8 @@ namespace Netzmacht\LeafletPHP\Plugins\Omnivore;
 use Netzmacht\Javascript\Encoder;
 use Netzmacht\Javascript\Output;
 use Netzmacht\Javascript\Type\Value\ConvertsToJavascript;
-use Netzmacht\LeafletPHP\Definition\AbstractLayer;
 use Netzmacht\LeafletPHP\Definition\EventsTrait;
-use Netzmacht\LeafletPHP\Definition\HasEvents;
-use Netzmacht\LeafletPHP\Definition\HasOptions;
+use Netzmacht\LeafletPHP\Definition\Group\FeatureGroup;
 use Netzmacht\LeafletPHP\Definition\Layer;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 
@@ -26,7 +24,7 @@ use Netzmacht\LeafletPHP\Definition\OptionsTrait;
  *
  * @package Netzmacht\LeafletPHP\Plugins\Omnivore
  */
-abstract class OmnivoreLayer extends AbstractLayer implements ConvertsToJavascript, HasEvents, HasOptions
+abstract class OmnivoreLayer extends FeatureGroup implements ConvertsToJavascript
 {
     use OptionsTrait;
     use EventsTrait;
@@ -127,9 +125,10 @@ abstract class OmnivoreLayer extends AbstractLayer implements ConvertsToJavascri
      */
     public function encode(Encoder $encoder, Output $output, $finish = true)
     {
+        $ref    = $encoder->encodeReference($this);
         $buffer = sprintf(
             '%s = %s(%s)%s',
-            $encoder->encodeReference($this),
+            $ref,
             strtolower(static::getType()),
             $encoder->encodeArguments(
                 array(
@@ -141,8 +140,17 @@ abstract class OmnivoreLayer extends AbstractLayer implements ConvertsToJavascri
             $finish ? ';' : ''
         );
 
+        foreach ($this->getLayers() as $layer) {
+            $buffer .= "\n";
+            $buffer .= sprintf(
+                '%s.addLayer(%s);',
+                $ref,
+                $encoder->encodeReference($layer)
+            );
+        }
+
         foreach ($this->getMethodCalls() as $call) {
-            $buffer .= "\n" . $call->encode($encoder, true);
+            $buffer .= "\n" . $call->encode($encoder, $output);
         }
 
         return $buffer;
