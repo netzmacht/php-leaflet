@@ -76,7 +76,7 @@ class Leaflet
         $this->javascriptBuilder = $javascriptBuilder;
         $this->stylesheets       = $libraries;
         $this->jsonEncodeFlags   = $jsonEncodeFlags;
-        $this->eventDispatcher = $eventDispatcher;
+        $this->eventDispatcher   = $eventDispatcher;
     }
 
     /**
@@ -144,7 +144,7 @@ class Leaflet
      */
     public function build(Map $map, Assets $assets = null)
     {
-        $prefix  = 'var map, layers = {}, controls = {}, icons = {};';
+        $prefix = 'var map, layers = {}, controls = {}, icons = {};';
 
         if (!$assets) {
             return $prefix . $this->javascriptBuilder->encode($map, $this->jsonEncodeFlags);
