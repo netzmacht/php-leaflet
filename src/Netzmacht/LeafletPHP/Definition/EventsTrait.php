@@ -11,7 +11,7 @@
 
 namespace Netzmacht\LeafletPHP\Definition;
 
-use Netzmacht\Javascript\Type\Call\AnonymousFunction;
+use Netzmacht\JavascriptBuilder\Type\AnonymousFunction;
 
 /**
  * Class EventsTrait can be added to definitions which supports the addMethod function.

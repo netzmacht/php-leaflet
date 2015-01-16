@@ -11,7 +11,7 @@
 
 namespace Netzmacht\LeafletPHP;
 
-use Netzmacht\Javascript\Type\Call\MethodCall;
+use Netzmacht\JavascriptBuilder\Type\Call\MethodCall;
 
 /**
  * Interface Definition is the base interface for leaflet map definitions.

@@ -11,8 +11,8 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Group;
 
-use Netzmacht\Javascript\Type\Call\AnonymousFunction;
-use Netzmacht\Javascript\Type\Value\Expression;
+use Netzmacht\JavascriptBuilder\Type\AnonymousFunction;
+use Netzmacht\JavascriptBuilder\Type\Expression;
 use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
 use Netzmacht\LeafletPHP\Definition\HasOptions;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;

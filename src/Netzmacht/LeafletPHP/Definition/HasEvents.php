@@ -11,7 +11,7 @@
 
 namespace Netzmacht\LeafletPHP\Definition;
 
-use Netzmacht\Javascript\Type\Call\AnonymousFunction;
+use Netzmacht\JavascriptBuilder\Type\AnonymousFunction;
 
 /**
  * Interface HasEvents describes elements which have events which can be subscribed.

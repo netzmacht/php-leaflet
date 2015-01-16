@@ -12,10 +12,10 @@
 namespace Netzmacht\LeafletPHP\Plugins\Loading;
 
 
-use Netzmacht\Javascript\Encoder;
-use Netzmacht\Javascript\Exception\EncodeValueFailed;
-use Netzmacht\Javascript\Output;
-use Netzmacht\Javascript\Type\Value\ConvertsToJavascript;
+use Netzmacht\JavascriptBuilder\Encoder;
+use Netzmacht\JavascriptBuilder\Exception\EncodeValueFailed;
+use Netzmacht\JavascriptBuilder\Output;
+use Netzmacht\JavascriptBuilder\Type\ConvertsToJavascript;
 use Netzmacht\LeafletPHP\Definition\Control\AbstractControl;
 use Netzmacht\LeafletPHP\Definition\Control\Zoom;
 
@@ -97,24 +97,15 @@ class LoadingControl extends AbstractControl implements ConvertsToJavascript
     }
 
     /**
-     * Encode the javascript representation of the object.
-     *
-     * @param Encoder $encoder The javascript encoder.
-     * @param Output  $output  The encoder output.
-     * @param bool    $finish  If true the statement should be finished with an semicolon.
-     *
-     * @return string
-     * @throws EncodeValueFailed If value encoding failed.
-     *
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * {@inheritdoc}
      */
-    public function encode(Encoder $encoder, Output $output, $finish = true)
+    public function encode(Encoder $encoder, $flags = null)
     {
         return sprintf(
             '%s = L.Control.loading(%s)%s',
             $encoder->encodeReference($this),
             $encoder->encodeValue($this->getOptions()),
-            $finish ? ';' : ''
+            $encoder->close($flags)
         );
     }
 }

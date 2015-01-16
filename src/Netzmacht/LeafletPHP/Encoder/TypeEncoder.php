@@ -11,8 +11,8 @@
 
 namespace Netzmacht\LeafletPHP\Encoder;
 
-use Netzmacht\Javascript\Encoder;
-use Netzmacht\Javascript\Event\GetReferenceEvent;
+use Netzmacht\JavascriptBuilder\Encoder;
+use Netzmacht\JavascriptBuilder\Symfony\Event\EncodeReferenceEvent;
 use Netzmacht\LeafletPHP\Definition;
 use Netzmacht\LeafletPHP\Definition\Type\AbstractIcon;
 use Netzmacht\LeafletPHP\Definition\Type\DivIcon;
@@ -28,7 +28,7 @@ class TypeEncoder extends AbstractEncoder
     /**
      * {@inheritdoc}
      */
-    public function setReference(Definition $definition, GetReferenceEvent $event)
+    public function setReference(Definition $definition, EncodeReferenceEvent $event)
     {
         if ($definition instanceof AbstractIcon) {
             $event->setReference('icons.' . $definition->getId());

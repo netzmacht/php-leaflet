@@ -11,11 +11,10 @@
 
 namespace Netzmacht\LeafletPHP\Plugins\Ajax;
 
-use Netzmacht\Javascript\Encoder;
-use Netzmacht\Javascript\Output;
-use Netzmacht\Javascript\Type\Call\AnonymousFunction;
-use Netzmacht\Javascript\Type\Value\ConvertsToJavascript;
-use Netzmacht\Javascript\Type\Value\Expression;
+use Netzmacht\JavascriptBuilder\Encoder;
+use Netzmacht\JavascriptBuilder\Type\AnonymousFunction;
+use Netzmacht\JavascriptBuilder\Type\ConvertsToJavascript;
+use Netzmacht\JavascriptBuilder\Type\Expression;
 use Netzmacht\LeafletPHP\Definition\Group\FeatureGroup;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 use Netzmacht\LeafletPHP\Definition\Vector\PathOptionsTrait;
@@ -159,7 +158,7 @@ class GeoJsonAjax extends FeatureGroup implements ConvertsToJavascript
     /**
      * {@inheritdoc}
      */
-    public function encode(Encoder $encoder, Output $output, $finish = true)
+    public function encode(Encoder $encoder, $flags = true)
     {
         $buffer = sprintf(
             '%s = L.geoJson.ajax(%s)%s',
@@ -170,7 +169,7 @@ class GeoJsonAjax extends FeatureGroup implements ConvertsToJavascript
                     $this->getOptions()
                 )
             ),
-            $finish ? ';' : ''
+            $encoder->close($flags)
         );
 
         foreach ($this->getLayers() as $layer) {

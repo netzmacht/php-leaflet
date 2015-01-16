@@ -11,7 +11,7 @@
 
 namespace Netzmacht\LeafletPHP\Definition;
 
-use Netzmacht\Javascript\Type\Call\MethodCall;
+use Netzmacht\JavascriptBuilder\Type\Call\MethodCall;
 use Netzmacht\LeafletPHP\Definition;
 
 /**

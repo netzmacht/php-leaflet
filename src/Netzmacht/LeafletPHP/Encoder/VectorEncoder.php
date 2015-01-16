@@ -11,8 +11,8 @@
 
 namespace Netzmacht\LeafletPHP\Encoder;
 
-use Netzmacht\Javascript\Encoder;
-use Netzmacht\Javascript\Event\GetReferenceEvent;
+use Netzmacht\JavascriptBuilder\Encoder;
+use Netzmacht\JavascriptBuilder\Symfony\Event\EncodeReferenceEvent;
 use Netzmacht\LeafletPHP\Definition;
 use Netzmacht\LeafletPHP\Definition\Layer;
 use Netzmacht\LeafletPHP\Definition\Vector;
@@ -32,7 +32,7 @@ class VectorEncoder extends AbstractEncoder
     /**
      * {@inheritdoc}
      */
-    public function setReference(Definition $definition, GetReferenceEvent $event)
+    public function setReference(Definition $definition, EncodeReferenceEvent $event)
     {
         if ($definition instanceof Vector) {
             $event->setReference('layers.vector_' . $definition->getId());

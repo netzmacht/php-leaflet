@@ -11,9 +11,9 @@
 
 namespace Netzmacht\LeafletPHP\Encoder;
 
-use Netzmacht\Javascript\Encoder;
-use Netzmacht\Javascript\Event\GetReferenceEvent;
-use Netzmacht\Javascript\Exception\GetReferenceFailed;
+use Netzmacht\JavascriptBuilder\Encoder;
+use Netzmacht\JavascriptBuilder\Symfony\Event\EncodeReferenceEvent;
+use Netzmacht\JavascriptBuilder\Exception\GetReferenceFailed;
 use Netzmacht\LeafletPHP\Definition;
 use Netzmacht\LeafletPHP\Definition\Map;
 
@@ -31,8 +31,6 @@ class MapEncoder extends AbstractEncoder
      * @param Encoder $encoder The builder.
      *
      * @return void
-     *
-     * @throws GetReferenceFailed If a reference could not be created.
      */
     public function encodeMap(Map $map, Encoder $encoder)
     {
@@ -70,7 +68,7 @@ class MapEncoder extends AbstractEncoder
     /**
      * {@inheritdoc}
      */
-    public function setReference(Definition $definition, GetReferenceEvent $event)
+    public function setReference(Definition $definition, EncodeReferenceEvent $event)
     {
         if ($definition instanceof Map) {
             $event->setReference('map');

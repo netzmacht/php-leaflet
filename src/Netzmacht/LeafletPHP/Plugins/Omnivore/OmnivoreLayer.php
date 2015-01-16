@@ -11,9 +11,10 @@
 
 namespace Netzmacht\LeafletPHP\Plugins\Omnivore;
 
-use Netzmacht\Javascript\Encoder;
-use Netzmacht\Javascript\Output;
-use Netzmacht\Javascript\Type\Value\ConvertsToJavascript;
+use Netzmacht\JavascriptBuilder\Encoder;
+use Netzmacht\JavascriptBuilder\Output;
+use Netzmacht\JavascriptBuilder\Type\ConvertsToJavascript;
+use Netzmacht\JavascriptBuilder\Util\Flags;
 use Netzmacht\LeafletPHP\Definition\EventsTrait;
 use Netzmacht\LeafletPHP\Definition\Group\FeatureGroup;
 use Netzmacht\LeafletPHP\Definition\Layer;
@@ -123,7 +124,7 @@ abstract class OmnivoreLayer extends FeatureGroup implements ConvertsToJavascrip
     /**
      * {@inheritdoc}
      */
-    public function encode(Encoder $encoder, Output $output, $finish = true)
+    public function encode(Encoder $encoder, $flags = null)
     {
         $ref    = $encoder->encodeReference($this);
         $buffer = sprintf(
@@ -133,7 +134,7 @@ abstract class OmnivoreLayer extends FeatureGroup implements ConvertsToJavascrip
             $encoder->encodeValue($this->getUrl()),
             $encoder->encodeArray($this->getOptions(), JSON_FORCE_OBJECT),
             $encoder->encodeValue($this->getCustomLayer()),
-            $finish ? ';' : ''
+            $encoder->close($flags)
         );
 
         foreach ($this->getLayers() as $layer) {
@@ -145,8 +146,10 @@ abstract class OmnivoreLayer extends FeatureGroup implements ConvertsToJavascrip
             );
         }
 
+        $closeFlag = Flags::add(Encoder::CLOSE_STATEMENT, $flags);
+
         foreach ($this->getMethodCalls() as $call) {
-            $buffer .= "\n" . $call->encode($encoder, $output);
+            $buffer .= "\n" . $call->encode($encoder, $closeFlag);
         }
 
         return $buffer;

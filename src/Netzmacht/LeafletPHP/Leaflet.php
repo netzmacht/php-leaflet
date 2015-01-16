@@ -11,11 +11,11 @@
 
 namespace Netzmacht\LeafletPHP;
 
-use Netzmacht\Javascript\Encoder;
-use Netzmacht\Javascript\Output;
+use Netzmacht\JavascriptBuilder\Builder;
+use Netzmacht\JavascriptBuilder\Encoder;
 use Netzmacht\LeafletPHP\Assets\Collector;
 use Netzmacht\LeafletPHP\Definition\Map;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface as EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface as EventDispatcherInter;
 
 /**
  * Class Leaflet provides a simple interface for building javascript from a map.
@@ -25,11 +25,11 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface as EventDispatche
 class Leaflet
 {
     /**
-     * The event dispatcher.
+     * The javascript builder.
      *
-     * @var EventDispatcher
+     * @var Builder
      */
-    private $dispatcher;
+    private $javascriptBuilder;
 
     /**
      * Libraries stylesheets.
@@ -53,17 +53,30 @@ class Leaflet
     private $jsonEncodeFlags;
 
     /**
+     * The event dispatcher used by the javascript builder.
+     *
+     * @var EventDispatcherInter The event dispatcher
+     */
+    private $eventDispatcher;
+
+    /**
      * Construct.
      *
-     * @param EventDispatcher $eventDispatcher The javascript encoder.
-     * @param array           $libraries       Registered libraries.
-     * @param null            $jsonEncodeFlags Flags for built in json_encode.
+     * @param Builder              $javascriptBuilder The javascript builder.
+     * @param EventDispatcherInter $eventDispatcher   The event dispatcher.
+     * @param array                $libraries         Registered libraries.
+     * @param null                 $jsonEncodeFlags   Flags for built in json_encode.
      */
-    public function __construct(EventDispatcher $eventDispatcher, array $libraries = array(), $jsonEncodeFlags = null)
-    {
-        $this->dispatcher      = $eventDispatcher;
-        $this->stylesheets     = $libraries;
-        $this->jsonEncodeFlags = $jsonEncodeFlags;
+    public function __construct(
+        Builder $javascriptBuilder,
+        EventDispatcherInter $eventDispatcher,
+        array $libraries = array(),
+        $jsonEncodeFlags = null
+    ) {
+        $this->javascriptBuilder = $javascriptBuilder;
+        $this->stylesheets       = $libraries;
+        $this->jsonEncodeFlags   = $jsonEncodeFlags;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -113,9 +126,9 @@ class Leaflet
      *
      * @return Encoder
      */
-    public function getDispatcher()
+    public function getJavascriptBuilder()
     {
-        return $this->dispatcher;
+        return $this->javascriptBuilder;
     }
 
     /**
@@ -132,18 +145,17 @@ class Leaflet
     public function build(Map $map, Assets $assets = null)
     {
         $prefix  = 'var map, layers = {}, controls = {}, icons = {};';
-        $encoder = new Encoder($this->dispatcher, $this->jsonEncodeFlags);
 
         if (!$assets) {
-            return $prefix . $encoder->encode($map);
+            return $prefix . $this->javascriptBuilder->encode($map, $this->jsonEncodeFlags);
         }
 
         $collector = new Collector($assets, $this->javascripts, $this->stylesheets);
-        $this->dispatcher->addSubscriber($collector);
+        $this->eventDispatcher->addSubscriber($collector);
 
-        $assets->setMap($prefix . $encoder->encode($map));
+        $assets->setMap($prefix . $this->javascriptBuilder->encode($map, $this->jsonEncodeFlags));
 
-        $this->dispatcher->removeSubscriber($collector);
+        $this->eventDispatcher->removeSubscriber($collector);
 
         return $assets->getMap();
     }

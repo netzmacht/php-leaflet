@@ -11,7 +11,7 @@
 
 namespace Netzmacht\LeafletPHP\Assets;
 
-use Netzmacht\Javascript\Event\EncodeValueEvent;
+use Netzmacht\JavascriptBuilder\Symfony\Event\EncodeValueEvent;
 use Netzmacht\LeafletPHP\Assets;
 use Netzmacht\LeafletPHP\Definition;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

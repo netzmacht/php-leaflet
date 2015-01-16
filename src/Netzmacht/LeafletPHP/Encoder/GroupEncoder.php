@@ -11,9 +11,8 @@
 
 namespace Netzmacht\LeafletPHP\Encoder;
 
-use Netzmacht\Javascript\Encoder;
-use Netzmacht\Javascript\Event\GetReferenceEvent;
-use Netzmacht\Javascript\Exception\GetReferenceFailed;
+use Netzmacht\JavascriptBuilder\Encoder;
+use Netzmacht\JavascriptBuilder\Symfony\Event\EncodeReferenceEvent;
 use Netzmacht\LeafletPHP\Definition;
 use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
 use Netzmacht\LeafletPHP\Definition\Group\FeatureGroup;
@@ -31,7 +30,7 @@ class GroupEncoder extends AbstractEncoder
     /**
      * {@inheritdoc}
      */
-    public function setReference(Definition $definition, GetReferenceEvent $event)
+    public function setReference(Definition $definition, EncodeReferenceEvent $event)
     {
         if ($definition instanceof LayerGroup) {
             $event->setReference('layers.' . $definition->getId());
@@ -104,8 +103,6 @@ class GroupEncoder extends AbstractEncoder
      * @param Encoder    $encoder The encoder.
      *
      * @return string
-     *
-     * @throws GetReferenceFailed If reference could not created.
      */
     private function doGroupEncode($type, LayerGroup $group, Encoder $encoder)
     {

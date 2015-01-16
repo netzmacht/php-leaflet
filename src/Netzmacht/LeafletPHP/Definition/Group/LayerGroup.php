@@ -11,8 +11,8 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Group;
 
-use Netzmacht\Javascript\Type\Call\AnonymousFunction;
-use Netzmacht\Javascript\Type\Call\MethodCall;
+use Netzmacht\JavascriptBuilder\Type\AnonymousFunction;
+use Netzmacht\JavascriptBuilder\Type\Call\MethodCall;
 use Netzmacht\LeafletPHP\Definition\AbstractLayer;
 use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureCollection;
 use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
@@ -99,7 +99,7 @@ class LayerGroup extends AbstractLayer implements ConvertsToGeoJsonFeature
      */
     public function eachLayer(AnonymousFunction $closure)
     {
-        return $this->addMethod('eachLayer', $closure);
+        return $this->addMethod('eachLayer', array($closure));
     }
 
     /**

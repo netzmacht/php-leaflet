@@ -11,9 +11,9 @@
 
 namespace Netzmacht\LeafletPHP\Encoder;
 
-use Netzmacht\Javascript\Encoder;
-use Netzmacht\Javascript\Event\EncodeValueEvent;
-use Netzmacht\Javascript\Event\GetReferenceEvent;
+use Netzmacht\JavascriptBuilder\Encoder;
+use Netzmacht\JavascriptBuilder\Symfony\Event\EncodeValueEvent;
+use Netzmacht\JavascriptBuilder\Symfony\Event\EncodeReferenceEvent;
 use Netzmacht\LeafletPHP\Definition;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -44,7 +44,7 @@ abstract class AbstractEncoder implements EventSubscriberInterface
             EncodeValueEvent::NAME  => array(
                 array('handleEncode', 100),
             ),
-            GetReferenceEvent::NAME => array(
+            EncodeReferenceEvent::NAME => array(
                 'handleGetReference'
             ),
         );
@@ -68,7 +68,7 @@ abstract class AbstractEncoder implements EventSubscriberInterface
         $method = 'encode' . $this->convertTypeToMethod($type);
 
         if (method_exists($this, $method)) {
-            $event->addLine($this->$method($definition, $event->getEncoder()));
+            $event->addLine($this->$method($definition, $event->getEncoder(), $event->getJsonFlags()));
             $this->encodeMethodCalls($definition, $event->getEncoder(), $event);
             $event->setSuccessful();
         }
@@ -77,11 +77,11 @@ abstract class AbstractEncoder implements EventSubscriberInterface
     /**
      * Handle get reference event.
      *
-     * @param GetReferenceEvent $event The event.
+     * @param EncodeReferenceEvent $event The event.
      *
      * @return void
      */
-    public function handleGetReference(GetReferenceEvent $event)
+    public function handleGetReference(EncodeReferenceEvent $event)
     {
         $definition = $event->getObject();
 
@@ -108,12 +108,12 @@ abstract class AbstractEncoder implements EventSubscriberInterface
     /**
      * Set the reference reference.
      *
-     * @param Definition        $definition The current definition.
-     * @param GetReferenceEvent $event      The get reference event.
+     * @param Definition           $definition The current definition.
+     * @param EncodeReferenceEvent $event      The get reference event.
      *
      * @return string
      */
-    abstract public function setReference(Definition $definition, GetReferenceEvent $event);
+    abstract public function setReference(Definition $definition, EncodeReferenceEvent $event);
 
     /**
      * Encode method calls.
@@ -132,7 +132,7 @@ abstract class AbstractEncoder implements EventSubscriberInterface
             static::$encodedMethods[$hash] = true;
 
             foreach ($definition->getMethodCalls() as $method) {
-                $event->addLine($method->encode($encoder, $encoder->getOutput()));
+                $event->addLine($method->encode($encoder));
             }
         }
     }
