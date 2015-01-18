@@ -13,8 +13,10 @@ namespace Netzmacht\LeafletPHP\Encoder;
 
 use Netzmacht\JavascriptBuilder\Encoder;
 use Netzmacht\JavascriptBuilder\Symfony\Event\EncodeReferenceEvent;
-use Netzmacht\JavascriptBuilder\Exception\GetReferenceFailed;
+use Netzmacht\JavascriptBuilder\Symfony\Event\GetObjectStackEvent;
 use Netzmacht\LeafletPHP\Definition;
+use Netzmacht\LeafletPHP\Definition\Control\Layers;
+use Netzmacht\LeafletPHP\Definition\Group\LayerGroup;
 use Netzmacht\LeafletPHP\Definition\Map;
 
 /**
@@ -24,6 +26,43 @@ use Netzmacht\LeafletPHP\Definition\Map;
  */
 class MapEncoder extends AbstractEncoder
 {
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEvents()
+    {
+        $events = parent::getSubscribedEvents();
+        $events[GetObjectStackEvent::NAME] = 'getStack';
+
+        return $events;
+    }
+
+    /**
+     * Get object stack of the map as far as possible.
+     *
+     * @param GetObjectStackEvent $event
+     */
+    public function getStack(GetObjectStackEvent $event)
+    {
+        $stack = array();
+        $value = $event->getValue();
+
+        if ($value instanceof Map) {
+            foreach ($value->getControls() as $control) {
+                if ($control instanceof Layers) {
+                    $this->addLayersToStack($control->getBaseLayers(), $stack);
+                    $this->addLayersToStack($control->getOverlays(), $stack);
+                }
+
+                $stack[] = $control;
+            }
+
+            $this->addLayersToStack($value->getLayers(), $stack);
+
+            $event->setStack($stack);
+        }
+    }
+
     /**
      * Compile a map.
      *
@@ -72,6 +111,25 @@ class MapEncoder extends AbstractEncoder
     {
         if ($definition instanceof Map) {
             $event->setReference('map');
+        }
+    }
+
+    /**
+     * Add layers to to the stack.
+     *
+     * @param array $layers The layers to be added.
+     * @param array $stack  The object stack being built.
+     *
+     * @return void
+     */
+    private function addLayersToStack($layers, &$stack)
+    {
+        foreach ($layers as $layer) {
+            if ($layer instanceof LayerGroup) {
+                $this->addLayersToStack($layer->getLayers(), $stack);
+            }
+
+            $stack[] = $layer;
         }
     }
 }
