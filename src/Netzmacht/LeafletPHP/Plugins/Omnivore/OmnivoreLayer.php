@@ -12,7 +12,6 @@
 namespace Netzmacht\LeafletPHP\Plugins\Omnivore;
 
 use Netzmacht\JavascriptBuilder\Encoder;
-use Netzmacht\JavascriptBuilder\Output;
 use Netzmacht\JavascriptBuilder\Type\ConvertsToJavascript;
 use Netzmacht\JavascriptBuilder\Util\Flags;
 use Netzmacht\LeafletPHP\Definition\EventsTrait;
@@ -126,7 +125,12 @@ abstract class OmnivoreLayer extends FeatureGroup implements ConvertsToJavascrip
      */
     public function encode(Encoder $encoder, $flags = null)
     {
-        $ref    = $encoder->encodeReference($this);
+        if ($this->getCustomLayer()) {
+            $ref = $encoder->encodeReference($this->getCustomLayer());
+        } else {
+            $ref = $encoder->encodeReference($this);
+        }
+
         $buffer = sprintf(
             '%s = %s(%s, %s, %s)%s',
             $ref,
