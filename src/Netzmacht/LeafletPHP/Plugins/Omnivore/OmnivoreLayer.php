@@ -132,7 +132,7 @@ abstract class OmnivoreLayer extends AbstractLayer implements ConvertsToJavascri
             $ref = $encoder->encodeReference($this->getCustomLayer());
         } else {
             $template = $encoder->encodeReference($this) . ' = ' . $template;
-            $ref = 'null';
+            $ref      = 'null';
         }
 
         $buffer .= sprintf(

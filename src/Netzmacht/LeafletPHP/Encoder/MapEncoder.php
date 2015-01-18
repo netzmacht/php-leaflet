@@ -32,6 +32,7 @@ class MapEncoder extends AbstractEncoder
     public static function getSubscribedEvents()
     {
         $events = parent::getSubscribedEvents();
+
         $events[GetObjectStackEvent::NAME] = 'getStack';
 
         return $events;
@@ -40,7 +41,9 @@ class MapEncoder extends AbstractEncoder
     /**
      * Get object stack of the map as far as possible.
      *
-     * @param GetObjectStackEvent $event
+     * @param GetObjectStackEvent $event The subscribed event.
+     *
+     * @return void
      */
     public function getStack(GetObjectStackEvent $event)
     {
