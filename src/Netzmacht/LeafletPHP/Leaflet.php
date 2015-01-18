@@ -112,13 +112,23 @@ class Leaflet
     }
 
     /**
-     * Get all registered libraries.
+     * Get all registered stylesheets.
      *
      * @return array
      */
     public function getStylesheets()
     {
         return $this->stylesheets;
+    }
+
+    /**
+     * Get all registered javscripts.
+     *
+     * @return array
+     */
+    public function getJavascripts()
+    {
+        return $this->javascripts;
     }
 
     /**
