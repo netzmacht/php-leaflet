@@ -11,8 +11,6 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Vector;
 
-use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
-use Netzmacht\LeafletPHP\Definition\GeoJson\Feature;
 use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureTrait;
 use Netzmacht\LeafletPHP\Definition\GeoJson\Geometry;
 use Netzmacht\LeafletPHP\Definition\Group\FeatureGroup;
