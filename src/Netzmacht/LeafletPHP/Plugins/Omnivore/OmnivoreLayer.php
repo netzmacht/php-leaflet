@@ -14,8 +14,8 @@ namespace Netzmacht\LeafletPHP\Plugins\Omnivore;
 use Netzmacht\JavascriptBuilder\Encoder;
 use Netzmacht\JavascriptBuilder\Type\ConvertsToJavascript;
 use Netzmacht\JavascriptBuilder\Util\Flags;
+use Netzmacht\LeafletPHP\Definition\AbstractLayer;
 use Netzmacht\LeafletPHP\Definition\EventsTrait;
-use Netzmacht\LeafletPHP\Definition\Group\FeatureGroup;
 use Netzmacht\LeafletPHP\Definition\Layer;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 
@@ -24,7 +24,7 @@ use Netzmacht\LeafletPHP\Definition\OptionsTrait;
  *
  * @package Netzmacht\LeafletPHP\Plugins\Omnivore
  */
-abstract class OmnivoreLayer extends FeatureGroup implements ConvertsToJavascript
+abstract class OmnivoreLayer extends AbstractLayer implements ConvertsToJavascript
 {
     use OptionsTrait;
     use EventsTrait;
@@ -125,30 +125,24 @@ abstract class OmnivoreLayer extends FeatureGroup implements ConvertsToJavascrip
      */
     public function encode(Encoder $encoder, $flags = null)
     {
+        $template = '%s(%s, %s, %s)%s';
+        $buffer   = '';
+
         if ($this->getCustomLayer()) {
             $ref = $encoder->encodeReference($this->getCustomLayer());
         } else {
-            $ref = $encoder->encodeReference($this);
+            $template = $encoder->encodeReference($this) . ' = ' . $template;
+            $ref = 'null';
         }
 
-        $buffer = sprintf(
-            '%s = %s(%s, %s, %s)%s',
-            $ref,
+        $buffer .= sprintf(
+            $template,
             strtolower(static::getType()),
             $encoder->encodeValue($this->getUrl()),
             $encoder->encodeArray($this->getOptions(), JSON_FORCE_OBJECT),
-            $encoder->encodeValue($this->getCustomLayer()),
+            $ref,
             $encoder->close($flags)
         );
-
-        foreach ($this->getLayers() as $layer) {
-            $buffer .= "\n";
-            $buffer .= sprintf(
-                '%s.addLayer(%s);',
-                $ref,
-                $encoder->encodeReference($layer)
-            );
-        }
 
         $closeFlag = Flags::add(Encoder::CLOSE_STATEMENT, $flags);
 
