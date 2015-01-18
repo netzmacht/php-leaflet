@@ -76,7 +76,7 @@ class GroupEncoder extends AbstractEncoder
         $buffer = sprintf(
             '%s = L.geoJson(%s, %s);',
             $encoder->encodeReference($geoJson),
-            $encoder->encodeValue($geoJson->toGeoJsonFeature()),
+            $encoder->encodeValue($geoJson->getInitializationData()),
             $encoder->encodeValue($geoJson->getOptions())
         );
 
