@@ -86,16 +86,18 @@ class MultiPolyline extends FeatureGroup implements Geometry, HasPopup
     {
         return array(
             'type'        => $this->geoJsonType,
-            'coordinates' => array_map(
-                function ($latLngs) {
-                    return array_map(
-                        function (LatLng $latLng) {
-                            return $latLng->toGeoJson();
-                        },
-                        $latLngs
-                    );
-                },
-                $this->getLatLngs()
+            'coordinates' => array(
+                array_map(
+                    function ($latLngs) {
+                        return array_map(
+                            function (LatLng $latLng) {
+                                return $latLng->toGeoJson();
+                            },
+                            $latLngs
+                        );
+                    },
+                    $this->getLatLngs()
+                )
             )
         );
     }
