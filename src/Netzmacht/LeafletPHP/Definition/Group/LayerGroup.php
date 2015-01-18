@@ -81,16 +81,6 @@ class LayerGroup extends AbstractLayer implements ConvertsToGeoJsonFeature
     }
 
     /**
-     * Get all method calls.
-     *
-     * @return MethodCall[]
-     */
-    public function getMethodCalls()
-    {
-        return array();
-    }
-
-    /**
      * Apply a closure to the layer.
      *
      * @param AnonymousFunction $closure The anonymous function.
