@@ -16,6 +16,7 @@ use Netzmacht\JavascriptBuilder\Encoder;
 use Netzmacht\JavascriptBuilder\Exception\EncodeValueFailed;
 use Netzmacht\JavascriptBuilder\Output;
 use Netzmacht\JavascriptBuilder\Type\ConvertsToJavascript;
+use Netzmacht\JavascriptBuilder\Util\Flags;
 use Netzmacht\LeafletPHP\Definition\Control\AbstractControl;
 use Netzmacht\LeafletPHP\Definition\Control\Zoom;
 
@@ -101,11 +102,19 @@ class LoadingControl extends AbstractControl implements ConvertsToJavascript
      */
     public function encode(Encoder $encoder, $flags = null)
     {
-        return sprintf(
+        $buffer = sprintf(
             '%s = L.Control.loading(%s)%s',
             $encoder->encodeReference($this),
             $encoder->encodeValue($this->getOptions()),
             $encoder->close($flags)
         );
+
+        $flags = Flags::add(Encoder::CLOSE_STATEMENT, $flags);
+
+        foreach ($this->getMethodCalls() as $method) {
+            $buffer .= "\n" . $method->encode($encoder, $flags);
+        }
+
+        return $buffer;
     }
 }

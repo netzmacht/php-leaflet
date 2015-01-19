@@ -13,6 +13,7 @@ namespace Netzmacht\LeafletPHP\Plugins\LeafletProviders;
 
 use Netzmacht\JavascriptBuilder\Encoder;
 use Netzmacht\JavascriptBuilder\Output;
+use Netzmacht\JavascriptBuilder\Util\Flags;
 
 /**
  * Provider plugin for the MaxBox.
@@ -97,9 +98,17 @@ class MapBoxProvider extends Provider
         $name .= '.' . $this->getUser();
         $name .= '.' . $this->getMapName();
 
-        return sprintf(
+        $buffer = sprintf(
             '%s = L.tileLayer.provider(\'' . $name . '\')' . $encoder->close($flags),
             $encoder->encodeReference($this)
         );
+
+        $flags = Flags::add(Encoder::CLOSE_STATEMENT, $flags);
+
+        foreach ($this->getMethodCalls() as $method) {
+            $buffer .= "\n" . $method->encode($encoder, $flags);
+        }
+
+        return $buffer;
     }
 }

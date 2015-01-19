@@ -82,7 +82,7 @@ class GroupEncoder extends AbstractEncoder
         );
 
         foreach ($geoJson->getLayers() as $layer) {
-            $buffer .= sprintf(
+            $buffer .= "\n" . sprintf(
                 '%s.addLayer(%s);',
                 $encoder->encodeReference($geoJson),
                 $encoder->encodeReference($layer)

@@ -14,6 +14,7 @@ namespace Netzmacht\LeafletPHP\Plugins\LeafletProviders;
 use Netzmacht\JavascriptBuilder\Encoder;
 use Netzmacht\JavascriptBuilder\Output;
 use Netzmacht\JavascriptBuilder\Type\ConvertsToJavascript;
+use Netzmacht\JavascriptBuilder\Util\Flags;
 use Netzmacht\LeafletPHP\Definition\AbstractLayer;
 use Netzmacht\LeafletPHP\Definition\Layer;
 
@@ -105,9 +106,17 @@ class Provider extends AbstractLayer implements Layer, ConvertsToJavascript
             $name .= '.' . $this->getVariant();
         }
 
-        return sprintf(
+        $buffer = sprintf(
             '%s = L.tileLayer.provider(\'' . $name . '\')' . $encoder->close($flags),
             $encoder->encodeReference($this)
         );
+
+        $flags = Flags::add(Encoder::CLOSE_STATEMENT, $flags);
+
+        foreach ($this->getMethodCalls() as $method) {
+            $buffer .= "\n" . $method->encode($encoder, $flags);
+        }
+
+        return $buffer;
     }
 }

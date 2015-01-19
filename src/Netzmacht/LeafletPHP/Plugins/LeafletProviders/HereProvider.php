@@ -13,6 +13,7 @@ namespace Netzmacht\LeafletPHP\Plugins\LeafletProviders;
 
 use Netzmacht\JavascriptBuilder\Encoder;
 use Netzmacht\JavascriptBuilder\Output;
+use Netzmacht\JavascriptBuilder\Util\Flags;
 use Netzmacht\LeafletPHP\Definition\HasOptions;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 
@@ -80,7 +81,7 @@ class HereProvider extends Provider implements HasOptions
             $name .= '.' . $this->getVariant();
         }
 
-        return sprintf(
+        $buffer = sprintf(
             '%s = L.tileLayer.provider(\'' . $name . '\', %s)' . $encoder->close($flags),
             $encoder->encodeReference($this),
             $encoder->encodeValue(
@@ -90,5 +91,13 @@ class HereProvider extends Provider implements HasOptions
                 )
             )
         );
+
+        $flags = Flags::add(Encoder::CLOSE_STATEMENT, $flags);
+
+        foreach ($this->getMethodCalls() as $method) {
+            $buffer .= "\n" . $method->encode($encoder, $flags);
+        }
+
+        return $buffer;
     }
 }

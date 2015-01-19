@@ -63,9 +63,6 @@ abstract class AbstractControl extends AbstractDefinition implements Control, Ha
     /**
      * Add control to the map.
      *
-     * Instead create an addTo method, it's assigned to the map.
-     * This is required so that the encoder knows the relation between the map and the control.
-     *
      * @param Map $map The leaflet map.
      *
      * @return $this
@@ -74,6 +71,6 @@ abstract class AbstractControl extends AbstractDefinition implements Control, Ha
     {
         $map->addControl($this);
 
-        return $this;
+        return $this->addMethod('addTo', array($map));
     }
 }

@@ -154,7 +154,7 @@ class Leaflet
      */
     public function build(Map $map, Assets $assets = null)
     {
-        $prefix = 'var map, layers = {}, controls = {}, icons = {};';
+        $prefix = 'var map, layers = {}, controls = {}, icons = {};' . "\n";
 
         if (!$assets) {
             return $prefix . $this->javascriptBuilder->encode($map, $this->jsonEncodeFlags);

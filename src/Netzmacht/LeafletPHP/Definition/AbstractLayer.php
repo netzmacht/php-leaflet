@@ -34,6 +34,6 @@ abstract class AbstractLayer extends AbstractDefinition implements Layer
     {
         $map->addLayer($this);
 
-        return $this;
+        return $this->addMethod('addTo', array($map));
     }
 }

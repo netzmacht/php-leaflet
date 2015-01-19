@@ -26,6 +26,8 @@ use Netzmacht\LeafletPHP\Definition\Map;
  */
 class MapEncoder extends AbstractEncoder
 {
+    private $initialized = array();
+
     /**
      * {@inheritdoc}
      */
@@ -77,33 +79,26 @@ class MapEncoder extends AbstractEncoder
     public function encodeMap(Map $map, Encoder $encoder)
     {
         $output = $encoder->getOutput();
+        $hash   = spl_object_hash($map);
 
-        $output->append(
-            sprintf(
-                '%s = L.map(%s);',
-                $encoder->encodeReference($map),
-                $encoder->encodeArguments(array($map->getElementId(), $map->getOptions()))
-            )
-        );
-
-        foreach ($map->getControls() as $control) {
-            $output->append(
+        if (!isset($this->initialized[$hash])) {
+            $output->prepend(
                 sprintf(
-                    '%s.addTo(%s);',
-                    $encoder->encodeReference($control),
-                    $encoder->encodeReference($map)
+                    '%s = L.map(%s);',
+                    $encoder->encodeReference($map),
+                    $encoder->encodeArguments(array($map->getElementId(), $map->getOptions()))
                 )
             );
-        }
 
-        foreach ($map->getLayers() as $layer) {
-            $output->append(
-                sprintf(
-                    '%s.addTo(%s);',
-                    $encoder->encodeReference($layer),
-                    $encoder->encodeReference($map)
-                )
-            );
+            $this->initialized[$hash] = true;
+        } else {
+            foreach ($map->getControls() as $control) {
+                $encoder->encodeReference($control);
+            }
+
+            foreach ($map->getLayers() as $layer) {
+                $encoder->encodeReference($layer);
+            }
         }
     }
 
