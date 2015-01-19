@@ -19,6 +19,7 @@ use Netzmacht\LeafletPHP\Definition\Group\FeatureGroup;
 use Netzmacht\LeafletPHP\Definition\Group\GeoJson;
 use Netzmacht\LeafletPHP\Definition\Group\LayerGroup;
 use Netzmacht\LeafletPHP\Definition\Layer;
+use Netzmacht\LeafletPHP\Plugins\Omnivore\OmnivoreLayer;
 
 /**
  * Class GroupEncoder encodes group elements.
@@ -81,10 +82,6 @@ class GroupEncoder extends AbstractEncoder
         );
 
         foreach ($geoJson->getLayers() as $layer) {
-            if ($layer instanceof ConvertsToGeoJsonFeature && $layer->convertsFullyToGeoJson()) {
-                continue;
-            }
-
             $buffer .= sprintf(
                 '%s.addLayer(%s);',
                 $encoder->encodeReference($geoJson),
