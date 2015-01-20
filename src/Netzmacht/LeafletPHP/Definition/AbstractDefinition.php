@@ -89,4 +89,12 @@ abstract class AbstractDefinition implements Definition
     {
         return $this->methods;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __call($name, array $arguments)
+    {
+        return $this->addMethod($name, $arguments);
+    }
 }

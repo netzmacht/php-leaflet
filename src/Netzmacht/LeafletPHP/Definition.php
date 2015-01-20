@@ -47,4 +47,16 @@ interface Definition
      * @return MethodCall[]
      */
     public function getMethodCalls();
+
+    /**
+     * Allow dynamic method calls.
+     *
+     * As Javascript is a prototype based language and methods can be plugged in, support it by the magic call method.
+     *
+     * @param string $name      The method name.
+     * @param array  $arguments List of arguments.
+     *
+     * @return $this
+     */
+    public function __call($name, array $arguments);
 }
