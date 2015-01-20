@@ -28,6 +28,11 @@ class MapEncoder extends AbstractEncoder
 {
     use EncodeHelperTrait;
 
+    /**
+     * Store initialized maps.
+     *
+     * @var array
+     */
     private $initialized = array();
 
     /**
