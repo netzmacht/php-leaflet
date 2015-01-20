@@ -52,6 +52,8 @@ trait OptionsTrait
 
             if (method_exists($this, $method)) {
                 $this->$method($value);
+            } else {
+                $this->options[$name] = $value;
             }
         }
 
@@ -66,7 +68,7 @@ trait OptionsTrait
      *
      * @return $this
      */
-    protected function setOption($name, $value)
+    public function setOption($name, $value)
     {
         $this->options[$name] = $value;
 
