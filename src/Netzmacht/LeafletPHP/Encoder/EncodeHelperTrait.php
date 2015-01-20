@@ -11,9 +11,11 @@
 
 namespace Netzmacht\LeafletPHP\Encoder;
 
+use Netzmacht\Contao\Leaflet\Dca\Control;
 use Netzmacht\JavascriptBuilder\Encoder;
 use Netzmacht\JavascriptBuilder\Type\Call\MethodCall;
 use Netzmacht\JavascriptBuilder\Util\Flags;
+use Netzmacht\LeafletPHP\Definition\Control\AbstractControl;
 
 /**
  * Class EncoderHelperTrait provides helper to encode an definition.
@@ -37,8 +39,33 @@ trait EncodeHelperTrait
         $flags  = Flags::add(Encoder::CLOSE_STATEMENT, $flags);
 
         foreach ($methodCalls as $call) {
-            $buffer .=  "\n" . $call->encode($encoder, $flags);
+            $buffer .= "\n" . $call->encode($encoder, $flags);
         }
+
+        return $buffer;
+    }
+
+    /**
+     * Encode an control.
+     *
+     * @param string          $name    Control name.
+     * @param AbstractControl $control The control object.
+     * @param Encoder         $encoder Javascript encoder.
+     * @param null            $flags   Encoder flags.
+     *
+     * @return string
+     */
+    protected function encodeSimpleControl($name, AbstractControl $control, Encoder $encoder, $flags = null)
+    {
+        $buffer = sprintf(
+            '%s = L.%s(%s)%s',
+            $encoder->encodeReference($control),
+            $name,
+            $encoder->encodeValue($control->getOptions()),
+            $encoder->close($flags)
+        );
+
+        $buffer .= $this->encodeMethodCalls($control->getMethodCalls(), $encoder, $flags);
 
         return $buffer;
     }

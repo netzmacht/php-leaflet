@@ -101,15 +101,6 @@ class LoadingControl extends AbstractControl implements ConvertsToJavascript
      */
     public function encode(Encoder $encoder, $flags = null)
     {
-        $buffer = sprintf(
-            '%s = L.Control.loading(%s)%s',
-            $encoder->encodeReference($this),
-            $encoder->encodeValue($this->getOptions()),
-            $encoder->close($flags)
-        );
-
-        $buffer .= $this->encodeMethodCalls($this->getMethodCalls(), $encoder, $flags);
-
-        return $buffer;
+        return $this->encodeSimpleControl('Control.loading', $this, $encoder, $flags);
     }
 }

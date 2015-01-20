@@ -31,13 +31,6 @@ class FullScreenControl extends AbstractControl implements ConvertsToJavascript
     const MAP_EVENT_EXIT_FULLSCREEN = 'exitFullscreen';
 
     /**
-     * Assigned maps.
-     *
-     * @var Map[]
-     */
-    private $maps = array();
-
-    /**
      * Default position.
      *
      * @var string
@@ -129,32 +122,11 @@ class FullScreenControl extends AbstractControl implements ConvertsToJavascript
         return $this->getOption('forcePseudoFullscreen', false);
     }
 
-    public function addTo(Map $map)
-    {
-        $this->maps[] = $map;
-
-        return parent::addTo($map);
-    }
-
     /**
-     * Encode the javascript representation of the object.
-     *
-     * @param Encoder  $encoder The javascript encoder.
-     * @param int|null $flags   The encoding flags.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function encode(Encoder $encoder, $flags = null)
     {
-        $buffer = sprintf(
-            '%s = L.control.fullscreen(%s)%s',
-            $encoder->encodeReference($this),
-            $encoder->encodeArray($this->getOptions()),
-            $encoder->close($flags)
-        );
-
-        $buffer .= $this->encodeMethodCalls($this->getMethodCalls(), $encoder, $flags);
-
-        return $buffer;
+        return $this->encodeSimpleControl('control.fullscreen', $this, $encoder, $flags);
     }
 }
