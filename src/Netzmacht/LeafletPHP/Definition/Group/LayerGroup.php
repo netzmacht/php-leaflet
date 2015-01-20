@@ -135,21 +135,4 @@ class LayerGroup extends AbstractLayer implements ConvertsToGeoJsonFeature
 
         return true;
     }
-
-    /**
-     * Add layer to the map.
-     *
-     * Instead create an addTo method, it's assigned to the map.
-     * This is required so that the encoder knows the relation between the map and the layer.
-     *
-     * @param Map $map The leaflet map.
-     *
-     * @return $this
-     */
-    public function addTo(Map $map)
-    {
-        $map->addLayer($this);
-
-        return $this;
-    }
 }
