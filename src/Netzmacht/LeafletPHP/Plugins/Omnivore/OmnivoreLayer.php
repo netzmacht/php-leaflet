@@ -13,11 +13,11 @@ namespace Netzmacht\LeafletPHP\Plugins\Omnivore;
 
 use Netzmacht\JavascriptBuilder\Encoder;
 use Netzmacht\JavascriptBuilder\Type\ConvertsToJavascript;
-use Netzmacht\JavascriptBuilder\Util\Flags;
 use Netzmacht\LeafletPHP\Definition\AbstractLayer;
 use Netzmacht\LeafletPHP\Definition\EventsTrait;
 use Netzmacht\LeafletPHP\Definition\Layer;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
+use Netzmacht\LeafletPHP\Encoder\EncodeHelperTrait;
 
 /**
  * Class OmnivoreLayer is the base omnivore layer providing support for a custom layer and options.
@@ -28,6 +28,7 @@ abstract class OmnivoreLayer extends AbstractLayer implements ConvertsToJavascri
 {
     use OptionsTrait;
     use EventsTrait;
+    use EncodeHelperTrait;
 
     /**
      * {@inheritdoc}
@@ -144,11 +145,7 @@ abstract class OmnivoreLayer extends AbstractLayer implements ConvertsToJavascri
             $encoder->close($flags)
         );
 
-        $closeFlag = Flags::add(Encoder::CLOSE_STATEMENT, $flags);
-
-        foreach ($this->getMethodCalls() as $call) {
-            $buffer .= "\n" . $call->encode($encoder, $closeFlag);
-        }
+        $buffer .= $this->encodeMethodCalls($this->getMethodCalls(), $encoder, $flags);
 
         return $buffer;
     }

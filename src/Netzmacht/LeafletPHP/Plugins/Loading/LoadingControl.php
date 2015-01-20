@@ -11,14 +11,11 @@
 
 namespace Netzmacht\LeafletPHP\Plugins\Loading;
 
-
 use Netzmacht\JavascriptBuilder\Encoder;
-use Netzmacht\JavascriptBuilder\Exception\EncodeValueFailed;
-use Netzmacht\JavascriptBuilder\Output;
 use Netzmacht\JavascriptBuilder\Type\ConvertsToJavascript;
-use Netzmacht\JavascriptBuilder\Util\Flags;
 use Netzmacht\LeafletPHP\Definition\Control\AbstractControl;
 use Netzmacht\LeafletPHP\Definition\Control\Zoom;
+use Netzmacht\LeafletPHP\Encoder\EncodeHelperTrait;
 
 /**
  * Class LoadingControl represents the Leaflet.loading control plugin.
@@ -28,6 +25,8 @@ use Netzmacht\LeafletPHP\Definition\Control\Zoom;
  */
 class LoadingControl extends AbstractControl implements ConvertsToJavascript
 {
+    use EncodeHelperTrait;
+
     /**
      * {@inheritdoc}
      */
@@ -109,11 +108,7 @@ class LoadingControl extends AbstractControl implements ConvertsToJavascript
             $encoder->close($flags)
         );
 
-        $flags = Flags::add(Encoder::CLOSE_STATEMENT, $flags);
-
-        foreach ($this->getMethodCalls() as $method) {
-            $buffer .= "\n" . $method->encode($encoder, $flags);
-        }
+        $buffer .= $this->encodeMethodCalls($this->getMethodCalls(), $encoder, $flags);
 
         return $buffer;
     }

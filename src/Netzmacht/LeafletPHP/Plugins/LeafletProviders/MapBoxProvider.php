@@ -12,8 +12,7 @@
 namespace Netzmacht\LeafletPHP\Plugins\LeafletProviders;
 
 use Netzmacht\JavascriptBuilder\Encoder;
-use Netzmacht\JavascriptBuilder\Output;
-use Netzmacht\JavascriptBuilder\Util\Flags;
+use Netzmacht\LeafletPHP\Encoder\EncodeHelperTrait;
 
 /**
  * Provider plugin for the MaxBox.
@@ -22,6 +21,8 @@ use Netzmacht\JavascriptBuilder\Util\Flags;
  */
 class MapBoxProvider extends Provider
 {
+    use EncodeHelperTrait;
+
     /**
      * Mapbox user.
      *
@@ -103,11 +104,7 @@ class MapBoxProvider extends Provider
             $encoder->encodeReference($this)
         );
 
-        $flags = Flags::add(Encoder::CLOSE_STATEMENT, $flags);
-
-        foreach ($this->getMethodCalls() as $method) {
-            $buffer .= "\n" . $method->encode($encoder, $flags);
-        }
+        $buffer .= $this->encodeMethodCalls($this->getMethodCalls(), $encoder, $flags);
 
         return $buffer;
     }
