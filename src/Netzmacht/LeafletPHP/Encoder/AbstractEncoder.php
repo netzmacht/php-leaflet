@@ -68,8 +68,13 @@ abstract class AbstractEncoder implements EventSubscriberInterface
         $method = 'encode' . $this->convertTypeToMethod($type);
 
         if (method_exists($this, $method)) {
-            $event->addLine($this->$method($definition, $event->getEncoder(), $event->getJsonFlags()));
-            $this->encodeMethodCalls($definition, $event->getEncoder(), $event);
+            $buffer = $this->$method($definition, $event->getEncoder(), $event->getJsonFlags());
+
+            if ($buffer) {
+                $event->addLine($buffer);
+                $this->handleMethodCalls($definition, $event->getEncoder(), $event);
+            }
+
             $event->setSuccessful();
         }
     }
@@ -124,7 +129,7 @@ abstract class AbstractEncoder implements EventSubscriberInterface
      *
      * @return void
      */
-    private function encodeMethodCalls(Definition $definition, Encoder $encoder, EncodeValueEvent $event)
+    private function handleMethodCalls(Definition $definition, Encoder $encoder, EncodeValueEvent $event)
     {
         $hash = spl_object_hash($definition);
 
@@ -132,7 +137,7 @@ abstract class AbstractEncoder implements EventSubscriberInterface
             static::$encodedMethods[$hash] = true;
 
             foreach ($definition->getMethodCalls() as $method) {
-                $event->addLine($method->encode($encoder));
+                $event->addLine($method->encode($encoder, Encoder::CLOSE_STATEMENT));
             }
         }
     }

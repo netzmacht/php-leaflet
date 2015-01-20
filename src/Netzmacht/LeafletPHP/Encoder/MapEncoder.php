@@ -26,6 +26,8 @@ use Netzmacht\LeafletPHP\Definition\Map;
  */
 class MapEncoder extends AbstractEncoder
 {
+    use EncodeHelperTrait;
+
     private $initialized = array();
 
     /**
@@ -99,6 +101,8 @@ class MapEncoder extends AbstractEncoder
             foreach ($map->getLayers() as $layer) {
                 $encoder->encodeReference($layer);
             }
+
+            $output->append($this->encodeMethodCalls($map->getMethodCalls(), $encoder));
         }
     }
 
