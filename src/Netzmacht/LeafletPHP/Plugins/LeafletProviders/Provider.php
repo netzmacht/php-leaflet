@@ -101,12 +101,7 @@ class Provider extends AbstractLayer implements Layer, ConvertsToJavascript
      */
     public function encode(Encoder $encoder, $flags = null)
     {
-        $name = $this->getProvider();
-
-        if ($this->getVariant()) {
-            $name .= '.' . $this->getVariant();
-        }
-
+        $name   = $this->encodeName();
         $buffer = sprintf(
             '%s = L.tileLayer.provider(\'' . $name . '\')' . $encoder->close($flags),
             $encoder->encodeReference($this)
@@ -115,5 +110,23 @@ class Provider extends AbstractLayer implements Layer, ConvertsToJavascript
         $buffer .= $this->encodeMethodCalls($this->getMethodCalls(), $encoder, $flags);
 
         return $buffer;
+    }
+
+    /**
+     * Encode provider name.
+     *
+     * @return string
+     */
+    protected function encodeName()
+    {
+        $name = $this->getProvider();
+
+        if ($this->getVariant()) {
+            $name .= '.' . $this->getVariant();
+
+            return $name;
+        }
+
+        return $name;
     }
 }

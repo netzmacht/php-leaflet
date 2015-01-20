@@ -88,7 +88,7 @@ class MapBoxProvider extends Provider
     /**
      * {@inheritdoc}
      */
-    public function encode(Encoder $encoder, $flags = null)
+    protected function encodeName()
     {
         $name = $this->getProvider();
 
@@ -99,13 +99,6 @@ class MapBoxProvider extends Provider
         $name .= '.' . $this->getUser();
         $name .= '.' . $this->getMapName();
 
-        $buffer = sprintf(
-            '%s = L.tileLayer.provider(\'' . $name . '\')' . $encoder->close($flags),
-            $encoder->encodeReference($this)
-        );
-
-        $buffer .= $this->encodeMethodCalls($this->getMethodCalls(), $encoder, $flags);
-
-        return $buffer;
+        return $name;
     }
 }

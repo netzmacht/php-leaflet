@@ -75,12 +75,7 @@ class HereProvider extends Provider implements HasOptions
      */
     public function encode(Encoder $encoder, $flags = null)
     {
-        $name = $this->getProvider();
-
-        if ($this->getVariant()) {
-            $name .= '.' . $this->getVariant();
-        }
-
+        $name   = $this->encodeName();
         $buffer = sprintf(
             '%s = L.tileLayer.provider(\'' . $name . '\', %s)' . $encoder->close($flags),
             $encoder->encodeReference($this),
