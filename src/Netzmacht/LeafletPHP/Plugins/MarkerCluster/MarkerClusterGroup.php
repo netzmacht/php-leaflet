@@ -214,7 +214,7 @@ class MarkerClusterGroup extends FeatureGroup implements ConvertsToJavascript, H
      */
     public function isSingleMarkerMode()
     {
-        return $this->getOption('singleMarkerMode', true);
+        return $this->getOption('singleMarkerMode', false);
     }
 
     /**
