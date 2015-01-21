@@ -15,6 +15,7 @@ use Netzmacht\JavascriptBuilder\Encoder;
 use Netzmacht\JavascriptBuilder\Type\ConvertsToJavascript;
 use Netzmacht\LeafletPHP\Definition\AbstractLayer;
 use Netzmacht\LeafletPHP\Definition\EventsTrait;
+use Netzmacht\LeafletPHP\Definition\HasEvents;
 use Netzmacht\LeafletPHP\Definition\Layer;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 use Netzmacht\LeafletPHP\Encoder\EncodeHelperTrait;
@@ -24,7 +25,7 @@ use Netzmacht\LeafletPHP\Encoder\EncodeHelperTrait;
  *
  * @package Netzmacht\LeafletPHP\Plugins\Omnivore
  */
-abstract class OmnivoreLayer extends AbstractLayer implements ConvertsToJavascript
+abstract class OmnivoreLayer extends AbstractLayer implements ConvertsToJavascript, HasEvents
 {
     use OptionsTrait;
     use EventsTrait;
