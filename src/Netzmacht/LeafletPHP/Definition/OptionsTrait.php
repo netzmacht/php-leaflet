@@ -83,7 +83,7 @@ trait OptionsTrait
      *
      * @return null
      */
-    protected function getOption($name, $default = null)
+    public function getOption($name, $default = null)
     {
         if (isset($this->options[$name])) {
             return $this->options[$name];
@@ -99,7 +99,7 @@ trait OptionsTrait
      *
      * @return $this
      */
-    protected function removeOption($name)
+    public function removeOption($name)
     {
         unset($this->options[$name]);
 
