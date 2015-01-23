@@ -111,7 +111,7 @@ class Circle extends Path implements Geometry
     public function toGeoJsonFeature()
     {
         $feature = $this->createFeature();
-        $feature->setProperty('arguments', array($this->getLatLng(), $this->getRadius()));
+        $feature->setProperty('radius', $this->getRadius());
 
         return $feature;
     }

@@ -25,15 +25,4 @@ class CircleMarker extends Circle
     {
         return 'CircleMarker';
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toGeoJsonFeature()
-    {
-        $feature = $this->createFeature();
-        $feature->setProperty('radius', $this->getRadius());
-
-        return $feature;
-    }
 }
