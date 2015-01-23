@@ -11,8 +11,6 @@
 
 namespace Netzmacht\LeafletPHP\Definition\GeoJson;
 
-use Netzmacht\LeafletPHP\Definition\HasPopup;
-
 /**
  * Class FeatureTrait can be used to create a GeoJson feature of the definition.
  *
@@ -32,16 +30,6 @@ trait FeatureTrait
         $feature = new Feature($this, $this->getId());
         $feature->setProperty('type', lcfirst(static::getType()));
         $feature->setProperty('options', $this->getOptions());
-
-        if ($this instanceof HasPopup) {
-            if ($this->getPopup()) {
-                $feature->setProperty('popup', $this->getPopup());
-            }
-
-            if ($this->getPopupContent()) {
-                $feature->setProperty('popupContent', $this->getPopupContent());
-            }
-        }
 
         return $feature;
     }
