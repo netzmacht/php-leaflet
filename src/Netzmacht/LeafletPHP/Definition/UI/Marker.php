@@ -350,27 +350,8 @@ class Marker extends AbstractLayer implements HasOptions, Geometry, ConvertsToGe
      */
     public function toGeoJsonFeature()
     {
-        $feature = new Feature(
-            $this,
-            $this->getId()
-        );
-
-        $options = $this->getOptions();
-
-        if ($this->getIcon()) {
-            $feature->setProperty('icon', $this->getIcon()->getId());
-            unset($options['icon']);
-        }
-
-        if ($this->getPopup()) {
-            $feature->setProperty('popup', $this->getPopup());
-        }
-
-        if ($this->getPopupContent()) {
-            $feature->setProperty('popupContent', $this->getPopupContent());
-        }
-
-        $feature->setProperty('options', $options);
+        $feature = new Feature($this, $this->getId());
+        $feature->setProperty('options', $this->getOptions());
 
         return $feature;
     }
