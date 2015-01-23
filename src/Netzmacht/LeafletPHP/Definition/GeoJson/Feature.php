@@ -98,6 +98,22 @@ class Feature extends AbstractFeature
     }
 
     /**
+     * Get feature property.
+     *
+     * @param string $name The property name.
+     *
+     * @return $this
+     */
+    public function getProperty($name)
+    {
+        if (isset($this->properties[$name])) {
+            return $this->properties[$name];
+        }
+
+        return null;
+    }
+
+    /**
      * Set feature properties.
      *
      * Properties are added. Existing properties are only overwritten if defined in the set.
