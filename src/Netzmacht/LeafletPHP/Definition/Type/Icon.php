@@ -12,13 +12,14 @@
 namespace Netzmacht\LeafletPHP\Definition\Type;
 
 use Netzmacht\LeafletPHP\Definition;
+use Netzmacht\LeafletPHP\Definition\HasOptions;
 
 /**
  * Interface describes Icon objects for Leaflet.
  *
  * @package Netzmacht\LeafletPHP\Definition\Type
  */
-interface Icon extends Definition
+interface Icon extends Definition, HasOptions
 {
     /**
      * The icon size as point.
