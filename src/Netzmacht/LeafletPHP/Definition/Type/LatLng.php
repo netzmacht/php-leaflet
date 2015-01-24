@@ -233,4 +233,22 @@ class LatLng implements \JsonSerializable
 
         return $raw;
     }
+
+    /**
+     * Create a string representation.
+     *
+     * @param bool $ignoreAltitude If true the altitude is not included.
+     *
+     * @return string
+     */
+    public function toString($ignoreAltitude = false)
+    {
+        $buffer = $this->getLatitude() . ',' . $this->getLongitude();
+
+        if (!$ignoreAltitude) {
+            $buffer .= ',' . $this->getAltitude();
+        }
+
+        return $buffer;
+    }
 }
