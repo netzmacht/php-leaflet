@@ -30,5 +30,5 @@ interface HasEvents
      *
      * @SuppressWarnings(PHPMD.ShortMethodName)
      */
-    public function on($event, AnonymousFunction $closure);
+    public function on($event, $closure);
 }

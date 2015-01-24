@@ -12,6 +12,7 @@
 namespace Netzmacht\LeafletPHP\Definition;
 
 use Netzmacht\JavascriptBuilder\Type\AnonymousFunction;
+use Netzmacht\JavascriptBuilder\Type\Expression;
 
 /**
  * Class EventsTrait can be added to definitions which supports the addMethod function.
@@ -23,14 +24,14 @@ trait EventsTrait
     /**
      * Add an event listener.
      *
-     * @param string            $event   The event name.
-     * @param AnonymousFunction $closure The callback.
+     * @param string                       $event   The event name.
+     * @param AnonymousFunction|Expression $closure The callback.
      *
      * @return $this
      *
      * @SuppressWarnings(PHPMD.ShortMethodName)
      */
-    public function on($event, AnonymousFunction $closure)
+    public function on($event, $closure)
     {
         return $this->addMethod('on', array($event, $closure));
     }
