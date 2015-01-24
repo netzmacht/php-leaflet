@@ -66,6 +66,31 @@ class LatLngBounds implements \JsonSerializable
     }
 
     /**
+     * Create from a string format.
+     *
+     * @param string $native    Bounds string representation.
+     * @param string $separator Separator string of each value.
+     *
+     * @return LatLngBounds
+     * @throws \InvalidArgumentException If an invalid value is given.
+     */
+    public static function fromString($native, $separator = ',')
+    {
+        $values = explode($separator, $native, 4);
+
+        if (count($values) !== 4) {
+            throw new \InvalidArgumentException(
+                sprintf('LatLngBounds can not be created from string "%s"', $native)
+            );
+        }
+
+        return new LatLngBounds(
+            new LatLng($values[0], $values[1]),
+            new LatLng($values[2], $values[3])
+        );
+    }
+
+    /**
      * Get south west corner.
      *
      * @return LatLng
@@ -197,6 +222,22 @@ class LatLngBounds implements \JsonSerializable
         return array(
             $this->getSouthWest()->toGeoJson(),
             $this->getNorthEast()->toGeoJson()
+        );
+    }
+
+    /**
+     * Create a string representation.
+     *
+     * @param bool $ignoreAltitude If true the altitude is not included.
+     *
+     * @return string
+     */
+    public function toString($ignoreAltitude = false)
+    {
+        return sprintf(
+            '%s,%s',
+            $this->getSouthWest()->toString($ignoreAltitude),
+            $this->getNorthEast()->toString($ignoreAltitude)
         );
     }
 
