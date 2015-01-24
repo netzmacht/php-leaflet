@@ -961,4 +961,29 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions
     {
         return $this->addMethod('panTo', array($latLng, $options));
     }
+
+    /**
+     * Create user locate call.
+     *
+     * @param array $options Location options.
+     *
+     * @return $this
+     * @see    http://leafletjs.com/reference.html#map-locate
+     */
+    public function locate(array $options = null)
+    {
+        $arguments = $options ? array($options) : array();
+
+        return $this->addMethod('locate', $arguments);
+    }
+
+    /**
+     * Stop watching location.
+     *
+     * @return $this
+     */
+    public function stopLocate()
+    {
+        return $this->addMethod('stopLocate');
+    }
 }
