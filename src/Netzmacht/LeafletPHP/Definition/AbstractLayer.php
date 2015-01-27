@@ -21,6 +21,13 @@ abstract class AbstractLayer extends AbstractDefinition implements Layer
     use LabelTrait;
 
     /**
+     * The connected map.
+     *
+     * @var Map
+     */
+    private $map;
+
+    /**
      * Add layer to the map.
      *
      * Instead create an addTo method, it's assigned to the map.
@@ -32,8 +39,19 @@ abstract class AbstractLayer extends AbstractDefinition implements Layer
      */
     public function addTo(Map $map)
     {
+        $this->map = $map;
         $map->addLayer($this);
 
         return $this->addMethod('addTo', array($map));
+    }
+
+    /**
+     * Get the map.
+     *
+     * @return Map|null
+     */
+    public function getMap()
+    {
+        return $this->map;
     }
 }
