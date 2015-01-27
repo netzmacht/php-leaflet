@@ -16,6 +16,7 @@ use Netzmacht\JavascriptBuilder\Encoder;
 use Netzmacht\JavascriptBuilder\Symfony\Event\EncodeReferenceEvent;
 use Netzmacht\LeafletPHP\Definition;
 use Netzmacht\LeafletPHP\Definition\UI\Marker;
+use Netzmacht\LeafletPHP\Definition\UI\Popup;
 
 /**
  * Class UIEncoder encodes ui elements.
@@ -24,6 +25,8 @@ use Netzmacht\LeafletPHP\Definition\UI\Marker;
  */
 class UIEncoder extends AbstractEncoder
 {
+    use EncodeHelperTrait;
+
     /**
      *  {@inheritdoc}
      */
@@ -54,5 +57,28 @@ class UIEncoder extends AbstractEncoder
                 )
             )
         );
+    }
+
+    /**
+     * Encode a marker.
+     *
+     * @param Popup   $popup   The popup.
+     * @param Encoder $encoder The encoder.
+     *
+     * @return bool
+     */
+    public function encodePopup(Popup $popup, Encoder $encoder)
+    {
+        $source = $popup->getSource();
+        $buffer = sprintf(
+            '%s = L.marker(%s%s);',
+            $encoder->encodeReference($popup),
+            $encoder->encodeArray($popup->getOptions()),
+            $source ? (', ' . $encoder->encodeReference($source)) : ''
+        );
+
+        $buffer .= $this->encodeMethodCalls($popup->getMethodCalls(), $encoder);
+
+        return $buffer;
     }
 }
