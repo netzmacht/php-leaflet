@@ -15,7 +15,7 @@ use Netzmacht\LeafletPHP\Assert\Assertion;
 use Netzmacht\LeafletPHP\Assert\InvalidArgumentException;
 use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
 use Netzmacht\LeafletPHP\Definition\GeoJson\Geometry;
-use Netzmacht\LeafletPHP\Definition\Type\LatLng;
+use Netzmacht\LeafletPHP\Value\LatLng;
 use Netzmacht\LeafletPHP\Definition\Vector;
 
 /**
@@ -100,7 +100,7 @@ class Polyline extends Path implements Vector, Geometry
     /**
      * Add a latitude longitude position.
      *
-     * @param LatLng|array|string $latLng LatLng coordinate.
+     * @param \Netzmacht\LeafletPHP\Value\LatLng|array|string $latLng LatLng coordinate.
      *
      * @return $this
      * @throws InvalidArgumentException If LatLng could not be created.

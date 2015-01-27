@@ -11,7 +11,7 @@
 
 namespace Netzmacht\LeafletPHP\Definition\GeoJson;
 
-use Netzmacht\LeafletPHP\Definition\Type\LatLngBounds;
+use Netzmacht\LeafletPHP\Value\LatLngBounds;
 
 /**
  * Base feature class.
@@ -23,14 +23,14 @@ abstract class AbstractFeature implements GeoJsonFeature
     /**
      * Bounding box of the feature.
      *
-     * @var LatLngBounds
+     * @var \Netzmacht\LeafletPHP\Value\LatLngBounds
      */
     private $boundingBox;
 
     /**
      * Get bounding box.
      *
-     * @return LatLngBounds|null
+     * @return \Netzmacht\LeafletPHP\Value\LatLngBounds|null
      */
     public function getBoundingBox()
     {
@@ -40,7 +40,7 @@ abstract class AbstractFeature implements GeoJsonFeature
     /**
      * Set bounding box.
      *
-     * @param LatLngBounds $boundingBox Bounding box.
+     * @param \Netzmacht\LeafletPHP\Value\LatLngBounds $boundingBox Bounding box.
      *
      * @return $this
      */

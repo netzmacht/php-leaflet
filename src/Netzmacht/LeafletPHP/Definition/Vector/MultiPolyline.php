@@ -17,7 +17,7 @@ use Netzmacht\LeafletPHP\Definition\Group\FeatureGroup;
 use Netzmacht\LeafletPHP\Definition\HasPopup;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 use Netzmacht\LeafletPHP\Definition\PopupTrait;
-use Netzmacht\LeafletPHP\Definition\Type\LatLng;
+use Netzmacht\LeafletPHP\Value\LatLng;
 
 /**
  * Class MultiPolyline is the definition for the leaflet multi polyline layer type.

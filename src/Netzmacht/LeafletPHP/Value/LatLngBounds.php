@@ -9,7 +9,7 @@
  *
  */
 
-namespace Netzmacht\LeafletPHP\Definition\Type;
+namespace Netzmacht\LeafletPHP\Value;
 
 /**
  * Class LatLngBounds defines a bounds on the map.

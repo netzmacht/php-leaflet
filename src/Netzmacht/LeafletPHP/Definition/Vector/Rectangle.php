@@ -15,7 +15,7 @@ use Netzmacht\LeafletPHP\Definition\GeoJson\Feature;
 use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureCollection;
 use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureTrait;
 use Netzmacht\LeafletPHP\Definition\GeoJson\Geometry;
-use Netzmacht\LeafletPHP\Definition\Type\LatLngBounds;
+use Netzmacht\LeafletPHP\Value\LatLngBounds;
 
 /**
  * Class Rectangle describes an rectangle on the map.
@@ -37,7 +37,7 @@ class Rectangle extends Polyline implements Geometry
     /**
      * LatLng bounds which defines the rectangle.
      *
-     * @var LatLngBounds
+     * @var \Netzmacht\LeafletPHP\Value\LatLngBounds
      */
     private $bounds;
 

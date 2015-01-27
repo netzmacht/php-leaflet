@@ -21,7 +21,7 @@ use Netzmacht\LeafletPHP\Definition\HasPopup;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 use Netzmacht\LeafletPHP\Definition\PopupTrait;
 use Netzmacht\LeafletPHP\Definition\Type\Icon;
-use Netzmacht\LeafletPHP\Definition\Type\LatLng;
+use Netzmacht\LeafletPHP\Value\LatLng;
 
 /**
  * Class Marker is the Marker definition for the Leaflet marker.
