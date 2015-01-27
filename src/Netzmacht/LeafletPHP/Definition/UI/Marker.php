@@ -13,9 +13,9 @@ namespace Netzmacht\LeafletPHP\Definition\UI;
 
 use Netzmacht\LeafletPHP\Definition\AbstractLayer;
 use Netzmacht\LeafletPHP\Definition\EventsTrait;
-use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
-use Netzmacht\LeafletPHP\Definition\GeoJson\Feature;
-use Netzmacht\LeafletPHP\Definition\GeoJson\Geometry;
+use Netzmacht\LeafletPHP\Value\GeoJson\ConvertsToGeoJsonFeature;
+use Netzmacht\LeafletPHP\Value\GeoJson\Feature;
+use Netzmacht\LeafletPHP\Value\GeoJson\Geometry;
 use Netzmacht\LeafletPHP\Definition\HasOptions;
 use Netzmacht\LeafletPHP\Definition\HasPopup;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;

@@ -9,7 +9,7 @@
  *
  */
 
-namespace Netzmacht\LeafletPHP\Definition\GeoJson;
+namespace Netzmacht\LeafletPHP\Value\GeoJson;
 
 use Netzmacht\LeafletPHP\Definition\AbstractLayer;
 

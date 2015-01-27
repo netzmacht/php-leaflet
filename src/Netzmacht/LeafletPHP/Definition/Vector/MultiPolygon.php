@@ -11,10 +11,10 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Vector;
 
-use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
-use Netzmacht\LeafletPHP\Definition\GeoJson\Feature;
-use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureTrait;
-use Netzmacht\LeafletPHP\Definition\GeoJson\Geometry;
+use Netzmacht\LeafletPHP\Value\GeoJson\ConvertsToGeoJsonFeature;
+use Netzmacht\LeafletPHP\Value\GeoJson\Feature;
+use Netzmacht\LeafletPHP\Value\GeoJson\FeatureTrait;
+use Netzmacht\LeafletPHP\Value\GeoJson\Geometry;
 use Netzmacht\LeafletPHP\Definition\Group\FeatureGroup;
 use Netzmacht\LeafletPHP\Definition\HasPopup;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;

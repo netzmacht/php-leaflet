@@ -9,7 +9,7 @@
  *
  */
 
-namespace Netzmacht\LeafletPHP\Definition\GeoJson;
+namespace Netzmacht\LeafletPHP\Value\GeoJson;
 
 /**
  * Class FeatureTrait can be used to create a GeoJson feature of the definition.

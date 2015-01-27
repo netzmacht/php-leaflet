@@ -9,7 +9,7 @@
  *
  */
 
-namespace Netzmacht\LeafletPHP\Definition\GeoJson;
+namespace Netzmacht\LeafletPHP\Value\GeoJson;
 
 /**
  * Interface GeoJsonFeature describes an object which represents a GeoJSON feature.

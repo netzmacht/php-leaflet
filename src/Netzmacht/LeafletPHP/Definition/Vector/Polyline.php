@@ -13,8 +13,8 @@ namespace Netzmacht\LeafletPHP\Definition\Vector;
 
 use Netzmacht\LeafletPHP\Assert\Assertion;
 use Netzmacht\LeafletPHP\Assert\InvalidArgumentException;
-use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
-use Netzmacht\LeafletPHP\Definition\GeoJson\Geometry;
+use Netzmacht\LeafletPHP\Value\GeoJson\ConvertsToGeoJsonFeature;
+use Netzmacht\LeafletPHP\Value\GeoJson\Geometry;
 use Netzmacht\LeafletPHP\Value\LatLng;
 use Netzmacht\LeafletPHP\Definition\Vector;
 

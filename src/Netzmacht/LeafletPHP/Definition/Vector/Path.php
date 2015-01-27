@@ -12,8 +12,8 @@
 namespace Netzmacht\LeafletPHP\Definition\Vector;
 
 use Netzmacht\LeafletPHP\Definition\AbstractLayer;
-use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
-use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureTrait;
+use Netzmacht\LeafletPHP\Value\GeoJson\ConvertsToGeoJsonFeature;
+use Netzmacht\LeafletPHP\Value\GeoJson\FeatureTrait;
 use Netzmacht\LeafletPHP\Definition\HasEvents;
 use Netzmacht\LeafletPHP\Definition\EventsTrait;
 use Netzmacht\LeafletPHP\Definition\HasOptions;

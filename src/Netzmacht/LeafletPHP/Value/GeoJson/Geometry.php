@@ -9,7 +9,7 @@
  *
  */
 
-namespace Netzmacht\LeafletPHP\Definition\GeoJson;
+namespace Netzmacht\LeafletPHP\Value\GeoJson;
 
 /**
  * Interface Geometry is used to mark an object as a geometry feature. It extends the \JsonSerializable Interface.

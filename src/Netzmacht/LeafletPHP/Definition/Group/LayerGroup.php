@@ -14,9 +14,9 @@ namespace Netzmacht\LeafletPHP\Definition\Group;
 use Netzmacht\JavascriptBuilder\Type\AnonymousFunction;
 use Netzmacht\JavascriptBuilder\Type\Call\MethodCall;
 use Netzmacht\LeafletPHP\Definition\AbstractLayer;
-use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureCollection;
-use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
-use Netzmacht\LeafletPHP\Definition\GeoJson\GeoJsonFeature;
+use Netzmacht\LeafletPHP\Value\GeoJson\FeatureCollection;
+use Netzmacht\LeafletPHP\Value\GeoJson\ConvertsToGeoJsonFeature;
+use Netzmacht\LeafletPHP\Value\GeoJson\GeoJsonFeature;
 use Netzmacht\LeafletPHP\Definition\Layer;
 use Netzmacht\LeafletPHP\Definition\Map;
 

@@ -13,10 +13,10 @@ namespace Netzmacht\LeafletPHP\Definition\Group;
 
 use Netzmacht\JavascriptBuilder\Type\AnonymousFunction;
 use Netzmacht\JavascriptBuilder\Type\Expression;
-use Netzmacht\LeafletPHP\Definition\GeoJson\ConvertsToGeoJsonFeature;
-use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureCollection;
-use Netzmacht\LeafletPHP\Definition\GeoJson\GeoJsonFeature;
-use Netzmacht\LeafletPHP\Definition\GeoJson\StaticFeature;
+use Netzmacht\LeafletPHP\Value\GeoJson\ConvertsToGeoJsonFeature;
+use Netzmacht\LeafletPHP\Value\GeoJson\FeatureCollection;
+use Netzmacht\LeafletPHP\Value\GeoJson\GeoJsonFeature;
+use Netzmacht\LeafletPHP\Value\GeoJson\StaticFeature;
 use Netzmacht\LeafletPHP\Definition\HasOptions;
 use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 use Netzmacht\LeafletPHP\Definition\Vector\PathOptionsTrait;

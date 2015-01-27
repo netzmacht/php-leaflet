@@ -11,10 +11,10 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Vector;
 
-use Netzmacht\LeafletPHP\Definition\GeoJson\Feature;
-use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureCollection;
-use Netzmacht\LeafletPHP\Definition\GeoJson\FeatureTrait;
-use Netzmacht\LeafletPHP\Definition\GeoJson\Geometry;
+use Netzmacht\LeafletPHP\Value\GeoJson\Feature;
+use Netzmacht\LeafletPHP\Value\GeoJson\FeatureCollection;
+use Netzmacht\LeafletPHP\Value\GeoJson\FeatureTrait;
+use Netzmacht\LeafletPHP\Value\GeoJson\Geometry;
 use Netzmacht\LeafletPHP\Value\LatLngBounds;
 
 /**
