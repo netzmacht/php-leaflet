@@ -23,14 +23,14 @@ abstract class AbstractFeature implements GeoJsonFeature
     /**
      * Bounding box of the feature.
      *
-     * @var \Netzmacht\LeafletPHP\Value\LatLngBounds
+     * @var LatLngBounds
      */
     private $boundingBox;
 
     /**
      * Get bounding box.
      *
-     * @return \Netzmacht\LeafletPHP\Value\LatLngBounds|null
+     * @return LatLngBounds|null
      */
     public function getBoundingBox()
     {
@@ -40,7 +40,7 @@ abstract class AbstractFeature implements GeoJsonFeature
     /**
      * Set bounding box.
      *
-     * @param \Netzmacht\LeafletPHP\Value\LatLngBounds $boundingBox Bounding box.
+     * @param LatLngBounds $boundingBox Bounding box.
      *
      * @return $this
      */

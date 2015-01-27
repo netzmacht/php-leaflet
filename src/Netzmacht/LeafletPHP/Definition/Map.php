@@ -477,7 +477,7 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions
     /**
      * Set max bounds option.
      *
-     * @param \Netzmacht\LeafletPHP\Value\LatLngBounds|array $bounds Max bounds.
+     * @param LatLngBounds|array $bounds Max bounds.
      *
      * @return $this
      * @see    http://leafletjs.com/reference.html#map-maxbounds
@@ -498,7 +498,7 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions
     /**
      * Get max bounds.
      *
-     * @return \Netzmacht\LeafletPHP\Value\LatLngBounds|null
+     * @return LatLngBounds|null
      * @see    http://leafletjs.com/reference.html#map-maxbounds
      */
     public function getMaxBounds()
@@ -927,7 +927,7 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions
     /**
      * Fit bounds.
      *
-     * @param \Netzmacht\LeafletPHP\Value\LatLngBounds $bounds  The bounds.
+     * @param LatLngBounds $bounds  The bounds.
      * @param array        $options The options.
      *
      * @return $this

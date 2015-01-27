@@ -59,7 +59,7 @@ class Circle extends Path implements Geometry
     /**
      * Set the lat lang position.
      *
-     * @param \Netzmacht\LeafletPHP\Value\LatLng $latLng The coordinate.
+     * @param LatLng $latLng The coordinate.
      *
      * @return $this
      */
