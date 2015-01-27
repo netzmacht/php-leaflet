@@ -25,7 +25,7 @@ abstract class AbstractLayer extends AbstractDefinition implements Layer
      *
      * @var Map
      */
-    private $map;
+    protected $map;
 
     /**
      * Add layer to the map.
