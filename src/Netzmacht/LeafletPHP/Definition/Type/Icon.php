@@ -86,7 +86,7 @@ interface Icon extends Definition, HasOptions
     public function setClassName($className);
 
     /**
-     * Get the clas name.
+     * Get the class name.
      *
      * @return string
      */
