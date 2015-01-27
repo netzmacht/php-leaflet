@@ -35,6 +35,13 @@ trait PopupTrait
     private $popupContent;
 
     /**
+     * Popup options.
+     *
+     * @var array|null
+     */
+    private $popupOptions;
+
+    /**
      * Set the popup content.
      *
      * @param string $content The popup content.
@@ -68,7 +75,8 @@ trait PopupTrait
      */
     public function bindPopup($popup, $options = null)
     {
-        $this->popup = $popup;
+        $this->popup        = $popup;
+        $this->popupOptions = $options;
 
         if (!empty($options)) {
             return $this->addMethod('binPopup', array($popup, $options));
@@ -85,6 +93,16 @@ trait PopupTrait
     public function getPopup()
     {
         return $this->popup;
+    }
+
+    /**
+     * Get popup options.
+     *
+     * @return array|null
+     */
+    public function getPopupOptions()
+    {
+        return $this->popupOptions;
     }
 
     /**

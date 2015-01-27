@@ -54,6 +54,13 @@ interface HasPopup
     public function getPopup();
 
     /**
+     * Get popup options.
+     *
+     * @return array|null
+     */
+    public function getPopupOptions();
+
+    /**
      * Unbind a popup.
      *
      * @return $this
