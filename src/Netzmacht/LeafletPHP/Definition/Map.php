@@ -344,7 +344,7 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions
             $center = LatLng::fromNative($center);
         }
 
-        Assertion::isInstanceOf($center, 'Netzmacht\LeafletPHP\Definition\Type\LatLng');
+        Assertion::isInstanceOf($center, 'Netzmacht\LeafletPHP\Value\LatLng');
 
         return $this->setOption('center', $center);
     }

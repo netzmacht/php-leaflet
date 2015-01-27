@@ -111,7 +111,7 @@ class Polyline extends Path implements Vector, Geometry
             $latLng = LatLng::fromNative($latLng);
         }
 
-        Assertion::isInstanceOf($latLng, 'Netzmacht\LeafletPHP\Definition\Type\LatLng');
+        Assertion::isInstanceOf($latLng, 'Netzmacht\LeafletPHP\Value\LatLng');
 
         $this->latLngs[] = $latLng;
 
