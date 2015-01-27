@@ -241,17 +241,29 @@ class LatLngBounds implements \JsonSerializable
         );
     }
 
-    // @codingStandardsIgnoreStart
     /**
      * Check if given object in in the bounds.
      *
-     * @param $object
+     * @param LatLng|LatLngBounds $object The given object.
      *
      * @return bool
+     * @throws \RuntimeException If LatLngBounds is checked. Not implemented yet.
      */
-    public function contains()
+    public function contains($object)
     {
-        // TODO: Implement
+        if ($object instanceof LatLng) {
+            $lat = $object->getLatitude();
+            $lng = $object->getLongitude();
+
+            if ($this->getWest() > $lng || $this->getEast() < $lng) {
+                return false;
+            }
+
+            return ($this->getSouth() <= $lat && $this->getNorth() >= $lat);
+        } elseif ($object instanceof LatLngBounds) {
+            throw new \RuntimeException('LatLngBounds checking not implemented so far');
+        }
+
+        return false;
     }
-    // @codingStandardsIgnoreEnd
 }
