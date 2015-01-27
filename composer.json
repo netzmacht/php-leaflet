@@ -19,7 +19,7 @@
         "beberlei/assert": "~2.0"
     },
     "require-dev": {
-        "netzmacht/contao-build-tools": "~1.0"
+        "netzmacht/contao-build-tools": "~1.1"
     },
     "autoload": {
         "psr-0": {
