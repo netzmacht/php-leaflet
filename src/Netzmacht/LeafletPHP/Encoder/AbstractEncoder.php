@@ -137,7 +137,7 @@ abstract class AbstractEncoder implements EventSubscriberInterface
             static::$encodedMethods[$hash] = true;
 
             foreach ($definition->getMethodCalls() as $method) {
-                $event->addLine($method->encode($encoder, Encoder::CLOSE_STATEMENT));
+                $event->addLine($method->encode($encoder, Flags::CLOSE_STATEMENT));
             }
         }
     }

@@ -14,7 +14,7 @@ namespace Netzmacht\LeafletPHP\Encoder;
 use Netzmacht\Contao\Leaflet\Dca\Control;
 use Netzmacht\JavascriptBuilder\Encoder;
 use Netzmacht\JavascriptBuilder\Type\Call\MethodCall;
-use Netzmacht\JavascriptBuilder\Util\Flags;
+use Netzmacht\JavascriptBuilder\Flags;
 use Netzmacht\LeafletPHP\Definition\Control\AbstractControl;
 
 /**
@@ -36,7 +36,7 @@ trait EncodeHelperTrait
     protected function encodeMethodCalls($methodCalls, Encoder $encoder, $flags = null)
     {
         $buffer = '';
-        $flags  = Flags::add(Encoder::CLOSE_STATEMENT, $flags);
+        $flags  = Flags::add(Flags::CLOSE_STATEMENT, $flags);
 
         foreach ($methodCalls as $call) {
             $buffer .= "\n" . $call->encode($encoder, $flags);
