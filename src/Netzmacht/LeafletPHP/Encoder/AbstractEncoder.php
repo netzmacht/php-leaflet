@@ -12,6 +12,7 @@
 namespace Netzmacht\LeafletPHP\Encoder;
 
 use Netzmacht\JavascriptBuilder\Encoder;
+use Netzmacht\JavascriptBuilder\Flags;
 use Netzmacht\JavascriptBuilder\Symfony\Event\EncodeValueEvent;
 use Netzmacht\JavascriptBuilder\Symfony\Event\EncodeReferenceEvent;
 use Netzmacht\LeafletPHP\Definition;
