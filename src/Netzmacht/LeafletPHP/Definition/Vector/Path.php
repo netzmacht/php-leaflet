@@ -32,7 +32,6 @@ abstract class Path extends AbstractLayer implements HasEvents, HasPopup, Conver
     use OptionsTrait;
     use EventsTrait;
     use PathOptionsTrait;
-    use PopupTrait;
     use FeatureTrait;
 
     /**

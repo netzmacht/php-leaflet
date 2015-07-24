@@ -20,6 +20,7 @@ abstract class AbstractLayer extends AbstractDefinition implements Layer
 {
     use LabelTrait;
     use OptionsTrait;
+    use PopupTrait;
 
     /**
      * The connected map.
@@ -129,15 +130,5 @@ abstract class AbstractLayer extends AbstractDefinition implements Layer
     public function getNonBubblingEvents()
     {
         return $this->getOption('nonBubblingEvents', []);
-    }
-
-    /**
-     * Call the isPopupOpen method.
-     *
-     * @return $this
-     */
-    public function isPopupOpen()
-    {
-        return $this->addMethod('isPopupOpen');
     }
 }
