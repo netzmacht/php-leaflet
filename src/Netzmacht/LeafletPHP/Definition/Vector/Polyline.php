@@ -187,7 +187,7 @@ class Polyline extends Path implements Vector, Geometry
     {
         if ($this->isFlat()) {
             return array(
-                'type'        => 'LineString',
+                'type'        => $this->getGeoJsonType(),
                 'coordinates' => array_map(
                     function (LatLng $latLng) {
                         return $latLng->toGeoJson();
@@ -198,7 +198,7 @@ class Polyline extends Path implements Vector, Geometry
         }
 
         return array(
-            'type'        => 'MultiLineString',
+            'type'        => $this->getGeoJsonType(),
             'coordinates' => array_map(
                 function ($latLng) {
                     return array_map(
@@ -218,8 +218,18 @@ class Polyline extends Path implements Vector, Geometry
      *
      * @return bool
      */
-    private function isFlat()
+    protected function isFlat()
     {
         return (count($this->latLngs) < 2);
+    }
+
+    /**
+     * Get the GeoJSON type.
+     *
+     * @return string
+     */
+    protected function getGeoJsonType()
+    {
+        return $this->isFlat() ? 'Polyline' : 'MultiPolyline';
     }
 }
