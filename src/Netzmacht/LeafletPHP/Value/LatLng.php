@@ -177,12 +177,22 @@ class LatLng implements \JsonSerializable
      * Compare 2 coordinates. It ignores the altitude.
      *
      * @param LatLng $other          Another coordinate.
+     * @param int    $maxMargin      Margin of tolerance.
      * @param bool   $ignoreAltitude If true only longitude and latitude are compared.
      *
      * @return bool
      */
-    public function equals(LatLng $other, $ignoreAltitude = true)
+    public function equals(LatLng $other, $maxMargin = null, $ignoreAltitude = true)
     {
+        if ($maxMargin !== null) {
+            $margin = max(
+                abs(($this->getLatitude() - $other->getLatitude())),
+                abs(($this->getLongitude() - $other->getLongitude()))
+            );
+
+            return ($margin <= $maxMargin);
+        }
+
         if ($this->getLatitude() !== $other->getLatitude()) {
             return false;
         }
