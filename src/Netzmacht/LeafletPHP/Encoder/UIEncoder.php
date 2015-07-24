@@ -71,7 +71,7 @@ class UIEncoder extends AbstractEncoder
     {
         $source = $popup->getSource();
         $buffer = sprintf(
-            '%s = L.marker(%s%s);',
+            '%s = L.popup(%s%s);',
             $encoder->encodeReference($popup),
             $encoder->encodeArray($popup->getOptions()),
             $source ? (', ' . $encoder->encodeReference($source)) : ''
