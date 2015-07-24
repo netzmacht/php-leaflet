@@ -653,6 +653,28 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions, HasRemova
     }
 
     /**
+     * Set max bounds viscosity option.
+     *
+     * @param float $boundsViscosity Max bounds viscosity.
+     *
+     * @return $this
+     */
+    public function setMaxBoundsViscosity($boundsViscosity)
+    {
+       return  $this->setOption('maxBoundsViscosity', (float) $boundsViscosity);
+    }
+
+    /**
+     * Get max bounds viscosity option.
+     *
+     * @return float
+     */
+    public function getMaxBoundsViscosity()
+    {
+        return $this->getOption('maxBoundsViscosity', 0.0);
+    }
+
+    /**
      * Enable or disable double click zoom.
      *
      * @param bool $value Enable double click zoom.
