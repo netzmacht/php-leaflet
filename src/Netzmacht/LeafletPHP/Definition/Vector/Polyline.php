@@ -97,6 +97,16 @@ class Polyline extends Path implements Vector, Geometry
     }
 
     /**
+     * Call the getCenter method.
+     *
+     * @return $this
+     */
+    public function getCenter()
+    {
+        return $this->addMethod('getCenter');
+    }
+
+    /**
      * Add a latitude longitude position.
      *
      * This method differs from the Leaflet JS API! Instead of passing the shape as second argument you can define
