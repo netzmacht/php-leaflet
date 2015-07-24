@@ -13,7 +13,6 @@ namespace Netzmacht\LeafletPHP\Definition\Vector;
 
 use Netzmacht\LeafletPHP\Assert\Assertion;
 use Netzmacht\LeafletPHP\Assert\InvalidArgumentException;
-use Netzmacht\LeafletPHP\Value\GeoJson\ConvertsToGeoJsonFeature;
 use Netzmacht\LeafletPHP\Value\GeoJson\Geometry;
 use Netzmacht\LeafletPHP\Value\LatLng;
 use Netzmacht\LeafletPHP\Definition\Vector;
@@ -28,7 +27,7 @@ class Polyline extends Path implements Vector, Geometry
     /**
      * List of latitude and longitude values.
      *
-     * @var array[[lat, lng]]
+     * @var array[][[lat, lng]]
      */
     private $latLngs = array();
 
@@ -100,12 +99,15 @@ class Polyline extends Path implements Vector, Geometry
     /**
      * Add a latitude longitude position.
      *
-     * @param \Netzmacht\LeafletPHP\Value\LatLng|array|string $latLng LatLng coordinate.
+     * This method differs from the Leaflet JS API! Instead of passing the shape as second argument you can define
+     * the index of the ring.
+     *
+     * @param LatLng|array|string $latLng    LatLng coordinate.
+     * @param int                 $ringIndex The index of the ring.
      *
      * @return $this
-     * @throws InvalidArgumentException If LatLng could not be created.
      */
-    public function addLatLng($latLng)
+    public function addLatLng($latLng, $ringIndex = 0)
     {
         if (is_scalar($latLng)) {
             $latLng = LatLng::fromNative($latLng);
@@ -113,7 +115,8 @@ class Polyline extends Path implements Vector, Geometry
 
         Assertion::isInstanceOf($latLng, 'Netzmacht\LeafletPHP\Value\LatLng');
 
-        $this->latLngs[] = $latLng;
+        $ringIndex                 = (int) $ringIndex;
+        $this->latLngs[$ringIndex] = $latLng;
 
         return $this;
     }
@@ -121,15 +124,16 @@ class Polyline extends Path implements Vector, Geometry
     /**
      * Add a list of values.
      *
-     * @param array $values Position list.
+     * @param array $values    Position list.
+     * @param int   $ringIndex The index of the ring.
      *
      * @return $this
      * @throws InvalidArgumentException If LatLng could not be created.
      */
-    public function addLatLngs($values)
+    public function addLatLngs($values, $ringIndex = 0)
     {
         foreach ($values as $position) {
-            $this->addLatLng($position);
+            $this->addLatLng($position, $ringIndex);
         }
 
         return $this;
@@ -138,11 +142,18 @@ class Polyline extends Path implements Vector, Geometry
     /**
      * Get all lat lngs.
      *
+     * @param bool $preferFlat If true a flat array is returned if only a single ring is defined.
+     *
      * @return array
      */
-    public function getLatLngs()
+    public function getLatLngs($preferFlat = true)
     {
-        return $this->latLngs;
+        if (empty($this->latLngs) || !$this->isFlat() || !$preferFlat) {
+            return $this->latLngs;
+
+        }
+
+        return $this->latLngs[0];
     }
 
     /**
@@ -174,14 +185,41 @@ class Polyline extends Path implements Vector, Geometry
      */
     public function jsonSerialize()
     {
+        if ($this->isFlat()) {
+            return array(
+                'type'        => 'LineString',
+                'coordinates' => array_map(
+                    function (LatLng $latLng) {
+                        return $latLng->toGeoJson();
+                    },
+                    $this->getLatLngs()
+                )
+            );
+        }
+
         return array(
-            'type'        => 'LineString',
+            'type'        => 'MultiLineString',
             'coordinates' => array_map(
-                function (LatLng $latLng) {
-                    return $latLng->toGeoJson();
+                function ($latLng) {
+                    return array_map(
+                        function (LatLng $latLng) {
+                            return $latLng->toGeoJson();
+                        },
+                        $latLng
+                    );
                 },
                 $this->getLatLngs()
             )
         );
+    }
+
+    /**
+     * Check if vector is flat.
+     *
+     * @return bool
+     */
+    private function isFlat()
+    {
+        return (count($this->latLngs) < 2);
     }
 }
