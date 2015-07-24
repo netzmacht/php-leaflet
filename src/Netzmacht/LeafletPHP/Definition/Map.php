@@ -23,7 +23,7 @@ use Netzmacht\LeafletPHP\Value\LatLngBounds;
  *
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
-class Map extends AbstractDefinition implements HasEvents, HasOptions
+class Map extends AbstractDefinition implements HasEvents, HasOptions, HasRemovableLayers
 {
     use OptionsTrait;
     use EventsTrait;
@@ -372,6 +372,32 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions
         $this->layers[] = $layer;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeLayer(Layer $layer)
+    {
+        $position = array_search($layer, $this->layers);
+
+        if ($position !== false) {
+            unset($this->layers[$position]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Check if the map has the layer.
+     *
+     * @param Layer $layer The layer.
+     *
+     * @return bool
+     */
+    public function hasLayer(Layer $layer)
+    {
+        return in_array($layer, $this->layers);
     }
 
     /**
