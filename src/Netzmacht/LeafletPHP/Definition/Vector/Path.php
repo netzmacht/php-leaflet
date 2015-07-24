@@ -116,6 +116,28 @@ abstract class Path extends AbstractLayer implements HasEvents, HasPopup, Conver
     }
 
     /**
+     * Set the fil rule.
+     *
+     * @param string $rule Fill rule value. Supported are evenodd and nonzero.
+     *
+     * @return $this
+     */
+    public function setFillRule($rule)
+    {
+        return $this->setOption('fillRule', $rule);
+    }
+
+    /**
+     * Get the fill rule.
+     *
+     * @return string
+     */
+    public function getFillRule()
+    {
+        return $this->getOption('fillRule', 'evenodd');
+    }
+
+    /**
      * Bring path to the front.
      *
      * @return $this
