@@ -261,27 +261,27 @@ trait PathOptionsTrait
     }
 
     /**
-     * Set clickable.
+     * Set interactive.
      *
-     * @param bool $value If true path is clickable.
+     * @param bool $value If true path is interactive.
      *
      * @return $this
-     * @see    http://leafletjs.com/reference.html#path-clickable
+     * @see    http://leafletjs.com/reference.html#path-interactive
      */
-    public function setClickable($value)
+    public function setInteractive($value)
     {
-        return $this->setOption('clickable', (bool) $value);
+        return $this->setOption('interactive', (bool) $value);
     }
 
     /**
-     * Check if path is clickable.
+     * Check if path is interactive.
      *
      * @return bool
-     * @see    http://leafletjs.com/reference.html#path-clickable
+     * @see    http://leafletjs.com/reference.html#path-interactive
      */
-    public function isClickable()
+    public function isInteractive()
     {
-        return $this->getOption('clickable', true);
+        return $this->getOption('interactive', true);
     }
 
     /**

@@ -117,27 +117,27 @@ class Marker extends AbstractLayer implements HasOptions, Geometry, ConvertsToGe
     }
 
     /**
-     * Set clickable option.
+     * Set interactive option.
      *
-     * @param bool $value Clickable value.
+     * @param bool $value Interactive value.
      *
      * @return $this
-     * @see    http://leafletjs.com/reference.html#marker-clickable
+     * @see    http://leafletjs.com/reference.html#marker-interactive
      */
-    public function setClickable($value)
+    public function setInteractive($value)
     {
-        return $this->setOption('clickable', (bool) $value);
+        return $this->setOption('interactive', (bool) $value);
     }
 
     /**
-     * Check if marker is clickable.
+     * Check if marker is interactive.
      * 
      * @return bool
-     * @see    http://leafletjs.com/reference.html#marker-clickable
+     * @see    http://leafletjs.com/reference.html#marker-interactive
      */
-    public function isClickable()
+    public function isInteractive()
     {
-        return $this->getOption('clickable', true);
+        return $this->getOption('interactive', true);
     }
 
     /**
