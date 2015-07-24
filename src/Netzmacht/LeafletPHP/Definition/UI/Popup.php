@@ -423,7 +423,7 @@ class Popup extends AbstractLayer implements HasOptions
      *
      * @return bool
      */
-    public function getAutoClose()
+    public function isAutoClose()
     {
         return $this->getOption('autoClose', true);
     }

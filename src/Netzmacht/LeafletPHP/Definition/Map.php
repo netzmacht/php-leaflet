@@ -22,6 +22,7 @@ use Netzmacht\LeafletPHP\Value\LatLngBounds;
  * @package Netzmacht\LeafletPHP\Definition
  *
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
+ * @SuppressWarnings(PHPMD.ExcessiveClassLength)
  */
 class Map extends AbstractDefinition implements HasEvents, HasOptions, HasRemovableLayers
 {
@@ -665,7 +666,7 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions, HasRemova
      */
     public function setMaxBoundsViscosity($boundsViscosity)
     {
-       return  $this->setOption('maxBoundsViscosity', (float) $boundsViscosity);
+        return $this->setOption('maxBoundsViscosity', (float) $boundsViscosity);
     }
 
     /**
