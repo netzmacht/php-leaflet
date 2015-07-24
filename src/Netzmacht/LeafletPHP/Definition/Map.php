@@ -631,6 +631,28 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions, HasRemova
     }
 
     /**
+     * Set wheel debounce time option.
+     *
+     * @param int $debounceTime Wheel debounce time in milliseconds.
+     *
+     * @return $this
+     */
+    public function setWheelDebounceTime($debounceTime)
+    {
+        return $this->setOption('wheelDebounceTime', (int) $debounceTime);
+    }
+
+    /**
+     * Get wheel debounce time option.
+     *
+     * @return int
+     */
+    public function getWheelDebounceTime()
+    {
+        return $this->getOption('wheelDebounceTime', 40);
+    }
+
+    /**
      * Enable or disable double click zoom.
      *
      * @param bool $value Enable double click zoom.
