@@ -597,12 +597,12 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions, HasRemova
     }
 
     /**
-     * Check if touch zoom is enabled.
+     * Get touch zoom option.
      *
-     * @return bool
+     * @return string|bool
      * @see    http://leafletjs.com/reference.html#map-touchzoom
      */
-    public function isTouchZoom()
+    public function getTouchZoom()
     {
         return $this->getOption('touchZoom', true);
     }
