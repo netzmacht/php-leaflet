@@ -189,6 +189,13 @@ class LatLng implements \JsonSerializable
                 abs(($this->getLatitude() - $other->getLatitude())),
                 abs(($this->getLongitude() - $other->getLongitude()))
             );
+            
+            if (!$ignoreAltitude) {
+                $margin = max(
+                    $margin,
+                    abs(($this->getAltitude() - $other->getLongitude()))
+                );
+            }
 
             return ($margin <= $maxMargin);
         }
