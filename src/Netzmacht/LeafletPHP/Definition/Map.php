@@ -581,14 +581,18 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions, HasRemova
     /**
      * Enable or disable touch zoom.
      *
-     * @param bool $value Enable touch zoom.
+     * @param bool|string $value Enable touch zoom.
      *
      * @return $this
      * @see    http://leafletjs.com/reference.html#map-touchzoom
      */
     public function setTouchZoom($value)
     {
-        return $this->setOption('touchZoom', (bool) $value);
+        if ($value !== 'center') {
+            $value = (bool) $value;
+        }
+
+        return $this->setOption('touchZoom', $value);
     }
 
     /**
