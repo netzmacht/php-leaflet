@@ -127,13 +127,13 @@ class VectorEncoder extends AbstractEncoder
     /**
      * Encode a circle.
      * 
-     * @param string  $type    The circle type.
-     * @param Circle  $circle  The circle object.
-     * @param Encoder $builder The builder.
+     * @param string       $type    The circle type.
+     * @param CircleMarker $circle  The circle object.
+     * @param Encoder      $builder The builder.
      *
      * @return array
      */
-    private function doCircleEncode($type, Circle $circle, Encoder $builder)
+    private function doCircleEncode($type, CircleMarker $circle, Encoder $builder)
     {
         return sprintf(
             '%s = L.%s(%s);',
