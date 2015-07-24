@@ -27,6 +27,18 @@ class Polygon extends Polyline
     }
 
     /**
+     * Get all lat lngs.
+     *
+     * @param bool $preferFlat Argument is ignored for polygons.
+     *
+     * @return array
+     */
+    public function getLatLngs($preferFlat = true)
+    {
+        return parent::getLatLngs(false);
+    }
+
+    /**
      * Get the GeoJSON type.
      *
      * @return string
