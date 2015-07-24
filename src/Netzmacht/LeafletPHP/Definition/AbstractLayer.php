@@ -19,6 +19,7 @@ namespace Netzmacht\LeafletPHP\Definition;
 abstract class AbstractLayer extends AbstractDefinition implements Layer
 {
     use LabelTrait;
+    use OptionsTrait;
 
     /**
      * The connected map.
@@ -53,5 +54,88 @@ abstract class AbstractLayer extends AbstractDefinition implements Layer
     public function getMap()
     {
         return $this->map;
+    }
+
+    /**
+     * Remove the layer from the map.
+     *
+     * @return $this
+     */
+    public function remove()
+    {
+        if (!$this->map) {
+            return $this;
+        }
+
+        return $this->removeFrom($this->map);
+    }
+
+    /**
+     * @param HasRemovableLayers $container
+     *
+     * @return $this
+     */
+    public function removeFrom(HasRemovableLayers $container)
+    {
+        $container->removeLayer($this);
+
+        return $this;
+    }
+
+    /**
+     * Set the pane option.
+     *
+     * @param string $name The name of the pane.
+     *
+     * @return $this
+     */
+    public function setPane($name)
+    {
+        return $this->setOption('pane', $name);
+    }
+
+    /**
+     * Get the pane option.
+     *
+     * This method does not work like L.Layer.getPane which returns a pane defined in the map.
+     * Use getMap()->getPane('name') instead.
+     *
+     * @return string.
+     */
+    public function getPane()
+    {
+        return $this->getOption('pane', 'overlayPane');
+    }
+
+    /**
+     * Set the names of non bubling events.
+     *
+     * @param array $events The name of events.
+     *
+     * @return $this
+     */
+    public function setNonBubblingEvents(array $events)
+    {
+        return $this->setOption('nonBubblingEvents', $events);
+    }
+
+    /**
+     * Get the non bubling events option.
+     *
+     * @return array
+     */
+    public function getNonBubblingEvents()
+    {
+        return $this->getOption('nonBubblingEvents', []);
+    }
+
+    /**
+     * Call the isPopupOpen method.
+     *
+     * @return $this
+     */
+    public function isPopupOpen()
+    {
+        return $this->addMethod('isPopupOpen');
     }
 }
