@@ -331,6 +331,28 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions, HasRemova
     }
 
     /**
+     * Set preferCanvas option.
+     *
+     * @param bool $preferCanvas Prefer canvas option.
+     *
+     * @return $this
+     */
+    public function setPreferCanvas($preferCanvas)
+    {
+        return $this->setOption('preferCanvas', (bool) $preferCanvas);
+    }
+
+    /**
+     * Get prefer canvas option.
+     *
+     * @return bool
+     */
+    public function isPreferCanvas()
+    {
+        return $this->getOption('preferCanvas', false);
+    }
+
+    /**
      * Set the center.
      *
      * @param LatLng|array $center The map center.
