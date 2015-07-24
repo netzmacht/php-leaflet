@@ -129,4 +129,24 @@ class Zoom extends AbstractControl
     {
         return $this->getOption('zoomOutTitle', 'Zoom out');
     }
+
+    /**
+     * Call enable method.
+     *
+     * @return $this
+     */
+    public function enable()
+    {
+        return $this->addMethod('enable');
+    }
+
+    /**
+     * Call disable method.
+     *
+     * @return $this
+     */
+    public function disable()
+    {
+        return $this->addMethod('disable');
+    }
 }
