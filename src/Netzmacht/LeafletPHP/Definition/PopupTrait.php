@@ -12,7 +12,6 @@
 namespace Netzmacht\LeafletPHP\Definition;
 
 use Netzmacht\LeafletPHP\Definition\UI\Popup;
-use Netzmacht\LeafletPHP\Value\LatLngBounds;
 
 /**
  * Class PopupTrait is an implementation of the HasPopup interface an can be used as trait.

@@ -407,6 +407,28 @@ class Popup extends AbstractLayer implements HasOptions
     }
 
     /**
+     * Set auto close option.
+     *
+     * @param bool $autoClose Autoclose option.
+     *
+     * @return $this
+     */
+    public function setAutoClose($autoClose)
+    {
+        return $this->setOption('autoClose', (bool) $autoClose);
+    }
+
+    /**
+     * Get auto close option.
+     *
+     * @return bool
+     */
+    public function getAutoClose()
+    {
+        return $this->getOption('autoClose', true);
+    }
+
+    /**
      * Create openOn map method.
      *
      * @param Map $map The map.
