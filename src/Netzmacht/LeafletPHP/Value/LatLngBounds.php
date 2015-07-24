@@ -200,6 +200,48 @@ class LatLngBounds implements \JsonSerializable
     }
 
     /**
+     * Check if bounds overlaps.
+     *
+     * @param LatLngBounds $other The over bounds to check.
+     *
+     * @return bool
+     */
+    public function overlaps(LatLngBounds $other)
+    {
+        $southWest = $other->getSouthWest();
+        $northEast = $other->getNorthEast();
+
+        $latOverlaps = ($northEast->getLatitude() > $this->southWest->getLatitude())
+            && ($southWest->getLatitude() < $this->northEast->getLatitude());
+
+        $lngOverlaps = ($northEast->getLongitude() > $this->southWest->getLongitude())
+            && ($southWest->getLongitude() < $northEast->getLongitude());
+
+        return $latOverlaps && $lngOverlaps;
+    }
+
+    /**
+     * Check if bounds intersects.
+     *
+     * @param LatLngBounds $other The other bounds.
+     *
+     * @return bool
+     */
+    public function intersects(LatLngBounds $other)
+    {
+        $southWest = $other->getSouthWest();
+        $northEast = $other->getNorthEast();
+
+        $latOverlaps = ($northEast->getLatitude() >= $this->southWest->getLatitude())
+            && ($southWest->getLatitude() <= $this->northEast->getLatitude());
+
+        $lngOverlaps = ($northEast->getLongitude() >= $this->southWest->getLongitude())
+            && ($southWest->getLongitude() <= $northEast->getLongitude());
+
+        return $latOverlaps && $lngOverlaps;
+    }
+
+    /**
      * Get value as valid json string.
      *
      * @return array
