@@ -25,9 +25,9 @@ use Netzmacht\LeafletPHP\Definition\Vector;
 class Polyline extends Path implements Vector, Geometry
 {
     /**
-     * List of latitude and longitude values.
+     * List of LatLngs values as nested array.
      *
-     * @var array[][[lat, lng]]
+     * @var LatLng[][]
      */
     private $latLngs = array();
 

@@ -71,7 +71,9 @@ abstract class AbstractLayer extends AbstractDefinition implements Layer
     }
 
     /**
-     * @param HasRemovableLayers $container
+     * Remove the layer from a container.
+     *
+     * @param HasRemovableLayers $container The container.
      *
      * @return $this
      */
