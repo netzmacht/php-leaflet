@@ -311,20 +311,20 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions, HasRemova
     /**
      * Set the zoom.
      *
-     * @param int $zoom The zoom level.
+     * @param float $zoom The zoom level.
      *
      * @return $this
      * @see    http://leafletjs.com/reference.html#map-zoom
      */
     public function setZoom($zoom)
     {
-        return $this->setOption('zoom', (int) $zoom);
+        return $this->setOption('zoom', (float) $zoom);
     }
 
     /**
      * Get the initial zoom level.
      *
-     * @return int
+     * @return float
      * @see    http://leafletjs.com/reference.html#map-zoom
      */
     public function getZoom()
@@ -479,20 +479,20 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions, HasRemova
     /**
      * Set the min zoom.
      *
-     * @param int $zoom The zoom level.
+     * @param float $zoom The zoom level.
      *
      * @return $this
      * @see    http://leafletjs.com/reference.html#map-minzoom
      */
     public function setMinZoom($zoom)
     {
-        return $this->setOption('minZoom', (int) $zoom);
+        return $this->setOption('minZoom', (float) $zoom);
     }
 
     /**
      * Get the min zoom level.
      *
-     * @return int
+     * @return float
      * @see    http://leafletjs.com/reference.html#map-minzoom
      */
     public function getMinZoom()
@@ -503,20 +503,20 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions, HasRemova
     /**
      * Set the max zoom.
      *
-     * @param int $zoom The zoom level.
+     * @param float $zoom The zoom level.
      *
      * @return $this
      * @see    http://leafletjs.com/reference.html#map-maxzoom
      */
     public function setMaxZoom($zoom)
     {
-        return $this->setOption('maxZoom', (int) $zoom);
+        return $this->setOption('maxZoom', (float) $zoom);
     }
 
     /**
      * Get the max zoom level.
      *
-     * @return int
+     * @return float
      * @see    http://leafletjs.com/reference.html#map-maxzoom
      */
     public function getMaxZoom()
