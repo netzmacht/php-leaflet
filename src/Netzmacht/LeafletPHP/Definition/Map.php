@@ -1084,4 +1084,16 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions, HasRemova
     {
         return $this->addMethod('stopLocate');
     }
+
+    /**
+     * Make getRenderer method call.
+     *
+     * @param Layer $layer The layer.
+     *
+     * @return $this
+     */
+    public function getRenderer(Layer $layer)
+    {
+        return $this->addMethod($layer);
+    }
 }
