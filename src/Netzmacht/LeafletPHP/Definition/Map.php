@@ -1094,6 +1094,39 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions, HasRemova
      */
     public function getRenderer(Layer $layer)
     {
-        return $this->addMethod($layer);
+        return $this->addMethod('getRenderer', [$layer]);
+    }
+
+    /**
+     * Create pane method call.
+     *
+     * @param string $name      Pane name.
+     * @param null   $container Optional container.
+     *
+     * @return $this
+     */
+    public function createPane($name, $container = null)
+    {
+        return $this->addMethod('createPane', [$name, $container]);
+    }
+
+    /**
+     * Create get pane method call.
+     *
+     * @return $this
+     */
+    public function getPane()
+    {
+        return $this->addMethod('getPane');
+    }
+
+    /**
+     * Create get panes method call.
+     *
+     * @return $this
+     */
+    public function getPanes()
+    {
+        return $this->addMethod('getPanes');
     }
 }
