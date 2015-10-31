@@ -64,7 +64,7 @@ class ImageOverlay extends AbstractLayer implements HasOptions
      *
      * @return string
      */
-    public function getImageUrl()
+    public function getUrl()
     {
         return $this->imageUrl;
     }
@@ -76,7 +76,7 @@ class ImageOverlay extends AbstractLayer implements HasOptions
      *
      * @return $this
      */
-    public function setImageUrl($imageUrl)
+    public function setUrl($imageUrl)
     {
         $this->imageUrl = $imageUrl;
 
@@ -88,7 +88,7 @@ class ImageOverlay extends AbstractLayer implements HasOptions
      *
      * @return LatLngBounds
      */
-    public function getImageBounds()
+    public function getBounds()
     {
         return $this->imageBounds;
     }
@@ -100,7 +100,7 @@ class ImageOverlay extends AbstractLayer implements HasOptions
      *
      * @return $this
      */
-    public function setImageBounds($imageBounds)
+    public function setBounds($imageBounds)
     {
         $this->imageBounds = $imageBounds;
 
