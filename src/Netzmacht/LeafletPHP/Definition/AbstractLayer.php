@@ -111,7 +111,7 @@ abstract class AbstractLayer extends AbstractDefinition implements Layer
     }
 
     /**
-     * Set the names of non bubling events.
+     * Set the names of non bubbling events.
      *
      * @param array $events The name of events.
      *
@@ -123,7 +123,7 @@ abstract class AbstractLayer extends AbstractDefinition implements Layer
     }
 
     /**
-     * Get the non bubling events option.
+     * Get the non bubbling events option.
      *
      * @return array
      */
