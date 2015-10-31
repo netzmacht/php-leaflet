@@ -81,7 +81,7 @@ trait OptionsTrait
      * @param string $name    Name of the option.
      * @param mixed  $default Default value if no option is set.
      *
-     * @return null
+     * @return mixed
      */
     public function getOption($name, $default = null)
     {
