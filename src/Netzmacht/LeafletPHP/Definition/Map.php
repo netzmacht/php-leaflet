@@ -22,6 +22,7 @@ use Netzmacht\LeafletPHP\Value\LatLngBounds;
  * @package Netzmacht\LeafletPHP\Definition
  *
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  * @SuppressWarnings(PHPMD.ExcessiveClassLength)
  */
 class Map extends AbstractDefinition implements HasEvents, HasOptions, HasRemovableLayers
@@ -32,224 +33,224 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions, HasRemova
     /**
      * The click event.
      *
-     * @see    http://leafletjs.com/reference.html#map-click
+     * @see http://leafletjs.com/reference.html#map-click
      */
     const EVENT_CLICK = 'click';
 
     /**
      * The dblclick event.
      *
-     * @see    http://leafletjs.com/reference.html#map-dblclick
+     * @see http://leafletjs.com/reference.html#map-dblclick
      */
     const EVENT_DOUBLE_CLICK = 'dblclick';
 
     /**
      * The mousedown event.
      *
-     * @see    http://leafletjs.com/reference.html#map-mousedown
+     * @see http://leafletjs.com/reference.html#map-mousedown
      */
     const EVENT_MOUSE_DOWN = 'mousedown';
 
     /**
      * The mouseover event.
      *
-     * @see    http://leafletjs.com/reference.html#map-mouseover
+     * @see http://leafletjs.com/reference.html#map-mouseover
      */
     const EVENT_MOUSE_OVER = 'mouseover';
 
     /**
      * The mouseout event.
      *
-     * @see    http://leafletjs.com/reference.html#map-mouseout
+     * @see http://leafletjs.com/reference.html#map-mouseout
      */
     const EVENT_MOUSE_OUT = 'mouseout';
 
     /**
      * The mousemove event.
      *
-     * @see    http://leafletjs.com/reference.html#map-mousemove
+     * @see http://leafletjs.com/reference.html#map-mousemove
      */
     const EVENT_MOUSE_MOVE = 'mousemove';
 
     /**
      * The contextmenu event.
      *
-     * @see    http://leafletjs.com/reference.html#map-contextmenu
+     * @see http://leafletjs.com/reference.html#map-contextmenu
      */
     const EVENT_CONTEXT_MENU = 'contextmenu';
 
     /**
      * The focus event.
      *
-     * @see    http://leafletjs.com/reference.html#map-focus
+     * @see http://leafletjs.com/reference.html#map-focus
      */
     const EVENT_FOCUS = 'focus';
 
     /**
      * The blur event.
      *
-     * @see    http://leafletjs.com/reference.html#map-blur
+     * @see http://leafletjs.com/reference.html#map-blur
      */
     const EVENT_BLUR = 'blur';
 
     /**
      * The preclick event.
      *
-     * @see    http://leafletjs.com/reference.html#map-preclick
+     * @see http://leafletjs.com/reference.html#map-preclick
      */
     const EVENT_PRE_CLICK = 'preclick';
 
     /**
      * The load event.
      *
-     * @see    http://leafletjs.com/reference.html#map-load
+     * @see http://leafletjs.com/reference.html#map-load
      */
     const EVENT_LOAD = 'load';
 
     /**
      * The unload event.
      *
-     * @see    http://leafletjs.com/reference.html#map-unload
+     * @see http://leafletjs.com/reference.html#map-unload
      */
     const EVENT_UNLOAD = 'unload';
 
     /**
      * The move event.
      *
-     * @see    http://leafletjs.com/reference.html#map-move
+     * @see http://leafletjs.com/reference.html#map-move
      */
     const EVENT_MOVE = 'move';
 
     /**
      * The movestart event.
      *
-     * @see    http://leafletjs.com/reference.html#map-movestart
+     * @see http://leafletjs.com/reference.html#map-movestart
      */
     const EVENT_MOVE_START = 'movestart';
 
     /**
      * The moveend event.
      *
-     * @see    http://leafletjs.com/reference.html#map-moveend
+     * @see http://leafletjs.com/reference.html#map-moveend
      */
     const EVENT_MOVE_END = 'moveend';
 
     /**
      * The drag event.
      *
-     * @see    http://leafletjs.com/reference.html#map-drag
+     * @see http://leafletjs.com/reference.html#map-drag
      */
     const EVENT_DRAG = 'drag';
 
     /**
      * The dragstart event.
      *
-     * @see    http://leafletjs.com/reference.html#map-dragstart
+     * @see http://leafletjs.com/reference.html#map-dragstart
      */
     const EVENT_DRAG_START = 'dragstart';
 
     /**
      * The dragend event.
      *
-     * @see    http://leafletjs.com/reference.html#map-dragend
+     * @see http://leafletjs.com/reference.html#map-dragend
      */
     const EVENT_DRAG_END = 'dragend';
 
     /**
      * The zoomstart event.
      *
-     * @see    http://leafletjs.com/reference.html#map-zoomstart
+     * @see http://leafletjs.com/reference.html#map-zoomstart
      */
     const EVENT_ZOOM_START = 'zoomstart';
 
     /**
      * The zoomend event.
      *
-     * @see    http://leafletjs.com/reference.html#map-zoomend
+     * @see http://leafletjs.com/reference.html#map-zoomend
      */
     const EVENT_ZOOM_END = 'zoomend';
 
     /**
      * The zoomlevelschange event.
      *
-     * @see    http://leafletjs.com/reference.html#map-zoomlevelschange
+     * @see http://leafletjs.com/reference.html#map-zoomlevelschange
      */
     const EVENT_ZOOMLEVELS_CHANGE = 'zoomlevelschange';
     
     /**
      * The resize event.
      *
-     * @see    http://leafletjs.com/reference.html#map-resize
+     * @see http://leafletjs.com/reference.html#map-resize
      */
     const EVENT_RESIZE = 'resize';
 
     /**
      * The autopanstart event.
      *
-     * @see    http://leafletjs.com/reference.html#map-autopanstart
+     * @see http://leafletjs.com/reference.html#map-autopanstart
      */
     const EVENT_AUTO_PAN_START = 'autopanstart';
 
     /**
      * The layeradd event.
      *
-     * @see    http://leafletjs.com/reference.html#map-layeradd
+     * @see http://leafletjs.com/reference.html#map-layeradd
      */
     const EVENT_LAYER_ADD = 'layeradd';
     
     /**
      * The layerremove event.
      *
-     * @see    http://leafletjs.com/reference.html#map-layerremove
+     * @see http://leafletjs.com/reference.html#map-layerremove
      */
     const EVENT_LAYER_REMOVE = 'layerremove';
 
     /**
      * The baselayerchange event.
      *
-     * @see    http://leafletjs.com/reference.html#map-baselayerchange
+     * @see http://leafletjs.com/reference.html#map-baselayerchange
      */
     const EVENT_BASE_LAYER_CHANGE = 'baselayerchange';
 
     /**
      * The overlayadd event.
      *
-     * @see    http://leafletjs.com/reference.html#map-overlayadd
+     * @see http://leafletjs.com/reference.html#map-overlayadd
      */
     const EVENT_OVERLAY_ADD = 'overlayadd';
 
     /**
      * The overlayremove event.
      *
-     * @see    http://leafletjs.com/reference.html#map-overlayremove
+     * @see http://leafletjs.com/reference.html#map-overlayremove
      */
     const EVENT_OVERLAY_REMOVE = 'overlayremove';
 
     /**
      * The locationfound event.
      *
-     * @see    http://leafletjs.com/reference.html#map-locationfound
+     * @see http://leafletjs.com/reference.html#map-locationfound
      */
     const EVENT_LOCATION_FOUND = 'locationfound';
 
     /**
      * The locationerror event.
      *
-     * @see    http://leafletjs.com/reference.html#map-locationerror
+     * @see http://leafletjs.com/reference.html#map-locationerror
      */
     const EVENT_LOCATION_ERROR = 'locationerror';
 
     /**
      * The popupopen event.
      *
-     * @see    http://leafletjs.com/reference.html#map-popupopen
+     * @see http://leafletjs.com/reference.html#map-popupopen
      */
     const EVENT_POPUP_OPEN = 'popupopen';
 
     /**
      * The popupclose event.
      *
-     * @see    http://leafletjs.com/reference.html#map-popupclose
+     * @see http://leafletjs.com/reference.html#map-popupclose
      */
     const EVENT_POPUP_CLOSE = 'popupclose';
 
