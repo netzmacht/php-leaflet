@@ -125,8 +125,8 @@ class Polyline extends Path implements Vector, Geometry
 
         Assertion::isInstanceOf($latLng, 'Netzmacht\LeafletPHP\Value\LatLng');
 
-        $ringIndex                 = (int) $ringIndex;
-        $this->latLngs[$ringIndex] = $latLng;
+        $ringIndex                   = (int) $ringIndex;
+        $this->latLngs[$ringIndex][] = $latLng;
 
         return $this;
     }
@@ -152,18 +152,23 @@ class Polyline extends Path implements Vector, Geometry
     /**
      * Get all lat lngs.
      *
-     * @param bool $preferFlat If true a flat array is returned if only a single ring is defined.
+     * @param bool $preferFlat If true a flat array is returned instead of a list of rings.
      *
      * @return array
      */
     public function getLatLngs($preferFlat = true)
     {
-        if (empty($this->latLngs) || !$this->isFlat() || !$preferFlat) {
-            return $this->latLngs;
+        if ($preferFlat) {
+            $value = [];
 
+            foreach ($this->latLngs as $ring) {
+                $value = array_merge($value, $ring);
+            }
+
+            return $value;
         }
 
-        return $this->latLngs[0];
+        return $this->latLngs;
     }
 
     /**
@@ -171,7 +176,7 @@ class Polyline extends Path implements Vector, Geometry
      *
      * @param boolean $affectsBounds If true bounds of map are affected.
      *
-     * @return bool
+     * @return $this
      */
     public function setAffectsBounds($affectsBounds)
     {
@@ -240,6 +245,6 @@ class Polyline extends Path implements Vector, Geometry
      */
     protected function getGeoJsonType()
     {
-        return $this->isFlat() ? 'Polyline' : 'MultiPolyline';
+        return $this->isFlat() ? 'LineString' : 'MultiLineString';
     }
 }
