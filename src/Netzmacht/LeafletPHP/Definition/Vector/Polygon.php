@@ -11,6 +11,8 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Vector;
 
+use Netzmacht\LeafletPHP\Value\LatLng;
+
 /**
  * Class Polygon represents a polygon on the map.
  *
@@ -27,15 +29,40 @@ class Polygon extends Polyline
     }
 
     /**
-     * Get all lat lngs.
-     *
-     * @param bool $preferFlat Argument is ignored for polygons.
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function getLatLngs($preferFlat = true)
+    public function jsonSerialize()
     {
-        return parent::getLatLngs(false);
+        if ($this->isFlat()) {
+            return array(
+                'type'        => $this->getGeoJsonType(),
+                'coordinates' => array(
+                    array_map(
+                        function (LatLng $latLng) {
+                            return $latLng->toGeoJson();
+                        },
+                        $this->getLatLngs()
+                    )
+                )
+            );
+        }
+
+        return array(
+            'type'        => $this->getGeoJsonType(),
+            'coordinates' => array_map(
+                function ($latLng) {
+                    return array(
+                        array_map(
+                            function (LatLng $latLng) {
+                                return $latLng->toGeoJson();
+                            },
+                            $latLng
+                        )
+                    );
+                },
+                $this->getLatLngs()
+            )
+        );
     }
 
     /**
