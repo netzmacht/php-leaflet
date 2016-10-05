@@ -14,6 +14,11 @@ namespace Netzmacht\LeafletPHP\Definition\Vector;
 use Netzmacht\LeafletPHP\Definition\AbstractLayer;
 use Netzmacht\LeafletPHP\Definition\HasOptions;
 
+/**
+ * Renderer class.
+ *
+ * @package Netzmacht\LeafletPHP\Definition\Vector
+ */
 class Renderer extends AbstractLayer implements HasOptions
 {
     /**
