@@ -11,7 +11,6 @@
 
 namespace Netzmacht\LeafletPHP\Encoder;
 
-use Netzmacht\Contao\Leaflet\Dca\Control;
 use Netzmacht\JavascriptBuilder\Encoder;
 use Netzmacht\JavascriptBuilder\Type\Call\MethodCall;
 use Netzmacht\JavascriptBuilder\Flags;
