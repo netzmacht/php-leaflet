@@ -60,7 +60,7 @@ class Polygon extends Polyline
                         )
                     );
                 },
-                $this->getLatLngs()
+                $this->getLatLngs(false)
             )
         );
     }

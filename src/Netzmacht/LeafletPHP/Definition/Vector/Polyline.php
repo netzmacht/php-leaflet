@@ -223,7 +223,7 @@ class Polyline extends Path implements Vector, Geometry
                         $latLng
                     );
                 },
-                $this->getLatLngs()
+                $this->getLatLngs(false)
             )
         );
     }
