@@ -34,7 +34,14 @@ class CircleMarker extends Path implements Geometry
      *
      * @var LatLng
      */
-    private $latLng;
+    private $latLng = array();
+
+    /**
+     * The radius in meters.
+     *
+     * @var int
+     */
+    private $radius = 0;
 
     /**
      * Get the lat lang.
@@ -67,7 +74,7 @@ class CircleMarker extends Path implements Geometry
      */
     public function getRadius()
     {
-        return $this->getOption('radius');
+        return $this->radius;
     }
 
     /**
@@ -79,7 +86,9 @@ class CircleMarker extends Path implements Geometry
      */
     public function setRadius($radius)
     {
-        return $this->setOption('radius', (int) $radius);
+        $this->radius = (int) $radius;
+
+        return $this;
     }
 
     /**
