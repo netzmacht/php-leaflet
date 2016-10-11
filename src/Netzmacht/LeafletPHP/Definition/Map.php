@@ -525,6 +525,54 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions, HasRemova
     }
 
     /**
+     * Set the zoom delta.
+     *
+     * @param float $zoom The zoom delta.
+     *
+     * @return $this
+     * @see    http://leafletjs.com/reference-1.0.0.html#map-zoomdelta
+     */
+    public function setZoomDelta($zoom)
+    {
+        return $this->setOption('zoomDelta', (float) $zoom);
+    }
+
+    /**
+     * Get the zoom delta.
+     *
+     * @return float
+     * @see    http://leafletjs.com/reference-1.0.0.html#map-zoomdelta
+     */
+    public function getZoomDelta()
+    {
+        return $this->getOption('zoomDelta', 1);
+    }
+
+    /**
+     * Set the zoom snap.
+     *
+     * @param float $zoom The zoom snap.
+     *
+     * @return $this
+     * @see    http://leafletjs.com/reference-1.0.0.html#map-zoomsnap
+     */
+    public function setZoomSnap($zoom)
+    {
+        return $this->setOption('zoomSnap', (float) $zoom);
+    }
+
+    /**
+     * Get the zoom snap.
+     *
+     * @return float
+     * @see    http://leafletjs.com/reference-1.0.0.html#map-zoomsnap
+     */
+    public function getZoomSnap()
+    {
+        return $this->getOption('zoomSnap', 1);
+    }
+
+    /**
      * Set max bounds option.
      *
      * @param LatLngBounds|array $bounds Max bounds.
