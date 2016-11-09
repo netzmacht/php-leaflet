@@ -14,6 +14,7 @@ use Netzmacht\JavascriptBuilder\Encoder;
 use Netzmacht\JavascriptBuilder\Type\ConvertsToJavascript;
 use Netzmacht\JavascriptBuilder\Type\Expression;
 use Netzmacht\LeafletPHP\Definition\AbstractLayer;
+use Netzmacht\LeafletPHP\Encoder\EncodeHelperTrait;
 
 /**
  * Class OverpassLayer provides implementation of https://github.com/kartenkarsten/leaflet-layer-overpass.
@@ -22,6 +23,8 @@ use Netzmacht\LeafletPHP\Definition\AbstractLayer;
  */
 class OverpassLayer extends AbstractLayer implements ConvertsToJavascript
 {
+    use EncodeHelperTrait;
+
     /**
      * Min zoom indicator options.
      *
@@ -163,7 +166,7 @@ class OverpassLayer extends AbstractLayer implements ConvertsToJavascript
      */
     public function setMinZoom($minZoom)
     {
-        return $this->setOption('minZoom', (int) $minZoom);
+        return $this->setOption('minzoom', (int) $minZoom);
     }
 
     /**
@@ -173,7 +176,7 @@ class OverpassLayer extends AbstractLayer implements ConvertsToJavascript
      */
     public function getMinZoom()
     {
-        return $this->getOption('minZoom', 15);
+        return $this->getOption('minzoom', 15);
     }
 
     /**
@@ -205,12 +208,16 @@ class OverpassLayer extends AbstractLayer implements ConvertsToJavascript
      */
     public function encode(Encoder $encoder, $flags = null)
     {
-        return sprintf (
+        $buffer = sprintf (
             '%s = new L.OverPassLayer(%s, %s)%s',
             $encoder->encodeReference($this),
             $encoder->encodeArray($this->getOptions(), JSON_FORCE_OBJECT),
             $encoder->encodeArray($this->getMinZoomIndicatorOptions()->getOptions(), JSON_FORCE_OBJECT),
             $encoder->close($flags)
         );
+
+        $buffer .= $this->encodeMethodCalls($this->getMethodCalls(), $encoder, $flags);
+
+        return $buffer;
     }
 }
