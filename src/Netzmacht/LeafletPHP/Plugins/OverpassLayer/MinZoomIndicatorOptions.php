@@ -18,7 +18,7 @@ use Netzmacht\LeafletPHP\Definition\OptionsTrait;
  *
  * @package Netzmacht\LeafletPHP\Plugins\OverpassLayer
  */
-class MinZoomIndicatorOptions implements HasOptions
+class MinZoomIndicatorOptions implements HasOptions, \JsonSerializable
 {
     use OptionsTrait;
 
@@ -86,5 +86,13 @@ class MinZoomIndicatorOptions implements HasOptions
     public function getMinZoomMessage()
     {
         return $this->getOption('minZoomMessage', 'current Zoom-Level: CURRENTZOOM all data at Level: MINZOOMLEVEL');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    function jsonSerialize()
+    {
+        return $this->getOptions();
     }
 }

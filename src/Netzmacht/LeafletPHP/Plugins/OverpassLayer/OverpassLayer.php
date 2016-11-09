@@ -26,13 +26,6 @@ class OverpassLayer extends AbstractLayer implements ConvertsToJavascript
     use EncodeHelperTrait;
 
     /**
-     * Min zoom indicator options.
-     *
-     * @var MinZoomIndicatorOptions
-     */
-    private $minZoomIndicatorOptions;
-
-    /**
      * {@inheritdoc}
      */
     public static function getType()
@@ -54,19 +47,14 @@ class OverpassLayer extends AbstractLayer implements ConvertsToJavascript
     /**
      * OverpassLayer constructor.
      *
-     * @param string                       $identifier              Indicator of the layer.
-     * @param array                        $options                 Options.
-     * @param MinZoomIndicatorOptions|null $minZoomIndicatorOptions Min zoom indicator options.
+     * @param string $identifier Indicator of the layer.
+     * @param array  $options    Options.
      */
-    public function __construct(
-        $identifier,
-        array $options = [],
-        MinZoomIndicatorOptions $minZoomIndicatorOptions = null
-    ) {
+    public function __construct($identifier, array $options = [])
+    {
         parent::__construct($identifier);
 
         $this->setOptions($options);
-        $this->minZoomIndicatorOptions = $minZoomIndicatorOptions ?: new MinZoomIndicatorOptions();
     }
 
     /**
@@ -186,7 +174,11 @@ class OverpassLayer extends AbstractLayer implements ConvertsToJavascript
      */
     public function getMinZoomIndicatorOptions()
     {
-        return $this->minZoomIndicatorOptions;
+        if (!$this->getOption('minZoomindicatorOptions')) {
+            $this->setMinZoomIndicatorOptions(new MinZoomIndicatorOptions());
+        }
+
+        return $this->getOption('minZoomIndicatorOptions');
     }
 
     /**
@@ -198,9 +190,7 @@ class OverpassLayer extends AbstractLayer implements ConvertsToJavascript
      */
     public function setMinZoomIndicatorOptions(MinZoomIndicatorOptions $minZoomIndicatorOptions)
     {
-        $this->minZoomIndicatorOptions = $minZoomIndicatorOptions;
-
-        return $this;
+        return $this->setOption('minZoomIndicatorOptions', $minZoomIndicatorOptions);
     }
 
     /**
