@@ -38,6 +38,17 @@ class OverpassLayer extends AbstractLayer implements ConvertsToJavascript
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public static function getRequiredLibraries()
+    {
+        $libs   = parent::getRequiredLibraries();
+        $libs[] = 'leaflet-layer-overpass';
+
+        return $libs;
+    }
+
+    /**
      * OverpassLayer constructor.
      *
      * @param string                       $identifier              Indicator of the layer.
