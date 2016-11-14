@@ -17,6 +17,7 @@ use Netzmacht\LeafletPHP\Definition;
 use Netzmacht\LeafletPHP\Definition\Type\AbstractIcon;
 use Netzmacht\LeafletPHP\Definition\Type\DivIcon;
 use Netzmacht\LeafletPHP\Definition\Type\ImageIcon;
+use Netzmacht\LeafletPHP\Plugins\ExtraMarkers\ExtraMarkersIcon;
 
 /**
  * Class TypeEncoder encodes type definitions.

@@ -105,7 +105,7 @@ abstract class AbstractEncoder implements EventSubscriberInterface
      */
     private function convertTypeToMethod($type)
     {
-        $parts = explode('.', $type);
+        $parts = explode('.', str_replace(['-', '_'], '.', $type));
         $parts = array_map('ucfirst', $parts);
 
         return implode('', $parts);
