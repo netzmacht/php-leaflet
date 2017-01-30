@@ -73,6 +73,7 @@ class OverpassLayer extends AbstractLayer implements ConvertsToJavascript
      * Get debug mode.
      *
      * @return bool
+     * @SuppressWarnings(BooleanGetMethodName)
      */
     public function getDebug()
     {
@@ -94,7 +95,7 @@ class OverpassLayer extends AbstractLayer implements ConvertsToJavascript
     /**
      * Get query.
      *
-     * @return bool
+     * @return string
      */
     public function getQuery()
     {
@@ -116,7 +117,7 @@ class OverpassLayer extends AbstractLayer implements ConvertsToJavascript
     /**
      * Get endpoint.
      *
-     * @return bool
+     * @return string
      */
     public function getEndpoint()
     {
@@ -160,7 +161,7 @@ class OverpassLayer extends AbstractLayer implements ConvertsToJavascript
     /**
      * Get minZoom.
      *
-     * @return bool
+     * @return int
      */
     public function getMinZoom()
     {

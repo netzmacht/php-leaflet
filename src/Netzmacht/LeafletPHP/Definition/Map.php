@@ -24,6 +24,7 @@ use Netzmacht\LeafletPHP\Value\LatLngBounds;
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  * @SuppressWarnings(PHPMD.ExcessiveClassLength)
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class Map extends AbstractDefinition implements HasEvents, HasOptions, HasRemovableLayers
 {
