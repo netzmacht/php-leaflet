@@ -13,7 +13,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "~5.4",
+        "php": ">=5.4",
         "symfony/event-dispatcher": "~2.3",
         "netzmacht/php-javascript-builder": "~1.0",
         "beberlei/assert": "~2.0"
