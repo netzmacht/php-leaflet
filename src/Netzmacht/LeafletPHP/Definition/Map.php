@@ -821,7 +821,7 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions, HasRemova
 
     /**
      * Get the max zoom level.
-     * 
+     *
      * @return int
      * @see    http://leafletjs.com/reference.html#map-taptolerance
      */
@@ -1013,7 +1013,7 @@ class Map extends AbstractDefinition implements HasEvents, HasOptions, HasRemova
 
     /**
      * Check if zoom control is enabled.
-     * 
+     *
      * @return bool
      */
     public function isZoomControl()

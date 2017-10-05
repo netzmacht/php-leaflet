@@ -127,7 +127,7 @@ class VectorEncoder extends AbstractEncoder
 
     /**
      * Encode a circle.
-     * 
+     *
      * @param string       $type    The circle type.
      * @param CircleMarker $circle  The circle object.
      * @param Encoder      $builder The builder.

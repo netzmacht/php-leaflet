@@ -12,7 +12,11 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Vector;
 
-
+/**
+ * Trait PathOptionsTrait.
+ *
+ * @package Netzmacht\LeafletPHP\Definition\Vector
+ */
 trait PathOptionsTrait
 {
     /**

@@ -12,8 +12,6 @@
 
 namespace Netzmacht\LeafletPHP\Assets;
 
-use Netzmacht\LeafletPHP\Assets;
-
 /**
  * Class SimpleAssets is a simple assets implementation.
  *
@@ -26,7 +24,7 @@ class SimpleAssets extends AbstractAssets
      */
     public function addJavascript($script, $type = self::TYPE_SOURCE)
     {
-        switch($type) {
+        switch ($type) {
             case static::TYPE_FILE:
                 $this->appendScript(sprintf('<script src="%s"></script>', $script));
                 break;
@@ -46,7 +44,7 @@ class SimpleAssets extends AbstractAssets
      */
     public function addStylesheet($stylesheet, $type = self::TYPE_FILE)
     {
-        switch($type) {
+        switch ($type) {
             case static::TYPE_FILE:
                 $this->appendStyle(sprintf('<link rel="stylesheet" href="%s"></script>', $stylesheet));
                 break;

@@ -71,7 +71,7 @@ class FullScreenControl extends AbstractControl implements ConvertsToJavascript
 
     /**
      * Get the button title.
-     * 
+     *
      * @return string
      */
     public function getTitle()

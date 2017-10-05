@@ -26,7 +26,7 @@ use Netzmacht\LeafletPHP\Value\LatLng;
 
 /**
  * Class Marker is the Marker definition for the Leaflet marker.
- * 
+ *
  * @package Netzmacht\LeafletPHP\Definition\UI
  */
 class Marker extends AbstractLayer implements HasOptions, Geometry, ConvertsToGeoJsonFeature, HasPopup
@@ -132,7 +132,7 @@ class Marker extends AbstractLayer implements HasOptions, Geometry, ConvertsToGe
 
     /**
      * Check if marker is interactive.
-     * 
+     *
      * @return bool
      * @see    http://leafletjs.com/reference.html#marker-interactive
      */

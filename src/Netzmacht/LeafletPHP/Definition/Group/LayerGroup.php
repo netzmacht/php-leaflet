@@ -120,16 +120,13 @@ class LayerGroup extends AbstractLayer implements ConvertsToGeoJsonFeature
             if ($layer instanceof GeoJsonFeature) {
                 // Layer is a geo json feature, it is fully a geo json object
                 continue;
-
             } elseif ($layer instanceof ConvertsToGeoJsonFeature) {
                 // check children of the layer.
-
                 if (!$layer->convertsFullyToGeoJson()) {
                     return false;
                 }
             } else {
                 // Unknown layer, return false.
-
                 return false;
             }
         }

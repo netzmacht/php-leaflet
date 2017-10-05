@@ -26,7 +26,7 @@ class MinZoomIndicatorOptions implements HasOptions, \JsonSerializable
 
     /**
      * Set the position of the indicator.
-     * 
+     *
      * @param string $position Position.
      *
      * @return $this
@@ -38,7 +38,7 @@ class MinZoomIndicatorOptions implements HasOptions, \JsonSerializable
 
     /**
      * Get the position.
-     * 
+     *
      * @return string
      */
     public function getPosition()
@@ -93,7 +93,7 @@ class MinZoomIndicatorOptions implements HasOptions, \JsonSerializable
     /**
      * {@inheritdoc}
      */
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         return $this->getOptions();
     }

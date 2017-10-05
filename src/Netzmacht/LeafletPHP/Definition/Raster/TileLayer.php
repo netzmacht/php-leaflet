@@ -123,7 +123,7 @@ class TileLayer extends AbstractLayer implements HasEvents, HasOptions
 
     /**
      * Set the min zoom.
-     * 
+     *
      * @param int $zoom The zoom level.
      *
      * @return $this
@@ -135,7 +135,7 @@ class TileLayer extends AbstractLayer implements HasEvents, HasOptions
 
     /**
      * Get the min zoom level.
-     * 
+     *
      * @return int
      */
     public function getMinZoom()

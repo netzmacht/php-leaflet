@@ -75,6 +75,7 @@ class OverpassLayer extends AbstractLayer implements ConvertsToJavascript
      * Get debug mode.
      *
      * @return bool
+     *
      * @SuppressWarnings(BooleanGetMethodName)
      */
     public function getDebug()
@@ -201,7 +202,7 @@ class OverpassLayer extends AbstractLayer implements ConvertsToJavascript
      */
     public function encode(Encoder $encoder, $flags = null)
     {
-        $buffer = sprintf (
+        $buffer = sprintf(
             '%s = new L.OverPassLayer(%s, %s)%s',
             $encoder->encodeReference($this),
             $encoder->encodeArray($this->getOptions(), JSON_FORCE_OBJECT),

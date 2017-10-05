@@ -14,7 +14,7 @@ namespace Netzmacht\LeafletPHP\Definition\Control;
 
 /**
  * Zoom control.
- * 
+ *
  * @package Netzmacht\LeafletPHP\Definition\Control
  */
 class Zoom extends AbstractControl

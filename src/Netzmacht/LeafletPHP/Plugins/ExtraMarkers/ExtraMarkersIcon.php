@@ -178,7 +178,7 @@ class ExtraMarkersIcon extends AbstractIcon implements ConvertsToJavascript
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function encode(Encoder $encoder, $flags = null)
     {
