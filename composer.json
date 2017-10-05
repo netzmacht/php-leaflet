@@ -10,16 +10,14 @@
             "email": "david.molineus@netzmacht.de"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "require": {
         "php": ">=5.4",
-        "symfony/event-dispatcher": "~2.3 || ~ 3.0",
+        "symfony/event-dispatcher": "~2.3 || ~3.0",
         "netzmacht/php-javascript-builder": "~1.0",
         "beberlei/assert": "~2.0"
     },
     "require-dev": {
-        "netzmacht/contao-build-tools": "~1.1"
+        "phpcq/all-tasks": "^1.2"
     },
     "autoload": {
         "psr-0": {
