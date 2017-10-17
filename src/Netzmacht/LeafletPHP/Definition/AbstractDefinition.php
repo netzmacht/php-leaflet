@@ -44,7 +44,7 @@ abstract class AbstractDefinition implements Definition
      *
      * @var MethodCall[]
      */
-    private $methods = array();
+    protected $methods = array();
 
     /**
      * Construct.

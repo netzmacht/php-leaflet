@@ -13,7 +13,9 @@
 namespace Netzmacht\LeafletPHP\Plugins\Omnivore;
 
 use Netzmacht\JavascriptBuilder\Encoder;
+use Netzmacht\JavascriptBuilder\Type\Call\MethodCall;
 use Netzmacht\JavascriptBuilder\Type\ConvertsToJavascript;
+use Netzmacht\LeafletPHP\Assert\Assertion;
 use Netzmacht\LeafletPHP\Definition\AbstractLayer;
 use Netzmacht\LeafletPHP\Definition\EventsTrait;
 use Netzmacht\LeafletPHP\Definition\HasEvents;
@@ -118,7 +120,23 @@ abstract class OmnivoreLayer extends AbstractLayer implements ConvertsToJavascri
      */
     public function setCustomLayer(Layer $customLayer)
     {
+        Assertion::count($this->getMethodCalls(), 0, 'Setting custom layer has to be done before any method call.');
+
         $this->customLayer = $customLayer;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function addMethod($name, array $arguments = array())
+    {
+        if ($this->getCustomLayer()) {
+            $this->methods[] = new MethodCall($this->getCustomLayer(), $name, $arguments);
+        } else {
+            parent::addMethod($name, $arguments);
+        }
 
         return $this;
     }
