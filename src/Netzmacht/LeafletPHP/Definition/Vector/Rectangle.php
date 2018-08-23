@@ -58,7 +58,7 @@ class Rectangle extends Polyline implements Geometry
     /**
      * {@inheritdoc}
      */
-    public function getLatLngs()
+    public function getLatLngs($preferFlat = true)
     {
         return array(
             $this->bounds->getSouthWest(),
