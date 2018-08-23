@@ -3,7 +3,7 @@
     "description": "PHP leaflet definition and javascript generator",
     "keywords": ["leaflet", "maps", "javascript", "library"],
     "type": "library",
-    "license": "LGPL-3.0",
+    "license": "LGPL-3.0-or-later",
     "authors": [
         {
             "name": "David Molineus",
@@ -12,9 +12,9 @@
     ],
     "require": {
         "php": ">=5.4",
-        "symfony/event-dispatcher": "~2.3 || ~3.0",
+        "symfony/event-dispatcher": "^2.3 || ^3.0 || ^4.0",
         "netzmacht/php-javascript-builder": "~1.0",
-        "beberlei/assert": "~2.0"
+        "beberlei/assert": "~2.0 || ^3.0"
     },
     "require-dev": {
         "phpcq/all-tasks": "^1.2"
