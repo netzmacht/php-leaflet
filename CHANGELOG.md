@@ -5,6 +5,7 @@
 
 ###Added
 
+ - Added ThunderforestProvider which allows to set the api key for thunderforest.
  - Added support for MapBox accessToken.
  
 ###Deprecated
