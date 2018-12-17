@@ -12,3 +12,7 @@
 ###Deprecated
 
  - Calling MapBoxProvider user and name setting is deprecated and without any affect anymore (Mapbox API v3). 
+
+### Fixed
+
+ - Marker is not rendered when using custom icon (#3)
