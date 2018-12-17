@@ -15,7 +15,6 @@ namespace Netzmacht\LeafletPHP\Plugins\LeafletProviders;
 use Netzmacht\JavascriptBuilder\Encoder;
 use Netzmacht\JavascriptBuilder\Type\ConvertsToJavascript;
 use Netzmacht\LeafletPHP\Definition\AbstractLayer;
-use Netzmacht\LeafletPHP\Definition\Layer;
 use Netzmacht\LeafletPHP\Encoder\EncodeHelperTrait;
 
 /**
@@ -23,7 +22,7 @@ use Netzmacht\LeafletPHP\Encoder\EncodeHelperTrait;
  *
  * @package Netzmacht\LeafletPHP\Plugins\LeafletProviders
  */
-class Provider extends AbstractLayer implements Layer, ConvertsToJavascript
+class Provider extends AbstractLayer implements ConvertsToJavascript
 {
     use EncodeHelperTrait;
 

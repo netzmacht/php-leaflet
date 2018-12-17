@@ -5,14 +5,16 @@
  *
  * @package    php-leaflet
  * @author     David Molineus <david.molineus@netzmacht.de>
- * @copyright  2014-2017 netzmacht David Molineus
- * @license    LGPL 3.0
+ * @copyright  2014-2018 netzmacht David Molineus
+ * @license    LGPL-3.0-or-later
  * @filesource
  */
 
 namespace Netzmacht\LeafletPHP\Plugins\LeafletProviders;
 
 use Netzmacht\JavascriptBuilder\Encoder;
+use Netzmacht\LeafletPHP\Definition\HasOptions;
+use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 use Netzmacht\LeafletPHP\Encoder\EncodeHelperTrait;
 
 /**
@@ -20,23 +22,10 @@ use Netzmacht\LeafletPHP\Encoder\EncodeHelperTrait;
  *
  * @package Netzmacht\LeafletPHP\Plugins\LeafletProviders
  */
-class MapBoxProvider extends Provider
+class MapBoxProvider extends Provider implements HasOptions
 {
+    use OptionsTrait;
     use EncodeHelperTrait;
-
-    /**
-     * Mapbox user.
-     *
-     * @var string
-     */
-    private $user;
-
-    /**
-     * Mapbox map name.
-     *
-     * @var string
-     */
-    private $mapName;
 
     /**
      * Get the key.
@@ -45,7 +34,13 @@ class MapBoxProvider extends Provider
      */
     public function getUser()
     {
-        return $this->user;
+        // @codingStandardsIgnoreStart
+        @trigger_error(
+            'MapBoxProvider::getUser is deprecated and has no affect. Will be removed in 2.0.'
+        );
+        // @codingStandardsIgnoreEnd
+
+        return '';
     }
 
     /**
@@ -54,14 +49,20 @@ class MapBoxProvider extends Provider
      * @param string $user Mapbox username.
      *
      * @return $this
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function setUser($user)
     {
-        $this->user = $user;
+        // @codingStandardsIgnoreStart
+        @trigger_error(
+            'MapBoxProvider::setUser is deprecated and has no affect. Will be removed in 2.0.'
+        );
+        // @codingStandardsIgnoreEnd
 
         return $this;
     }
-    
+
     /**
      * Get the map name.
      *
@@ -69,7 +70,13 @@ class MapBoxProvider extends Provider
      */
     public function getMapName()
     {
-        return $this->mapName;
+        // @codingStandardsIgnoreStart
+        @trigger_error(
+            'MapBoxProvider::getMapName is deprecated and has no affect. Will be removed in 2.0.'
+        );
+        // @codingStandardsIgnoreEnd
+
+        return '';
     }
 
     /**
@@ -78,28 +85,60 @@ class MapBoxProvider extends Provider
      * @param string $mapName Mapbox map name.
      *
      * @return $this
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function setMapName($mapName)
     {
-        $this->mapName = $mapName;
+        // @codingStandardsIgnoreStart
+        @trigger_error(
+            'MapBoxProvider::setMapName is deprecated and has no affect. Will be removed in 2.0.'
+        );
+        // @codingStandardsIgnoreEnd
 
         return $this;
     }
 
     /**
+     * Get access roken.
+     *
+     * @return string|null
+     */
+    public function getAccessToken()
+    {
+        return $this->getOption('accessToken');
+    }
+
+    /**
+     * Set access token.
+     *
+     * @param string $accessToken AccessToken.
+     *
+     * @return $this
+     */
+    public function setAccessToken($accessToken)
+    {
+        return $this->setOption('accessToken', $accessToken);
+    }
+
+    /**
      * {@inheritdoc}
      */
-    protected function encodeName()
+    public function encode(Encoder $encoder, $flags = null)
     {
-        $name = $this->getProvider();
+        $name   = $this->encodeName();
+        $buffer = sprintf(
+            '%s = L.tileLayer.provider(\'' . $name . '\', %s)' . $encoder->close($flags),
+            $encoder->encodeReference($this),
+            $encoder->encodeValue(
+                array(
+                    'accessToken'   => $this->getAccessToken(),
+                )
+            )
+        );
 
-        if ($this->getVariant()) {
-            $name .= '.' . $this->getVariant();
-        }
+        $buffer .= $this->encodeMethodCalls($this->getMethodCalls(), $encoder, $flags);
 
-        $name .= '.' . $this->getUser();
-        $name .= '.' . $this->getMapName();
-
-        return $name;
+        return $buffer;
     }
 }
