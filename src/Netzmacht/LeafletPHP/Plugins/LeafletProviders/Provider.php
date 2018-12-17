@@ -147,7 +147,7 @@ class Provider extends AbstractLayer implements ConvertsToJavascript
      *
      * @return array|null
      *
-     * @SuppressWarnings(PHPMD.UnsuedFormalParameter)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     protected function encodeOptions(Encoder $encoder, $flags = null)
     {
