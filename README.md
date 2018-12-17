@@ -27,7 +27,7 @@ This library provides different components:
 
  - Definition classes to define the leaflet map with all layers, controls and so on.
  - Value classes which have real behaviour and can be used to handle LatLng or GeoJSON features.
- - The Encoder component to convert the PHP leaflet definition into javscript.
+ - The Encoder component to convert the PHP leaflet definition into javascript.
  - Support for several Leaflet plugins.
  - Assets handling to autoload all required javascripts and css files from all plugins.
 
