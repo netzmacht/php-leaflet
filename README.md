@@ -2,6 +2,12 @@
 PHP Leaflet library
 ===================
 
+[![Build Status](http://img.shields.io/travis/netzmacht/php-leaflet/master.svg?style=flat-square)](https://travis-ci.org/netzmacht/php-leaflet)
+[![Version](http://img.shields.io/packagist/v/netzmacht/php-leaflet.svg?style=flat-square)](http://packagist.org/packages/netzmacht/php-leaflet)
+[![License](http://img.shields.io/packagist/l/netzmacht/php-leaflet.svg?style=flat-square)](http://packagist.org/packages/netzmacht/php-leaflet)
+[![Downloads](http://img.shields.io/packagist/dt/netzmacht/php-leaflet.svg?style=flat-square)](http://packagist.org/packages/netzmacht/php-leaflet)
+[![Contao Community Alliance coding standard](http://img.shields.io/badge/cca-coding_standard-red.svg?style=flat-square)](https://github.com/contao-community-alliance/coding-standard)
+
 This library provides a PHP API to setup the Leaflet map definitions. The goal of the library is to provide a handy way
 to handle dynamic map configurations working in a PHP context.
 
