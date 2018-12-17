@@ -42,7 +42,7 @@ Before you start
 Requirements
 ------------
 
-This library requires PHP 5.4 and the symfony event dispatcher. The event dispatcher is used by the 
+This library requires PHP 5.6 and the symfony event dispatcher. The event dispatcher is used by the 
 [php-javascript-builder](https://github.com/netzmacht/php-javascript-builder) which encodes the PHP definition.
  
 Example
