@@ -18,7 +18,7 @@ use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 use Netzmacht\LeafletPHP\Encoder\EncodeHelperTrait;
 
 /**
- * Provider plguin for the HERE provider.
+ * Provider plugin for the Thunderforest provider.
  *
  * @package Netzmacht\LeafletPHP\Plugins\LeafletProviders
  */
@@ -28,23 +28,23 @@ class ThunderforestProvider extends Provider implements HasOptions
     use EncodeHelperTrait;
 
     /**
-     * Set the app key.
+     * Set the api key.
      *
-     * @param string $appId The app key.
+     * @param string $appId The api key.
      *
      * @return $this
      */
-    public function setAppKey($appId)
+    public function setApiKey($appId)
     {
         return $this->setOption('apikey', $appId);
     }
 
     /**
-     * Get the app key.
+     * Get the api key.
      *
      * @return string
      */
-    public function getAppKey()
+    public function getApiKey()
     {
         return $this->getOption('apikey');
     }
@@ -52,21 +52,12 @@ class ThunderforestProvider extends Provider implements HasOptions
     /**
      * {@inheritdoc}
      */
-    public function encode(Encoder $encoder, $flags = null)
+    protected function encodeOptions(Encoder $encoder, $flags = null)
     {
-        $name   = $this->encodeName();
-        $buffer = sprintf(
-            '%s = L.tileLayer.provider(\'' . $name . '\', %s)' . $encoder->close($flags),
-            $encoder->encodeReference($this),
-            $encoder->encodeValue(
-                array(
-                    'apikey'   => $this->getAppKey(),
-                )
+        return $encoder->encodeValue(
+            array(
+                'apikey' => $this->getApiKey(),
             )
         );
-
-        $buffer .= $this->encodeMethodCalls($this->getMethodCalls(), $encoder, $flags);
-
-        return $buffer;
     }
 }

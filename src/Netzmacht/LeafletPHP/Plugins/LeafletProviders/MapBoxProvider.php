@@ -124,21 +124,12 @@ class MapBoxProvider extends Provider implements HasOptions
     /**
      * {@inheritdoc}
      */
-    public function encode(Encoder $encoder, $flags = null)
+    protected function encodeOptions(Encoder $encoder, $flags = null)
     {
-        $name   = $this->encodeName();
-        $buffer = sprintf(
-            '%s = L.tileLayer.provider(\'' . $name . '\', %s)' . $encoder->close($flags),
-            $encoder->encodeReference($this),
-            $encoder->encodeValue(
-                array(
-                    'accessToken'   => $this->getAccessToken(),
-                )
+        return $encoder->encodeValue(
+            array(
+                'accessToken' => $this->getAccessToken(),
             )
         );
-
-        $buffer .= $this->encodeMethodCalls($this->getMethodCalls(), $encoder, $flags);
-
-        return $buffer;
     }
 }

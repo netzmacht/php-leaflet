@@ -101,11 +101,20 @@ class Provider extends AbstractLayer implements ConvertsToJavascript
      */
     public function encode(Encoder $encoder, $flags = null)
     {
-        $name   = $this->encodeName();
-        $buffer = sprintf(
-            '%s = L.tileLayer.provider(\'' . $name . '\')' . $encoder->close($flags),
-            $encoder->encodeReference($this)
-        );
+        $name    = $this->encodeName();
+        $options = $this->encodeOptions($encoder, $flags);
+
+        if ($options === null) {
+            $buffer = sprintf(
+                '%s = L.tileLayer.provider(\'' . $name . '\')' . $encoder->close($flags),
+                $encoder->encodeReference($this)
+            );
+        } else {
+            $buffer = sprintf(
+                '%s = L.tileLayer.provider(\'' . $name . '\', %s)' . $encoder->close($flags),
+                $encoder->encodeReference($this, $options)
+            );
+        }
 
         $buffer .= $this->encodeMethodCalls($this->getMethodCalls(), $encoder, $flags);
 
@@ -128,5 +137,20 @@ class Provider extends AbstractLayer implements ConvertsToJavascript
         }
 
         return $name;
+    }
+
+    /**
+     * Encode options which might be set by a provider.
+     *
+     * @param Encoder  $encoder The javascript encoder.
+     * @param int|null $flags   The encoding flags.
+     *
+     * @return array|null
+     *
+     * @SuppressWarnings(PHPMD.UnsuedFormalParameter)
+     */
+    protected function encodeOptions(Encoder $encoder, $flags = null)
+    {
+        return null;
     }
 }

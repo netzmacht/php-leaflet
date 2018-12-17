@@ -18,7 +18,7 @@ use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 use Netzmacht\LeafletPHP\Encoder\EncodeHelperTrait;
 
 /**
- * Provider plguin for the HERE provider.
+ * Provider plugin for the HERE provider.
  *
  * @package Netzmacht\LeafletPHP\Plugins\LeafletProviders
  */
@@ -74,22 +74,13 @@ class HereProvider extends Provider implements HasOptions
     /**
      * {@inheritdoc}
      */
-    public function encode(Encoder $encoder, $flags = null)
+    protected function encodeOptions(Encoder $encoder, $flags = null)
     {
-        $name   = $this->encodeName();
-        $buffer = sprintf(
-            '%s = L.tileLayer.provider(\'' . $name . '\', %s)' . $encoder->close($flags),
-            $encoder->encodeReference($this),
-            $encoder->encodeValue(
-                array(
-                    'app_id'   => $this->getAppId(),
-                    'app_code' => $this->getAppCode()
-                )
+        return $encoder->encodeValue(
+            array(
+                'app_id'   => $this->getAppId(),
+                'app_code' => $this->getAppCode()
             )
         );
-
-        $buffer .= $this->encodeMethodCalls($this->getMethodCalls(), $encoder, $flags);
-
-        return $buffer;
     }
 }
