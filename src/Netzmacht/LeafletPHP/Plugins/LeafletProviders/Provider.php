@@ -16,6 +16,7 @@ use Netzmacht\JavascriptBuilder\Encoder;
 use Netzmacht\JavascriptBuilder\Type\ConvertsToJavascript;
 use Netzmacht\LeafletPHP\Definition\AbstractLayer;
 use Netzmacht\LeafletPHP\Encoder\EncodeHelperTrait;
+use const JSON_FORCE_OBJECT;
 
 /**
  * Class Provider provides the L.tileLayer.provider plugin.
@@ -105,7 +106,7 @@ class Provider extends AbstractLayer implements ConvertsToJavascript
         $buffer = sprintf(
             '%s = L.tileLayer.provider(\'' . $name . '\', %s)' . $encoder->close($flags),
             $encoder->encodeReference($this),
-            $encoder->encodeArray($this->getOptions(), $flags)
+            $encoder->encodeArray($this->getOptions(), JSON_FORCE_OBJECT)
         );
 
         $buffer .= $this->encodeMethodCalls($this->getMethodCalls(), $encoder, $flags);
