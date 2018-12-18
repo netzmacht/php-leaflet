@@ -5,8 +5,8 @@
  *
  * @package    php-leaflet
  * @author     David Molineus <david.molineus@netzmacht.de>
- * @copyright  2014-2017 netzmacht David Molineus
- * @license    LGPL 3.0
+ * @copyright  2014-2018 netzmacht David Molineus
+ * @license    LGPL-3.0-or-later https://github.com/netzmacht/php-leaflet/blob/master/LICENSE
  * @filesource
  */
 
@@ -15,15 +15,15 @@ namespace Netzmacht\LeafletPHP\Plugins\LeafletProviders;
 use Netzmacht\JavascriptBuilder\Encoder;
 use Netzmacht\JavascriptBuilder\Type\ConvertsToJavascript;
 use Netzmacht\LeafletPHP\Definition\AbstractLayer;
-use Netzmacht\LeafletPHP\Definition\Layer;
 use Netzmacht\LeafletPHP\Encoder\EncodeHelperTrait;
+use const JSON_FORCE_OBJECT;
 
 /**
  * Class Provider provides the L.tileLayer.provider plugin.
  *
  * @package Netzmacht\LeafletPHP\Plugins\LeafletProviders
  */
-class Provider extends AbstractLayer implements Layer, ConvertsToJavascript
+class Provider extends AbstractLayer implements ConvertsToJavascript
 {
     use EncodeHelperTrait;
 
@@ -104,8 +104,9 @@ class Provider extends AbstractLayer implements Layer, ConvertsToJavascript
     {
         $name   = $this->encodeName();
         $buffer = sprintf(
-            '%s = L.tileLayer.provider(\'' . $name . '\')' . $encoder->close($flags),
-            $encoder->encodeReference($this)
+            '%s = L.tileLayer.provider(\'' . $name . '\', %s)' . $encoder->close($flags),
+            $encoder->encodeReference($this),
+            $encoder->encodeArray($this->getOptions(), JSON_FORCE_OBJECT)
         );
 
         $buffer .= $this->encodeMethodCalls($this->getMethodCalls(), $encoder, $flags);

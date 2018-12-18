@@ -18,56 +18,34 @@ use Netzmacht\LeafletPHP\Definition\OptionsTrait;
 use Netzmacht\LeafletPHP\Encoder\EncodeHelperTrait;
 
 /**
- * Provider plugin for the HERE provider.
+ * Provider plugin for the Thunderforest provider.
  *
  * @package Netzmacht\LeafletPHP\Plugins\LeafletProviders
  */
-class HereProvider extends Provider implements HasOptions
+class ThunderforestProvider extends Provider implements HasOptions
 {
     use OptionsTrait;
     use EncodeHelperTrait;
 
     /**
-     * Set the app id.
+     * Set the api key.
      *
-     * @param string $appId The app id.
-     *
-     * @return $this
-     */
-    public function setAppId($appId)
-    {
-        return $this->setOption('app_id', $appId);
-    }
-
-    /**
-     * Get the app id.
-     *
-     * @return string
-     */
-    public function getAppId()
-    {
-        return $this->getOption('app_id');
-    }
-
-    /**
-     * Set the app code.
-     *
-     * @param string $code The app code.
+     * @param string $appId The api key.
      *
      * @return $this
      */
-    public function setAppCode($code)
+    public function setApiKey($appId)
     {
-        return $this->setOption('app_code', $code);
+        return $this->setOption('apikey', $appId);
     }
 
     /**
-     * Get the app code.
+     * Get the api key.
      *
      * @return string
      */
-    public function getAppCode()
+    public function getApiKey()
     {
-        return $this->getOption('app_code');
+        return $this->getOption('apikey');
     }
 }

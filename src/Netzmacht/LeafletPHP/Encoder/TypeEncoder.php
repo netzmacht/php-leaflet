@@ -5,8 +5,8 @@
  *
  * @package    php-leaflet
  * @author     David Molineus <david.molineus@netzmacht.de>
- * @copyright  2014-2017 netzmacht David Molineus
- * @license    LGPL 3.0
+ * @copyright  2014-2018 netzmacht David Molineus
+ * @license    LGPL-3.0-or-later https://github.com/netzmacht/php-leaflet/blob/master/LICENSE
  * @filesource
  */
 
@@ -48,7 +48,7 @@ class TypeEncoder extends AbstractEncoder
     public function encodeIcon(ImageIcon $icon, Encoder $encoder)
     {
         return sprintf(
-            '%s = L.Icon(%s);',
+            '%s = L.icon(%s);',
             $encoder->encodeReference($icon),
             $encoder->encodeArguments(array($icon->getOptions()))
         );
@@ -65,7 +65,7 @@ class TypeEncoder extends AbstractEncoder
     public function encodeDivIcon(DivIcon $icon, Encoder $encoder)
     {
         return sprintf(
-            '%s = L.DivIcon(%s);',
+            '%s = L.divIcon(%s);',
             $encoder->encodeReference($icon),
             $encoder->encodeArguments(array($icon->getOptions()))
         );

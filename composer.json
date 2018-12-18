@@ -11,7 +11,8 @@
         }
     ],
     "require": {
-        "php": ">=5.4",
+        "php": ">=5.6",
+        "ext-json": "*",
         "symfony/event-dispatcher": "^2.3 || ^3.0 || ^4.0",
         "netzmacht/php-javascript-builder": "~1.0",
         "beberlei/assert": "~2.0 || ^3.0"
@@ -26,9 +27,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-support/0.7.x": "0.7.x-dev",
-            "dev-master": "1.0.x-dev",
-            "dev-develop": "1.1.x-dev"
+            "dev-master": "1.1.x-dev",
+            "dev-develop": "1.2.x-dev"
         }
     }
 }

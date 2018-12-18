@@ -2,6 +2,12 @@
 PHP Leaflet library
 ===================
 
+[![Build Status](http://img.shields.io/travis/netzmacht/php-leaflet/master.svg?style=flat-square)](https://travis-ci.org/netzmacht/php-leaflet)
+[![Version](http://img.shields.io/packagist/v/netzmacht/php-leaflet.svg?style=flat-square)](http://packagist.org/packages/netzmacht/php-leaflet)
+[![License](http://img.shields.io/packagist/l/netzmacht/php-leaflet.svg?style=flat-square)](http://packagist.org/packages/netzmacht/php-leaflet)
+[![Downloads](http://img.shields.io/packagist/dt/netzmacht/php-leaflet.svg?style=flat-square)](http://packagist.org/packages/netzmacht/php-leaflet)
+[![Contao Community Alliance coding standard](http://img.shields.io/badge/cca-coding_standard-red.svg?style=flat-square)](https://github.com/contao-community-alliance/coding-standard)
+
 This library provides a PHP API to setup the Leaflet map definitions. The goal of the library is to provide a handy way
 to handle dynamic map configurations working in a PHP context.
 
@@ -21,7 +27,7 @@ This library provides different components:
 
  - Definition classes to define the leaflet map with all layers, controls and so on.
  - Value classes which have real behaviour and can be used to handle LatLng or GeoJSON features.
- - The Encoder component to convert the PHP leaflet definition into javscript.
+ - The Encoder component to convert the PHP leaflet definition into javascript.
  - Support for several Leaflet plugins.
  - Assets handling to autoload all required javascripts and css files from all plugins.
 
@@ -36,7 +42,7 @@ Before you start
 Requirements
 ------------
 
-This library requires PHP 5.4 and the symfony event dispatcher. The event dispatcher is used by the 
+This library requires PHP 5.6 and the symfony event dispatcher. The event dispatcher is used by the 
 [php-javascript-builder](https://github.com/netzmacht/php-javascript-builder) which encodes the PHP definition.
  
 Example
