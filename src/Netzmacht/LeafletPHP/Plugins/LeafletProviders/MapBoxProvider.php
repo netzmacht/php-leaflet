@@ -120,16 +120,4 @@ class MapBoxProvider extends Provider implements HasOptions
     {
         return $this->setOption('accessToken', $accessToken);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function encodeOptions(Encoder $encoder, $flags = null)
-    {
-        return $encoder->encodeValue(
-            array(
-                'accessToken' => $this->getAccessToken(),
-            )
-        );
-    }
 }

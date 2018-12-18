@@ -70,17 +70,4 @@ class HereProvider extends Provider implements HasOptions
     {
         return $this->getOption('app_code');
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function encodeOptions(Encoder $encoder, $flags = null)
-    {
-        return $encoder->encodeValue(
-            array(
-                'app_id'   => $this->getAppId(),
-                'app_code' => $this->getAppCode()
-            )
-        );
-    }
 }

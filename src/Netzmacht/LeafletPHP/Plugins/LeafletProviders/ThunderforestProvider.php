@@ -48,16 +48,4 @@ class ThunderforestProvider extends Provider implements HasOptions
     {
         return $this->getOption('apikey');
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function encodeOptions(Encoder $encoder, $flags = null)
-    {
-        return $encoder->encodeValue(
-            array(
-                'apikey' => $this->getApiKey(),
-            )
-        );
-    }
 }
