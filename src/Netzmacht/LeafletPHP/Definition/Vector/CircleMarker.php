@@ -35,7 +35,7 @@ class CircleMarker extends Path implements Geometry
      *
      * @var LatLng
      */
-    private $latLng = array();
+    private $latLng;
 
     /**
      * The radius in meters.
@@ -99,7 +99,7 @@ class CircleMarker extends Path implements Geometry
     {
         return array(
             'type'        => 'Point',
-            'coordinates' => $this->getLatLng()->toGeoJson()
+            'coordinates' => $this->getLatLng() ?: null
         );
     }
 
