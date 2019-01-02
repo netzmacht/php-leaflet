@@ -2,6 +2,7 @@
 
 namespace Netzmacht\LeafletPHP\Test;
 
+use const JSON_UNESCAPED_SLASHES;
 use Netzmacht\JavascriptBuilder\Builder;
 use Netzmacht\JavascriptBuilder\Encoder\ChainEncoder;
 use Netzmacht\JavascriptBuilder\Encoder\JavascriptEncoder;
@@ -37,7 +38,7 @@ class TestCase extends PHPUnitTestCase
 
             $encoder->register(new MultipleObjectsEncoder());
             $encoder->register(new EventDispatchingEncoder($dispatcher));
-            $encoder->register(new JavascriptEncoder($output));
+            $encoder->register(new JavascriptEncoder($output, JSON_UNESCAPED_SLASHES));
 
             return $encoder;
         };
