@@ -1,8 +1,17 @@
 <?php
 
+/**
+ * PHP Leaflet library.
+ *
+ * @package    php-leaflet
+ * @author     David Molineus <david.molineus@netzmacht.de>
+ * @copyright  2014-2018 netzmacht David Molineus
+ * @license    LGPL-3.0-or-later https://github.com/netzmacht/php-leaflet/blob/master/LICENSE
+ * @filesource
+ */
+
 namespace Netzmacht\LeafletPHP\Test;
 
-use const JSON_UNESCAPED_SLASHES;
 use Netzmacht\JavascriptBuilder\Builder;
 use Netzmacht\JavascriptBuilder\Encoder\ChainEncoder;
 use Netzmacht\JavascriptBuilder\Encoder\JavascriptEncoder;
@@ -18,6 +27,7 @@ use Netzmacht\LeafletPHP\Encoder\UIEncoder;
 use Netzmacht\LeafletPHP\Encoder\VectorEncoder;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use const JSON_UNESCAPED_SLASHES;
 
 class TestCase extends PHPUnitTestCase
 {
