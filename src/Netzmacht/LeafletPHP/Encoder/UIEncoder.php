@@ -77,8 +77,6 @@ class UIEncoder extends AbstractEncoder
             $source ? (', ' . $encoder->encodeReference($source)) : ''
         );
 
-        $buffer .= $this->encodeMethodCalls($popup->getMethodCalls(), $encoder);
-
         return $buffer;
     }
 }
