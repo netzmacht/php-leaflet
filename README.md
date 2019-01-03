@@ -80,7 +80,7 @@ $factory = function(Output $output) use ($dispatcher) {
 }; 
 
 $builder = new \Netzmacht\JavascriptBuilder\Builder($factory);
-$leaflet = new \Netzmacht\LeafletPHP\leaflet($builder, $dispatcher);
+$leaflet = new \Netzmacht\LeafletPHP\Leaflet($builder, $dispatcher);
 
 /*
  * 2. Create the map definitions
