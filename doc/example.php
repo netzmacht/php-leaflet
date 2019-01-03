@@ -1,4 +1,13 @@
 <?php
+/**
+ * PHP Leaflet library.
+ *
+ * @package    php-leaflet
+ * @author     Thomas Rothe <th.rothe@gmail.com>
+ * @copyright  2014-2019 netzmacht David Molineus
+ * @license    LGPL-3.0-or-later https://github.com/netzmacht/php-leaflet/blob/master/LICENSE
+ * @filesource
+ */
 
 use Netzmacht\JavascriptBuilder\Builder;
 use Netzmacht\JavascriptBuilder\Encoder\ChainEncoder;
