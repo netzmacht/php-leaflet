@@ -1,34 +1,40 @@
 {
-    "name": "netzmacht/php-leaflet",
-    "description": "PHP leaflet definition and javascript generator",
-    "keywords": ["leaflet", "maps", "javascript", "library"],
-    "type": "library",
-    "license": "LGPL-3.0-or-later",
-    "authors": [
-        {
-            "name": "David Molineus",
-            "email": "david.molineus@netzmacht.de"
-        }
-    ],
-    "require": {
-        "php": ">=5.6",
-        "ext-json": "*",
-        "symfony/event-dispatcher": "^2.3 || ^3.0 || ^4.0",
-        "netzmacht/php-javascript-builder": "~1.0",
-        "beberlei/assert": "~2.0 || ^3.0"
-    },
-    "require-dev": {
-        "phpcq/all-tasks": "^1.2"
-    },
-    "autoload": {
-        "psr-0": {
-            "Netzmacht\\LeafletPHP\\": "src/"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.1.x-dev",
-            "dev-develop": "1.2.x-dev"
-        }
+  "name": "netzmacht/php-leaflet",
+  "description": "PHP leaflet definition and javascript generator",
+  "license": "LGPL-3.0-or-later",
+  "type": "library",
+  "keywords": [
+    "leaflet",
+    "maps",
+    "javascript",
+    "library"
+  ],
+  "authors": [
+    {
+      "name": "David Molineus",
+      "email": "david.molineus@netzmacht.de"
     }
+  ],
+  "require": {
+    "php": "^7.1 || ^8.0",
+    "ext-json": "*",
+    "beberlei/assert": "~2.0 || ^3.0",
+    "netzmacht/php-javascript-builder": "~1.0",
+    "symfony/event-dispatcher": "^4.4 || ^5.1"
+  },
+  "require-dev": {
+    "phpcq/coding-standard": "^2.1",
+    "phpcq/runner-bootstrap": "^1.0@dev"
+  },
+  "autoload": {
+    "psr-0": {
+      "Netzmacht\\LeafletPHP\\": "src/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-develop": "1.2.x-dev",
+      "dev-master": "1.1.x-dev"
+    }
+  }
 }

@@ -1,24 +1,10 @@
-# OS
-.DS_Store
-Thumbs.db
-.directory
-
-# IDEs 
-.buildpath
-.project
-.settings/
-.build/
-.external*/
-.idea/
-nbproject/
-
 # composer related
 vendor/
 composer.lock
 
-# build
-build/
-build.properties
-
 # Translations
 .tx
+
+# PHPCQ
+.phpcq
+.phpcq.yaml
