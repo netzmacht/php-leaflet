@@ -1,6 +1,12 @@
 
 #Changelog
 
+## 1.1.1 - 2022-02-22
+
+### Changed
+
+ - Bump dependencies of symfony
+
 ## 1.1.0 - 2018-12-18
 
 ### Added
