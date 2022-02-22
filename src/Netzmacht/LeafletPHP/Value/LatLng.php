@@ -125,7 +125,7 @@ class LatLng implements \JsonSerializable
      */
     public static function fromString($latLng)
     {
-        list($latitude, $longitude, $altitude) = explode(',', $latLng);
+        [$latitude, $longitude, $altitude] = array_pad(explode(',', $latLng), 3, null);
 
         Assertion::numeric($latitude);
         Assertion::numeric($longitude);
