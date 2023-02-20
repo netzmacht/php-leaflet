@@ -12,8 +12,6 @@
 
 namespace Netzmacht\LeafletPHP\Definition\Vector;
 
-use Netzmacht\LeafletPHP\Value\GeoJson\FeatureTrait;
-
 /**
  * Class Circle represents a circle object on the map.
  *
@@ -21,8 +19,6 @@ use Netzmacht\LeafletPHP\Value\GeoJson\FeatureTrait;
  */
 class Circle extends CircleMarker
 {
-    use FeatureTrait;
-
     /**
      * {@inheritdoc}
      */
